@@ -21,12 +21,10 @@ More to come...
 ### Screenshots
 
 #### Home Page:
-<img src="./src/assets/Home.png" alt="Home Page Screenshot" width="1280" style="border-radius:8px;"/>
+<img src="./src/assets/Home.png" alt="Home Page Screenshot" width="1280"/>
 
 #### Details Page:
-<img src="./src/assets/Details.png" alt="Details Page Screenshot" width="1280" style="border-radius:8px;"/>
-> [!NOTE]
-> I am working on adding more details to the details page.
+<img src="./src/assets/Details.png" alt="Details Page Screenshot" width="1280"/>
 
 ### Links
 
