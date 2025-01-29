@@ -28,7 +28,6 @@ More to come...
 
 ### Links
 
-- [Live Site URL](https://creightoneli.github.io/notflix/)
 - [React Docs](https://react.dev/reference/react)
 - [Vite Docs](https://vite.dev/guide/)
 - [Phosphor Icons](https://phosphoricons.com/)
