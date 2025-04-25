@@ -1,15 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import './index.css'
-import Header from './components/Header'
-import App from './App.jsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import './scss/style.scss';
+import Header from './components/Header';
+import App from './App.jsx';
+import ScrollToTop from './components/ScrollToTop.js';
+import { HeaderVisibilityProvider } from './context/HeaderVisibilityContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Header />
-      <App />
+        <HeaderVisibilityProvider>
+          <ScrollToTop />
+          <Header />
+          <App />
+        </HeaderVisibilityProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);

@@ -1,49 +1,53 @@
-import './Home.css'
-import Hero from '../components/Hero'
-import Cards from '../components/Cards'
+import Hero from '../components/Hero';
+import Carousel from '../components/Carousel';
 import React, { useEffect, useState } from 'react';
+import useApiKey from '../hooks/useApiKey';
 
-import { CaretRight } from "@phosphor-icons/react"
+export default function Home() {
+  const [movies, setMovies] = useState([]);
+  const [shows, setShows] = useState([]);
+  const [movieLists, setMovieLists] = useState([]);
+  const [showLists, setShowLists] = useState([]);
+  const [apiKey, setApiKey] = useApiKey();
 
-function Home() {
-  const [movies, setMovies] = useState([]); // State to store movie data
-  const [shows, setShows] = useState([]); // State to store show data
+  document.title = `Home - Notflix`;
 
+  // Fetch options
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+  };
+
+  // Fetch data only if the API key is set
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`
-      }
-    };
+    if (!apiKey) return; // Prevent fetch requests if the API key is not set
 
     fetch('https://api.themoviedb.org/3/trending/movie/day?append_to_response=credits&language=en-US', options)
-      .then(response => response.json()) // Parse JSON response
-      .then(data => setMovies(data.results)) // Save `results` to state
-      .catch(err => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`
-      }
-    };
+      .then((response) => response.json())
+      .then((data) => setMovies(data.results))
+      .catch((err) => console.error(err));
 
     fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', options)
-      .then(response => response.json()) // Parse JSON response
-      .then(data => setShows(data.results)) // Save `results` to state
-      .catch(err => console.error(err));
-  }, []);
+      .then((response) => response.json())
+      .then((data) => setShows(data.results))
+      .catch((err) => console.error(err));
 
-  // console.log(movies)
+    fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+      .then((response) => response.json())
+      .then((data) => setMovieLists(data.results))
+      .catch((err) => console.error(err));
 
-  const mergedObjects = [...movies, ...shows]
+    fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', options)
+      .then((response) => response.json())
+      .then((data) => setShowLists(data.results))
+      .catch((err) => console.error(err));
+  }, [apiKey]); // Only re-run this effect when the API key changes
 
-  // get random number to index hero banner image
+  const mergedObjects = [...movies, ...shows];
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -52,21 +56,11 @@ function Home() {
     <>
       <Hero {...mergedObjects[getRandomInt(40)]} />
       <main>
-        <h3><a>Trending Movies<span>See all<CaretRight /></span></a></h3>
-        <div className='gallery'>
-          {movies.slice(0, 6).map((movie) => (
-            <Cards key = {movie.id} {...movie} />
-          ))}
-        </div>
-        <h3><a>Trending Shows<span>See all<CaretRight /></span></a></h3>
-        <div className='gallery'>
-          {shows.slice(0, 6).map((show) => (
-            <Cards key = {show.id} {...show} />
-          ))}
-        </div>
+        <Carousel headline="Trending Movies" type="trending" mediaList={movies} />
+        <Carousel headline="Trending TV" type="trending" mediaList={shows} />
+        <Carousel headline="Top Rated Movies" type="top_rated" mediaList={movieLists} />
+        <Carousel headline="Top Rated TV" type="top_rated" mediaList={showLists} />
       </main>
     </>
-  )
+  );
 }
-
-export default Home

@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
-import { MagnifyingGlass } from "@phosphor-icons/react"
-export default function Header() {
+import { MagnifyingGlass } from "@phosphor-icons/react";
+import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 
+export default function Header() {
+    const { isHeaderVisible } = useHeaderVisibility();
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-    
-        // Access the input value
-        const query = event.target.elements.query?.value; // Safely access the value
+        const query = event.target.elements.query?.value;
         if (query) {
             navigate(`/results?search=${encodeURIComponent(query)}`);
         } else {
@@ -16,29 +16,16 @@ export default function Header() {
         }
     };
 
+    if (!isHeaderVisible) return null; // Hide the header if not visible
+
     return (
         <header>
-            <h1 className="logo">
+            {/* <h1 className="logo"> */}
                 <Link to={'/'}>
-                    NOTFLIX
+                    {/* NOTFLIX */}
+                    <img className="logo" src={'../src/assets/logo_full.png'} alt="Notflix Logo" />
                 </Link>
-            </h1>
-            <ul>
-                <li>
-                    <Link to={'/'}>
-                        Home
-                    </Link>
-                </li>
-                <li><Link to={'/'}>
-                        Movies
-                    </Link>
-                </li>
-                <li>
-                    <Link to={'/'}>
-                        TV Shows
-                    </Link>    
-                </li>
-            </ul>
+            {/* </h1> */}
             <form onSubmit={handleSubmit}>
                 <input 
                     className="search-box"
@@ -50,5 +37,5 @@ export default function Header() {
                 <button className="search-btn" type="submit" ><MagnifyingGlass size={18} /></button>
             </form>
         </header>
-    )
+    );
 }

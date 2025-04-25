@@ -1,42 +1,47 @@
-# 🍿Notflix
+<img src="./src/assets/logo_small_shadow.png" alt="Logo" width="130"/>
+
+# Notflix
 
 ## Table of contents
 
 - [Overview](#overview)
+  - [Getting Started](#getting-started)
   - [Screenshots](#screenshots)
   - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [Useful resources](#useful-resources)
+- [Built with](#built-with)
 - [Author](#author)
 
 ## Overview
 
-Movie and TV show web app. See what is trending, who it is directed by and how well it is reviewed. There are more features on the way that will more fully utilize the wealth of data that the Movie Database API provides.
+Movie and TV show web app. See what is trending, who it is directed by and how well it is reviewed. You can search for just about anything, filter by media type or by genre, and learn more about the people who make movies happen by reading their biography or scrolling through their filmography.
 
-This is the first larger React app I've developed. It has been a challenge thus far but one that is incredibly rewarding to work through. I'm learning something new every time I work on it and it is improving just as much as I am. It's cool to see.
+### Getting Started:
 
-More to come...
+Before you can use Notflix there is a bit of setup you may need to do.
 
-### Screenshots
+1. In order to use Notflix you first need to register your API key with the Movie Database. [Here](https://developer.themoviedb.org/docs/getting-started)'s a link to get you started.
 
-#### Home Page:
-<img src="./src/assets/Home.png" alt="Home Page Screenshot" width="1280"/>
+2. Once you have the key you can submit it on the website. Your API key is saved locally in your browser and used by it to make all the necessary API calls.
 
-#### Details Page:
-<img src="./src/assets/Details.png" alt="Details Page Screenshot" width="1280"/>
+3. Finally, I highly recommend you only access this site with a solid adblocking extension like [uBlock Origin](https://github.com/gorhill/uBlock). I don't put ads on the site myself but many of the video providers inject ads into their services which are used on the site. In order to avoid dealing with annoying pop-ups please install a decent adblocker.
 
-### Links
+That's about all you need to do to enjoy Notflix.
+
+### Screenshots:
+
+#### Home Page
+<img src="./src/assets/horizontal.png" alt="Desktop screenshot of the Home page" width="1080"/>
+<img src="./src/assets/vertical.png" alt="Mobile screenshot of the Home page" width="300"/>
+
+### Links:
 
 - [React Docs](https://react.dev/reference/react)
 - [Vite Docs](https://vite.dev/guide/)
 - [Phosphor Icons](https://phosphoricons.com/)
 - [The Movie Database](https://www.themoviedb.org/)
-    - [TMDB API Docs](https://developer.themoviedb.org/docs/getting-started)
+  - [TMDB API Docs](https://developer.themoviedb.org/docs/getting-started)
 
-## My process
-
-### Built with
+## Built with
 
 - React
 - React Router
@@ -44,8 +49,9 @@ More to come...
 - The Movie Database API
 - Semantic HTML5 markup
 - CSS custom properties and SCSS
-- A fair amount of JavaScript
+- An immense amount of JavaScript
 - Phosphor Icons
+- Various online video providers
 
 ## Author
 

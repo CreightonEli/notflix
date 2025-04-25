@@ -1,8 +1,47 @@
 import { Link } from "react-router-dom";
 import { Info, Star, StarHalf } from "@phosphor-icons/react"
 import genres from "../genres"
+import React, { useEffect, useState } from 'react';
+import useApiKey from '../hooks/useApiKey';
 
 export default function Hero(props) {
+    const [images, setImages] = useState(null); // Store only the relevant logo path
+    const [isDataFetched, setIsDataFetched] = useState(false); // Track if data has been fetched
+    const [apiKey, setApiKey] = useApiKey();
+
+    useEffect(() => {
+        // Only fetch images once we have settled props.id and props.media_type
+        if (!props.id || !props.media_type || isDataFetched) return;
+    
+        const fetchImages = async () => {
+          const options = {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+          };
+    
+          try {
+            const endpoint =
+              props.media_type === "movie"
+                ? `https://api.themoviedb.org/3/movie/${props.id}/images?include_image_language=en%2Cnull`
+                : `https://api.themoviedb.org/3/tv/${props.id}/images?include_image_language=en%2Cnull`;
+    
+            const response = await fetch(endpoint, options);
+            const data = await response.json();
+    
+            if (data && props.id) {
+              setImages({ id: props.id, logos: data.logos });
+              setIsDataFetched(true); // Mark as fetched
+            }
+          } catch (error) {
+            console.error("Error fetching images:", error);
+          }
+        };
+    
+        fetchImages();
+    }, [props.id, props.media_type, isDataFetched]);
 
     const starArray = [
         <><Star size={32} /><Star size={32} /><Star size={32} /><Star size={32} /><Star size={32} /></>, 
@@ -29,64 +68,48 @@ export default function Hero(props) {
 
     const genreNames = getGenreNames(props.genre_ids); // Call the function with genre_ids
     
-    if (props.media_type == "movie") {
-        return (
-            <div className="banner" style={{backgroundImage: "linear-gradient(360deg, rgb(26, 11, 63) 1%, transparent 100%), url(https://image.tmdb.org/t/p/original" + props.backdrop_path + ")"}}>
-                <div className="hero-container">
-                    <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={"Movie poster for " + props.title} />
-                    <div className="text-container">
-                        <h2>{props.title}
-                            {props.release_date && (
-                                <span className="year">
-                                    {props.release_date.split('-')[0]}
-                                </span>
-                            )}
+    // console.log(images)
+    
+    return (
+        <div className="banner" style={{backgroundImage: "linear-gradient(360deg, rgb(26, 11, 63) 1%, transparent 100%), url(https://image.tmdb.org/t/p/original" + props.backdrop_path + ")"}}>
+            <div className="hero-container">
+                <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={"Movie poster for " + props.title} />
+                <div className="text-container">
+                    {images?.id === props.id && images?.logos?.[0]?.file_path ? 
+                        <img src={`https://image.tmdb.org/t/p/w500${images?.logos[0]?.file_path}`} alt={`Logo for ${props?.title || props?.name}`} />
+                        :
+                        <h2>
+                            {props.title && (props.title)}
+                            {props.name && (props.name)}
                         </h2>
-                        <p>{props.overview}</p>
-                        <p><span className="media-tag tag">Movie</span>{genreNames.map((genre, index) => (
+                    }
+                    {props.release_date && (
+                        <p className="date">
+                            Released <span className="year">{props.release_date.split('-')[0]}</span>
+                        </p>
+                    )}
+                    {props.first_air_date && (
+                        <p className="date">
+                            First aired <span className="year">{props.first_air_date.split('-')[0]}</span>
+                        </p>
+                    )}
+                    <p className="clamped">{props.overview}</p>
+                    <p>
+                        <span className="media-tag tag">{props.media_type == 'movie' ? 'Movie' : 'TV Show'}</span>
+                        {genreNames.map((genre, index) => (
                             <span key={index} className="tag">
                                 {genre}
-                            </span>
-                        ))}</p>
-                        <div className="bottom">
-                            <Link to={`/movies/${props.id}`}>
-                                <button><Info size={24} /><span>More info</span></button>
-                            </Link>
-                            <span className="hero-rating">{starArray[parseInt(props.vote_average)]}</span><p>{props.vote_count} votes</p>
-                        </div>
+                            </span>)
+                        )}
+                    </p>
+                    <div className="bottom">
+                        <Link to={`/${props.media_type === 'movie' ? 'movies' : 'shows'}/${props.id}`}>
+                            <button><Info size={24} /><span>More info</span></button>
+                        </Link>
+                        <span className="hero-rating">{starArray[parseInt(props.vote_average)]}</span><p className="vote-count-text">{props.vote_count} votes</p>
                     </div>
                 </div>
             </div>
-        )
-    }
-    else { // if show
-        return (
-            <div className="banner" style={{backgroundImage: "linear-gradient(360deg, rgb(26, 11, 63) 1%, transparent 100%), url(https://image.tmdb.org/t/p/original" + props.backdrop_path + ")"}}>
-                <div className="hero-container">
-                    <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={"Cover image for " + props.name} />
-                    <div className="text-container">
-                        <h2>{props.name}
-                            {props.first_air_date && (
-                                <span className="year">
-                                    {props.first_air_date.split('-')[0]}
-                                </span>
-                            )}
-                        </h2>
-                        <p>{props.overview}</p>
-                        <p><span className="media-tag tag">TV Show</span>{genreNames.map((genre, index) => (
-                            <span key={index} className="tag">
-                                {genre}
-                            </span>
-                        ))}</p>
-                        <div className="bottom">
-                            <Link to={`/shows/${props.id}`}>
-                                <button><Info size={24} /><span>More info</span></button>
-                            </Link>
-                            <span className="hero-rating">{starArray[parseInt(props.vote_average)]}</span><p>{props.vote_count} votes</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+        </div>
+    )
 }

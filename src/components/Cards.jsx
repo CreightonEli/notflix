@@ -26,8 +26,10 @@ export default function Cards(props) {
                     {/* <span className="media-type">{props.title && ("Movie")}{props.name && ("TV")}</span> */}
                     <div className="text-content">
                         <h2 className="title">
-                            {(props.title || props.name)}
+                            {(props.title || props.name)} 
                         </h2>
+                            {(props.release_date && props.release_date.split('-')[0])}
+                            {(props.first_air_date && props.first_air_date.split('-')[0])}
                         {/* <p className="description">{props.overview}</p> */}
                         <div className="cards-rating">{starArray[parseInt(props.vote_average)]}</div>
                         {props.title && (
