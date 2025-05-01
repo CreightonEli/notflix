@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-B5Qt9EMX.js";const n="/notflix/",o=window.location.pathname,e=["/notflix/","/notflix/movies","/notflix/about"];if(e.includes(o)){const t=o+window.location.search;window.location.href=t}else console.error("Invalid path detected. Redirecting to the home page."),window.location.href=n;

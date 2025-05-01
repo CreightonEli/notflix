@@ -2,18 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Redirecting...</title>
-    <script>
-      // Redirect to the app's index.html while preserving the original path
-      const basePath = "/notflix"; // Update this to match your repository name
-      if (!window.location.pathname.startsWith(basePath)) {
-        const newPath = basePath + window.location.pathname + window.location.search;
-        window.location.href = newPath;
-      } else {
-        // Prevent infinite redirect loop
-        console.error("Redirect loop detected. Check your base path configuration.");
-      }
-    </script>
+    <title>Redirecting...</title>
+    <script type="module" crossorigin src="/notflix/assets/notFound-g1Fif8OY.js"></script>
+    <link rel="modulepreload" crossorigin href="/notflix/assets/modulepreload-polyfill-B5Qt9EMX.js">
   </head>
   <body>
     Redirecting...
