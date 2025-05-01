@@ -5,7 +5,14 @@
     <title>Redirecting...</title>
     <script>
       // Redirect to the app's index.html while preserving the original path
-      window.location.href = "/notflix" + window.location.pathname + window.location.search;
+      const basePath = "/notflix"; // Update this to match your repository name
+      if (!window.location.pathname.startsWith(basePath)) {
+        const newPath = basePath + window.location.pathname + window.location.search;
+        window.location.href = newPath;
+      } else {
+        // Prevent infinite redirect loop
+        console.error("Redirect loop detected. Check your base path configuration.");
+      }
     </script>
   </head>
   <body>
