@@ -76,7 +76,9 @@ export default function Hero(props) {
                 <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={"Movie poster for " + props.title} />
                 <div className="text-container">
                     {images?.id === props.id && images?.logos?.[0]?.file_path ? 
-                        <img src={`https://image.tmdb.org/t/p/w500${images?.logos[0]?.file_path}`} alt={`Logo for ${props?.title || props?.name}`} />
+                        // <div className="logo-container">
+                            <img src={`https://image.tmdb.org/t/p/w500${images?.logos[0]?.file_path}`} alt={`Logo for ${props?.title || props?.name}`} />
+                        // </div>
                         :
                         <h2>
                             {props.title && (props.title)}
@@ -94,14 +96,14 @@ export default function Hero(props) {
                         </p>
                     )}
                     <p className="clamped">{props.overview}</p>
-                    <p>
+                    <div className="genre-container">
                         <span className="media-tag tag">{props.media_type == 'movie' ? 'Movie' : 'TV Show'}</span>
                         {genreNames.map((genre, index) => (
                             <span key={index} className="tag">
                                 {genre}
                             </span>)
                         )}
-                    </p>
+                    </div>
                     <div className="bottom">
                         <Link to={`/${props.media_type === 'movie' ? 'movies' : 'shows'}/${props.id}`}>
                             <button><Info size={24} /><span>More info</span></button>

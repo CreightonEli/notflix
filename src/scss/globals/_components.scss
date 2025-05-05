@@ -333,8 +333,7 @@ header > form {
 .hero-container > .text-container > img {
     max-width: 500px;
     max-height: 125px;
-    width: fit-content;
-    margin: auto 0 0;
+    margin: auto auto 0 0;
 }
 
 .text-container {
@@ -363,7 +362,7 @@ header > form {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    margin: 0;
+    margin: 0 0 8px;
 }
 
 
@@ -395,7 +394,7 @@ header > form {
     display: flex;
     flex-direction: row;
     max-height: 42px;
-    margin: 8px 0 0;
+    margin: 14px 0 0;
     align-items: end;
 }
 .bottom > a > button {
@@ -979,8 +978,7 @@ h3 > a > span {
 .details-container > .text-container > img {
     max-width: 500px;
     max-height: 125px;
-    margin: 0 0 8px;
-    width: fit-content;
+    margin: auto auto 8px 0;
 }
 .details-container > .text-container > h2 {
     font-size: 34pt;
@@ -1021,7 +1019,8 @@ h3 > a > span {
     margin: auto 0 12px;
 }
   
-.details-container > .text-container > .genre-container {
+.genre-container {
+    font-size: 12pt;
     margin: 0;
 }
   
