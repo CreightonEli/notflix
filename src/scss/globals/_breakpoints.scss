@@ -1,3 +1,65 @@
+// laptop breakpoints
+@media (max-width: 1200px) {
+  .hero-container {
+    margin: 70px auto 25px;
+  }
+  .gallery-wrapper {
+    padding: 10px 0 5px;
+    height: inherit;
+    height: 300px;
+  }
+  
+  h3 {
+    margin: 0 0 0 60px;
+  }
+
+  .gallery-container {
+    margin: 0 70px 0 90px;
+  }
+
+  .card {
+    max-width: 150px;
+    min-width: 150px;
+    height: 225px;
+  }
+  .card > .text-content {
+    width: 150px;
+    height: 225px;
+    padding: 6px 0;
+  }
+  .card > .text-content > .title {
+    font-size: 10pt;
+  }
+  .card > .text-content > .description {
+    font-size: 8pt;
+  }
+  .card > .text-content > a > button {
+    color: var(--white);
+    padding: 6px 10px;
+  }
+
+  .scroll-button.right {
+    right: -44%;
+  }
+  .scroll-button.left {
+    left: -42%;
+  }
+
+  .embed-section > .embed-wrapper {
+    border-radius: 12px 12px 0 0;
+    max-width: 950px;
+  }
+
+  .source-container {
+    max-width: 950px;
+  }
+
+  .media-header > h3 {
+    margin-left: 38px;
+  }
+}
+
+// mobile breakpoints
 @media (max-width: 950px) {
     header {
       margin: 18px;
