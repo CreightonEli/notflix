@@ -150,6 +150,7 @@ header > form {
     margin-right: 4px;
     transition: 355ms;
     border-color: var(--header-border);
+    font-size: 16px;
 }
 .search-box:hover {
     border-color: var(--purple);
@@ -376,10 +377,12 @@ header > form {
 }
 
 .tag {
+    display: inline-block;
     background-color: var(--dark-gray);
     border: 1px solid var(--purple);
     border-radius: 4px;
     margin-right: 5px;
+    margin-bottom: 5px;
     padding: 2px 4px;
     transition: 355ms;
     cursor: pointer;

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script type="module">
+      // Use Vite's BASE_URL environment variable for the base path
+      const basePath = import.meta.env.BASE_URL || "/"; // Fallback to "/" if not defined
+      const currentPath = window.location.pathname;
+
+      // Define a whitelist of valid paths (relative to the basePath)
+      const validPaths = [
+        "/notflix/", // Home page
+        "/notflix/movies", // Example valid path
+        "/notflix/about", // Example valid path
+        // Add other valid paths here
+      ];
+
+      // Check if the current path is valid
+      if (validPaths.includes(currentPath)) {
+        const newPath = currentPath + window.location.search;
+        window.location.href = newPath;
+      } else {
+        // If the path is invalid, redirect to the home page or show an error
+        console.error("Invalid path detected. Redirecting to the home page.");
+        window.location.href = basePath;
+      }
+    </script>
+  </head>
+  <body>
+    Redirecting...
+  </body>
+</html>

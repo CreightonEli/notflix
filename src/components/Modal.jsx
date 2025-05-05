@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logoSmall from '../assets/logo_small.png'; // Use relative path
 
 export default function Modal({ isOpen, onClose, onApiKeySet }) {
   if (!isOpen) return null;
@@ -48,8 +49,8 @@ export default function Modal({ isOpen, onClose, onApiKeySet }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <img className="logo" src={'../src/assets/logo_small.png'} alt="Notflix Logo" />
-        <img className="logo-shadow" src={'../src/assets/logo_small.png'} alt="Notflix Logo" />
+        <img className="logo" src={logoSmall} alt="Notflix Logo" />
+        <img className="logo-shadow" src={logoSmall} alt="Notflix Logo" />
         <h2>Welcome to Notflix!</h2>
         <p>Please submit your TMDB API key below to get started.</p>
         <input

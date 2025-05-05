@@ -48,18 +48,22 @@ export default function Details(props) {
                     {props.credits && (
                         props?.credits?.crew.find(person => person.job === "Director") && (
                             <p className="director">
-                                Directed by <span className="name"><Link to={'/person/' + props?.credits?.crew.find(person => person.job === "Director").id}>{props?.credits?.crew.find(person => person.job === "Director")?.name}</Link></span>
+                                Directed by <span className="name">
+                                    <Link to={`/person/${props?.credits?.crew.find(person => person.job === "Director").id}`}>
+                                        {props?.credits?.crew.find(person => person.job === "Director")?.name}
+                                    </Link>
+                                </span>
                             </p>
                         )
                     )}
                     {props?.created_by?.length > 0 && (
                         props?.created_by.length > 1 ? (
                             <p className="director">
-                                Created by <span className="name"><Link to={'/person/' + props?.created_by[0]?.id}>{props?.created_by[0]?.name}</Link></span> and <span className="name"><Link to={'/person/' + props?.created_by[1]?.id}>{props?.created_by[1]?.name}</Link></span>
+                                Created by <span className="name"><Link to={`/person/${props?.created_by[0]?.id}`}>{props?.created_by[0]?.name}</Link></span> and <span className="name"><Link to={'/person/' + props?.created_by[1]?.id}>{props?.created_by[1]?.name}</Link></span>
                             </p>
                         ) : (
                             <p className="director">
-                                Created by <span className="name"><Link to={'/person/' + props?.created_by[0]?.id}>{props?.created_by[0]?.name}</Link></span>
+                                Created by <span className="name"><Link to={`/person/${props?.created_by[0]?.id}`}>{props?.created_by[0]?.name}</Link></span>
                             </p>
                         )
                     )}

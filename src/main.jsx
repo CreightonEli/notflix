@@ -9,12 +9,12 @@ import { HeaderVisibilityProvider } from './context/HeaderVisibilityContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-        <HeaderVisibilityProvider>
-          <ScrollToTop />
-          <Header />
-          <App />
-        </HeaderVisibilityProvider>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <HeaderVisibilityProvider>
+        <ScrollToTop />
+        <Header />
+        <App />
+      </HeaderVisibilityProvider>
     </BrowserRouter>
   </StrictMode>
 );

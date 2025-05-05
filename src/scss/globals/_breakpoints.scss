@@ -8,8 +8,7 @@
     .search-box {
       box-sizing: border-box;
       padding: auto;
-      font-size: 10pt;
-      width: 130px;
+      width: none;
       height: 42px;
     }
     .search-btn {
@@ -34,6 +33,7 @@
     }
     .hero-container > .text-container > img {
       max-width: 100%;
+      max-height: 200px;
     }
     .hero-container > .text-container > p {
       font-size: 11pt;

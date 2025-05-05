@@ -1,10 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
+import { useState, useEffect } from "react";
+import logoFull from '../assets/logo_full.png'; // Use relative path
+import logoSmall from '../assets/logo_small.png'; // Use relative path
 
 export default function Header() {
     const { isHeaderVisible } = useHeaderVisibility();
     const navigate = useNavigate();
+    const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia("(max-width: 950px)").matches);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 950px)");
+        const handleResize = () => setIsSmallScreen(mediaQuery.matches);
+
+        mediaQuery.addEventListener("change", handleResize);
+        return () => mediaQuery.removeEventListener("change", handleResize);
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,12 +32,13 @@ export default function Header() {
 
     return (
         <header>
-            {/* <h1 className="logo"> */}
-                <Link to={'/'}>
-                    {/* NOTFLIX */}
-                    <img className="logo" src={'../src/assets/logo_full.png'} alt="Notflix Logo" />
-                </Link>
-            {/* </h1> */}
+            <Link to={`/`}>
+                <img 
+                    className="logo" 
+                    src={isSmallScreen ? logoSmall : logoFull} 
+                    alt="Notflix Logo" 
+                />
+            </Link>
             <form onSubmit={handleSubmit}>
                 <input 
                     className="search-box"
