@@ -14,6 +14,8 @@ export default function Embed(props) {
     const [apiKey, setApiKey] = useApiKey();
 
     // provider URLs
+    const vidLinkMovieURL = `https://vidlink.pro/movie/${props.id}&?autoplay=false`;
+    const vidLinkShowURL = `https://vidlink.pro/tv/${props.id}/${selectedSeason}/${selectedEpisode}&?autoplay=false`;
     const embedMovieURL = `https://embed.su/embed/movie/${props.id}`;
     const embedShowURL = `https://embed.su/embed/tv/${props.id}/${selectedSeason}/${selectedEpisode}`;
     const vidsrcMovieURL = `https://vidsrc.cc/v3/embed/movie/${props.id}`;
@@ -24,8 +26,8 @@ export default function Embed(props) {
     const vidsrcShow2URL = `https://vidsrc.me/embed/tv?tmdb=${props.id}&season=${selectedSeason}&episode=${selectedEpisode}`;
 
     let defaultURL = 'https://embed.su/embed/movie/${props.id}';
-    props.title && (defaultURL = vidsrcMovieURL);
-    props.name && (defaultURL = vidsrcShowURL);
+    props.title && (defaultURL = vidLinkMovieURL);
+    props.name && (defaultURL = vidLinkShowURL);
 
     useEffect(() => {
         const options = {
@@ -101,7 +103,7 @@ export default function Embed(props) {
                 className="banner"
                 style={{
                     backgroundImage: `linear-gradient(0deg, rgb(26, 11, 63) 1%, ${
-                        isTheaterMode ? 'rgba(13, 3, 37, 0.8)' : 'rgba(0, 0, 0, 0)'
+                        isTheaterMode ? 'rgba(0, 0, 0, 0.88)' : 'rgba(0, 0, 0, 0)'
                     } 100%), url(https://image.tmdb.org/t/p/original${props.backdrop_path})`,
                 }}
             >
@@ -117,9 +119,10 @@ export default function Embed(props) {
                     <div className="source-container">
                         <div className="source-control">
                             <select name="source" id="source" onChange={handleSourceChange}>
+                                <option value={vidLinkMovieURL}>VidLink</option>
                                 <option value={vidsrcMovieURL}>VidSrc</option>
-                                <option value={vidsrcMovie2URL}>VidSrc 2</option>
                                 <option value={embedMovieURL}>Embed.su</option>
+                                <option value={vidsrcMovie2URL}>VidSrc 2</option>
                             </select>
                             <button
                                 className={`theater-mode ${isTheaterMode ? 'active' : ''}`}
@@ -146,9 +149,10 @@ export default function Embed(props) {
                 <div className="episode-selector">
                     <div className="source-control">
                         <select name="source" id="source" onChange={handleSourceChange}>
+                            <option value={vidLinkShowURL}>VidLink</option>
                             <option value={vidsrcShowURL}>VidSrc</option>
-                            <option value={vidsrcShow2URL}>VidSrc 2</option>
                             <option value={embedShowURL}>Embed.su</option>
+                            <option value={vidsrcShow2URL}>VidSrc 2</option>
                             <option value={vidsrcAnimeSubURL}>VS Anime (Sub)</option>
                             <option value={vidsrcAnimeDubURL}>VS Anime (Dub)</option>
                         </select>
