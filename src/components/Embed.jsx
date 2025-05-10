@@ -60,11 +60,13 @@ export default function Embed(props) {
                 return baseUrl.replace(/\/\d+\/\d+$/, `/${season}/${episode}`);
             }
         } else if (baseUrl.includes('vidsrc.me')) {
-            // Handle vidsrcShow2URL with query parameters
             const url = new URL(baseUrl);
             url.searchParams.set('season', season);
             url.searchParams.set('episode', episode);
             return url.toString();
+        } else if (baseUrl.includes('vidlink.pro')) {
+            // Handle vidLinkShowURL with query parameters
+            return baseUrl.replace(/\/\d+\/\d+&/, `/${season}/${episode}&`);
         }
         return baseUrl;
     };
