@@ -5,8 +5,8 @@
   }
   .gallery-wrapper {
     padding: 10px 0 5px;
-    height: inherit;
-    height: 300px;
+    // height: inherit;
+    // height: 360px;
   }
   
   h3 {
@@ -18,22 +18,26 @@
   }
 
   .card {
+    max-width: 183px;
+  }
+
+  .card-top {
     max-width: 150px;
-    min-width: 150px;
+    min-width: 151px;
     height: 225px;
   }
-  .card > .text-content {
+  .card-top > .text-content {
     width: 150px;
     height: 225px;
     padding: 6px 0;
   }
-  .card > .text-content > .title {
+  .card-top > .text-content > .title {
     font-size: 10pt;
   }
-  .card > .text-content > .description {
+  .card-top > .text-content > .description {
     font-size: 8pt;
   }
-  .card > .text-content > a > button {
+  .card-top > .text-content > a > button {
     color: var(--white);
     padding: 6px 10px;
   }
@@ -163,22 +167,22 @@
       justify-content: center;
     }
   
-    .results-container > .card {
+    .results-container > .card-top {
       max-width: 115px;
       min-width: 115px;
       height: 172px;
     }
-    .results-container > .card > .text-content {
+    .results-container > .card-top > .text-content {
       width: 115px;
       height: 172px;
       padding: 6px 0;
     }
     
-    .results-container > .card > .text-content > .title {
+    .results-container > .card-top > .text-content > .title {
       font-size: 9pt;
       color: var(--white);
     }
-    .results-container > .card > .text-content {
+    .results-container > .card-top > .text-content {
       font-size: 8pt;
       color: var(--off-white);
     }
@@ -366,27 +370,37 @@
   
     .gallery-wrapper {
       padding: 10px 0 5px;
-      height: inherit;
+      // height: 320px;
     }
   
+    
     .card {
+      max-width: 164px;
+    }
+
+    .card-top {
       max-width: 130px;
-      min-width: 130px;
+      min-width: 131px;
       height: 200px;
     }
-    .card > .text-content {
+    .card-top > .text-content {
       width: 130px;
       height: 200px;
       padding: 6px 0;
     }
-    .card > .text-content > .title {
+    .card-top > .text-content > .title {
       font-size: 10pt;
     }
-    .card > .text-content > .description {
+    .card-top > .text-content > .description {
       font-size: 8pt;
     }
-    .card > .text-content > a > button {
+    .card-top > .text-content > a > button {
       color: var(--white);
       padding: 6px 10px;
+    }
+
+    .card-bottom > .quick-info {
+      font-size: 9pt;
+      // font-weight: 600;
     }
   }
