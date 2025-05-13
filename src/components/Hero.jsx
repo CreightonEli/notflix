@@ -68,7 +68,7 @@ export default function Hero(props) {
 
     const genreNames = getGenreNames(props.genre_ids); // Call the function with genre_ids
     
-    // console.log(images)
+    console.log(props)
     
     return (
         <div className="banner" style={{backgroundImage: "linear-gradient(360deg, rgb(26, 11, 63) 1%, transparent 100%), url(https://image.tmdb.org/t/p/original" + props.backdrop_path + ")"}}>
@@ -87,12 +87,20 @@ export default function Hero(props) {
                     }
                     {props.release_date && (
                         <p className="date">
-                            Released <span className="year">{props.release_date.split('-')[0]}</span>
+                            {new Date(props.release_date) > new Date() ? (
+                                <>Set to release in <span className="year">{new Date(props.release_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                            ) : (
+                                <>Released <span className="year">{props.release_date.split('-')[0]}</span></>
+                            )}
                         </p>
                     )}
                     {props.first_air_date && (
                         <p className="date">
-                            First aired <span className="year">{props.first_air_date.split('-')[0]}</span>
+                            {new Date(props.first_air_date) > new Date() ? (
+                                <>Set to air in <span className="year">{new Date(props.first_air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                            ) : (
+                                <>First aired <span className="year">{props.first_air_date.split('-')[0]}</span></>
+                            )}
                         </p>
                     )}
                     <p className="clamped">{props.overview}</p>
@@ -106,9 +114,21 @@ export default function Hero(props) {
                     </div>
                     <div className="bottom">
                         <Link to={`/${props.media_type === 'movie' ? 'movies' : 'shows'}/${props.id}`}>
-                            <button><Info size={24} /><span>More info</span></button>
+                            <button><Info size={24} weight="bold" /><span>More info</span></button>
                         </Link>
-                        <span className="hero-rating">{starArray[parseInt(props.vote_average)]}</span><p className="vote-count-text">{props.vote_count} votes</p>
+                        <div className="quick-info">
+                            {/* rating average */}
+                            <span className="info-item rating-avg">
+                                <Star weight="fill"/>
+                                <span className="rating-num">
+                                    {Math.round(props.vote_average * 10) / 10}
+                                </span>
+                            </span>
+                            {/* number of ratings */}
+                            <span className="info-item">
+                                <p className="vote-count-text">{props.vote_count} ratings</p>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

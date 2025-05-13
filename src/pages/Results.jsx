@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from "react-router-dom";
 import genres from '../genres'; // Import genres array
 import useApiKey from '../hooks/useApiKey';
+import logoSmall from '../assets/logo_small.png'; // Use relative path
 
 export default function Results() {
     const [searchParams] = useSearchParams();
@@ -269,6 +270,12 @@ export default function Results() {
                             />
                         ))}
                 </div>
+                {page < totalPages && (
+                    <div className='load-more'>
+                        <img className="logo" src={logoSmall} alt="Notflix Logo" />
+                        <img className="logo-shadow" src={logoSmall} alt="Notflix Logo" />
+                    </div>
+                )}
             </main>
         </>
     );

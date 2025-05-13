@@ -1,4 +1,4 @@
-import { Star, StarHalf, PlayCircle, MagnifyingGlassPlus } from "@phosphor-icons/react";
+import { Clock, Star, StarHalf, PlayCircle, MagnifyingGlassPlus } from "@phosphor-icons/react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -31,6 +31,8 @@ export default function Details(props) {
 
     const letterboxdSlug = generateSlug(props.title);
     const letterboxdUrl = `https://letterboxd.com/film/${letterboxdSlug}/`;
+
+    console.log(props)
 
     return (
         <>
@@ -99,13 +101,37 @@ export default function Details(props) {
                         )) || <span>Loading...</span>}
                     </p>
                     <div className="bottom">
-                        <a className="hero-rating" href={`https://www.themoviedb.org/${props.title ? 'movie' : 'tv'}/${props.id}`} target="_blank">{starArray[parseInt(props.vote_average)]}</a>
-                        <a className="vote-count" href={`https://www.themoviedb.org/${props.title ? 'movie' : 'tv'}/${props.id}`} target="_blank"><p className="vote-count-text">{props.vote_count} votes</p></a>
-                        {props.title && (
-                            <a className="letterboxd-btn" href={letterboxdUrl} target="_blank">
-                                <img src="https://a.ltrbxd.com/logos/letterboxd-logo-h-neg-rgb.svg" />
-                            </a>
-                        )}
+                        <div className="quick-info">
+                            {/* runtime */}
+                            {props.runtime && (
+                                <span className="info-item runtime">
+                                    <Clock weight="bold" />
+                                    {props.runtime / 60 > 1 && (Math.floor(props.runtime / 60) + 'h ')}
+                                    {props.runtime % 60}m
+                                </span>
+                            )}
+                            {/* rating average */}
+                            <span className="info-item rating-avg">
+                                <Star weight="fill"/>
+                                <span className="rating-num">
+                                    {Math.round(props.vote_average * 10) / 10}
+                                </span>
+                            </span>
+                            {/* number of ratings */}
+                            <span className="info-item">
+                                <span className="vote-count-text">
+                                    {props.vote_average > 0 ? (
+                                        <>
+                                            {props.vote_count.toLocaleString('en', {useGrouping:true})} ratings
+                                        </>
+                                    ) : (
+                                        <>
+                                            No ratings
+                                        </>
+                                    )}
+                                </span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,6 +171,11 @@ export default function Details(props) {
                         ))}
                     </div>
                 </div>
+            )}
+            {props.title && (
+                <a className="letterboxd-btn" href={letterboxdUrl} target="_blank">
+                    <img src="https://a.ltrbxd.com/logos/letterboxd-logo-h-neg-rgb.svg" />
+                </a>
             )}
         </>
     );

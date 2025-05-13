@@ -61,7 +61,6 @@ button:focus-visible {
 
 #root {
     /* styles */
-    padding-bottom: 50px;
     text-align: center;
     width: 100vw;
     min-height: 100vh;
@@ -177,6 +176,14 @@ header > form {
     outline: 1px solid var(--purple);
 }
 
+// Footer //
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px auto 0;
+}
+
 /* Home page */
 
 /* Key Modal */
@@ -224,6 +231,31 @@ header > form {
     margin: 6px auto -110px;
     filter: grayscale(100%) brightness(0);
     animation: rotate 10s linear infinite;
+}
+
+.load-more {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+}
+.load-more > img.logo {
+    width: 80px;
+    height: auto;
+    border-radius: 6px;
+    margin: 6px auto;
+    animation: rotate 2s ease-in-out infinite;
+    z-index: 1;
+}
+.load-more > img.logo-shadow {
+    position: relative;
+    top: -80px;
+    left: 10px;
+    width: 80px;
+    height: auto;
+    border-radius: 6px;
+    margin: 6px auto -110px;
+    filter: grayscale(100%) brightness(0);
+    animation: rotate 2s ease-in-out infinite;
 }
 
 
@@ -390,7 +422,7 @@ header > form {
     background-color: var(--gray);
 }
 
-.bottom {
+.hero-container > .text-container > .bottom {
     display: flex;
     flex-direction: row;
     max-height: 42px;
@@ -404,28 +436,54 @@ header > form {
     display: inline;
     vertical-align: middle;
 }
-.bottom > a  > button:hover {
+.bottom > a > button:hover {
     border-color: var(--white);
 }
-.bottom > a   > button > svg {
+.bottom > a > button > svg {
     transform: translateY(4px) translateX(-4px);
 }
-.bottom > a   > button > span {
+.bottom > a > button > span {
     font-size: 14pt;
     font-weight: 600;
 }
+
+.bottom > .quick-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin: 0 auto 0 0;
+    color: var(--off-white);
+    font-size: 14pt;
+    gap: 12px;
+}
+// .quick-info {
+//     display: flex;
+//     flex-direction: row;
+// }
+
 
 .vote-count {
     margin: 0 auto 1px 0;
 }
 
-.hero-rating {
-    color: goldenrod;
-    height: 34px;
-    margin: auto 8px 0px 0;
+.info-item {
+    display: flex;
+    font-size: 14pt;
 }
-.hero-rating:hover {
+.info-item.rating-avg {
     color: goldenrod;
+}
+.info-item > svg {
+    margin: auto 4px auto 0;
+}
+.info-item > .rating-num {
+    font-weight: 600;
+}
+.info-item > .vote-count-text {
+    color: var(--off-white);
+    margin: auto 0 1px 0;
+    font-size: 12pt;
+    font-weight: 300;
 }
 
 /* Media Cards / Carousel */
@@ -636,20 +694,20 @@ h3 > a > span {
     padding-top: 4px;
     transition: 355ms;
 }
-.quick-info > span {
+.card-bottom > .quick-info > span {
     display: flex;
     margin: 0 auto;
 }
-.quick-info > span.year {
+.card-bottom > .quick-info > span.year {
     margin: auto auto auto 0;
 }
-.quick-info > svg {
+.card-bottom > .quick-info > svg {
     margin: auto 0 auto auto;
 }
-.quick-info > span.rating {
+.card-bottom > .quick-info > span.rating {
     margin: auto auto auto 0;
 }
-.quick-info > span.type {
+.card-bottom > .quick-info > span.type {
     display: block;
     margin: auto 0 auto auto;
     padding: 0 2px;
@@ -665,11 +723,6 @@ h3 > a > span {
 .cards-rating {
     color: goldenrod;
     margin: auto auto 0;
-}
-
-.vote-count-text {
-    color: var(--off-white);
-    margin: auto 0 0px;
 }
 
 .text-content > a {
@@ -729,7 +782,6 @@ h3 > a > span {
     max-width: 1080px;
     max-height: 500px;
     overflow: hidden;
-    margin-bottom: 3px;
 }
 .media-container > .media-header {
     display: flex;
@@ -809,7 +861,7 @@ h3 > a > span {
     justify-content: center;
     max-width: 1050px;
     margin: auto auto 40px;
-    padding: 0 20px 0px;
+    padding: 0 20px 16px;
     box-sizing: border-box;
     background-color: var(--header);
     border-radius: 0 0 8px 8px;
@@ -1083,10 +1135,11 @@ h3 > a > span {
     font-size: 12pt;
     margin: 0;
 }
-  
+
+
 .letterboxd-btn {
     height: 40px;
-    margin: 0 0 0 auto;
+    margin: 0 auto 0 0;
     background-color: #202830;
     border-radius: 10px;
     transition: 355ms;
@@ -1106,7 +1159,7 @@ h3 > a > span {
     max-width: 1300px;
     border: 1px solid var(--gray);
     border-radius: 8px;
-    margin: 0 auto 60px;
+    margin: 0 auto;
     padding: 8px 20px 0px 40px;
     justify-content: left;
     text-align: left;
@@ -1329,18 +1382,6 @@ ul.department-list {
     flex-direction: row;
     justify-content: center;
     margin: 0 auto 25px;
-}
-  
-.results-bottom > button {
-    background-color: var(--dark-gray);
-    border-color: var(--light-gray);
-    border-radius: 10rem;
-    /* width: 4rem; */
-    height: 4rem;
-    margin: 0 10px;
-}
-.results-bottom > button:hover {
-    border-color: var(--purple);
 }
   
 /* Person Page */

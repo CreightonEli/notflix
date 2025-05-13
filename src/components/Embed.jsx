@@ -132,7 +132,7 @@ export default function Embed(props) {
                             >
                                 {isTheaterMode ? (
                                     <>
-                                        <span>Exit Theater Mode</span>
+                                        <span>Theater Mode</span>
                                         <CornersIn size={21} />
                                     </>
                                 ) : (
@@ -164,7 +164,7 @@ export default function Embed(props) {
                         >
                             {isTheaterMode ? (
                                 <>
-                                    <span>Exit Theater Mode</span>
+                                    <span>Theater Mode</span>
                                     <CornersIn size={21} />
                                 </>
                             ) : (
@@ -202,10 +202,17 @@ export default function Embed(props) {
                                     <span className="ep-num">{index + 1}</span>
                                     <div className="ep-thumbnail-container">
                                         <PlayCircle size={50} weight="fill" />
-                                        <img
-                                            src={`https://image.tmdb.org/t/p/w500${episode?.still_path}`}
-                                            alt={`Thumbnail for ${episode?.name} not found`}
-                                        />
+                                        {episode?.still_path ? (
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/w500${episode?.still_path}`}
+                                                alt={`Thumbnail`}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/w500${props?.backdrop_path}`}
+                                                alt={`Thumbnail missing`}
+                                            />
+                                        )}
                                     </div>
                                     <div className="ep-text">
                                         <div className="top-text">

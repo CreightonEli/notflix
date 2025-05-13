@@ -3,7 +3,7 @@ import { User } from "@phosphor-icons/react";
 
 export default function Cast(props) {
 
-    console.log(props?.aggregate_credits?.crew)
+    // console.log(props?.aggregate_credits?.crew)
 
     return (
         <>
