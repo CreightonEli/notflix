@@ -24,6 +24,8 @@ export default function Embed(props) {
     const vidsrcAnimeDubURL = `https://vidsrc.cc/v2/embed/anime/tmdb${props.id}/${selectedEpisode}/dub?autoPlay=false`;
     const vidsrcMovie2URL = `https://vidsrc.me/embed/movie?tmdb=${props.id}`;
     const vidsrcShow2URL = `https://vidsrc.me/embed/tv?tmdb=${props.id}&season=${selectedSeason}&episode=${selectedEpisode}`;
+    const superEmbedMovieURL = `https://multiembed.mov/directstream.php?video_id=${props.id}&tmdb=1`;
+    const superEmbedShowURL = `https://multiembed.mov/directstream.php?video_id=${props.id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode}`;
 
     let defaultURL = 'https://embed.su/embed/movie/${props.id}';
     props.title && (defaultURL = vidLinkMovieURL);
@@ -65,8 +67,17 @@ export default function Embed(props) {
             url.searchParams.set('episode', episode);
             return url.toString();
         } else if (baseUrl.includes('vidlink.pro')) {
-            // Handle vidLinkShowURL with query parameters
             return baseUrl.replace(/\/\d+\/\d+&/, `/${season}/${episode}&`);
+        } else if (baseUrl.includes('multiembed.mov')) {
+            // Handle SuperEmbedShowURL
+            // Replace &s= and &e= if present, or append if missing
+            let url = baseUrl;
+            if (url.includes('&s=') && url.includes('&e=')) {
+                url = url.replace(/&s=\d+/, `&s=${season}`).replace(/&e=\d+/, `&e=${episode}`);
+            } else {
+                url += `&s=${season}&e=${episode}`;
+            }
+            return url;
         }
         return baseUrl;
     };
@@ -124,6 +135,7 @@ export default function Embed(props) {
                                 <option value={vidLinkMovieURL}>VidLink</option>
                                 <option value={vidsrcMovieURL}>VidSrc</option>
                                 <option value={embedMovieURL}>Embed.su</option>
+                                <option value={superEmbedMovieURL}>SuperEmbed</option>
                                 <option value={vidsrcMovie2URL}>VidSrc 2</option>
                             </select>
                             <button
@@ -154,6 +166,7 @@ export default function Embed(props) {
                             <option value={vidLinkShowURL}>VidLink</option>
                             <option value={vidsrcShowURL}>VidSrc</option>
                             <option value={embedShowURL}>Embed.su</option>
+                            <option value={superEmbedShowURL}>SuperEmbed</option>
                             <option value={vidsrcShow2URL}>VidSrc 2</option>
                             <option value={vidsrcAnimeSubURL}>VS Anime (Sub)</option>
                             <option value={vidsrcAnimeDubURL}>VS Anime (Dub)</option>
