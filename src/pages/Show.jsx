@@ -23,7 +23,7 @@ export default function Show() {
         fetch(`https://api.themoviedb.org/3/tv/${id}?append_to_response=recommendations,aggregate_credits,images,videos,similar&language=en-US&include_image_language=en,null`, options)
             .then(response => response.json()) // Parse JSON response
             .then(data => {
-                document.title = `${data?.name} (${data?.first_air_date.split('-')[0]}) - Notflix`; // Set document title
+                document.title = `${data?.name} ${ data?.first_air_date && '(' + data?.first_air_date.split('-')[0] + ')' } - Notflix`; // Set document title
                 setShowDetails(data) // Save `results` to state
             })
             .catch(err => console.error(err));
