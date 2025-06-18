@@ -592,7 +592,7 @@ h3 > a > span {
 // cards //
 
 .card {
-    margin: 0 16px;
+    margin: 0 15.5px;
     max-width: 190px;
     box-sizing: border-box;
 }
@@ -627,12 +627,13 @@ h3 > a > span {
     display: flex;
     justify-content: center;
     touch-action: auto;
+    overflow: hidden;
 }
 
 .card-top a img.movie-cover {
     transition: inherit;
     pointer-events: none;
-    width: 100%;
+    // width: 100%;
 }
 
 .card-top .media-type {

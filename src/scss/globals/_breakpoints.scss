@@ -1,4 +1,8 @@
+// =============================
+// 
 // laptop breakpoints
+// 
+// =============================
 @media (max-width: 1300px) {
   .hero-container {
     margin: 70px auto 25px;
@@ -23,7 +27,7 @@
 
   .card-top {
     max-width: 150px;
-    min-width: 151px;
+    min-width: 150px;
     height: 225px;
   }
   .card-top > .text-content {
@@ -67,7 +71,11 @@
   }
 }
 
+// =============================
+// 
 // mobile breakpoints
+// 
+// =============================
 @media (max-width: 950px) {
     header {
       margin: 18px;
@@ -389,7 +397,7 @@
 
     .card-top {
       max-width: 130px;
-      min-width: 131px;
+      min-width: 130px;
       height: 200px;
     }
     .card-top > .text-content {
