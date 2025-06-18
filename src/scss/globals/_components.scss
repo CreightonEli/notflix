@@ -600,7 +600,7 @@ h3 > a > span {
 .card-top {
     margin: 15px 0 4px;
     padding: 0;
-    border: 1px solid var(--purple);
+    border: 1px solid var(--header-border);
     background-color: var(--header);
     display: flex;
     flex-direction: row;
@@ -610,11 +610,13 @@ h3 > a > span {
     max-width: 187px;
     justify-content: start;
     transition: 355ms;
-    box-shadow: 0 0 16px -5px var(--purple);
+    // box-shadow: 0 0 16px -5px var(--purple);
     overflow: hidden;
 }
 .card:hover .card-top {
     transform: translateY(-3px);
+    border: 1px solid var(--purple);
+    box-shadow: 0 0 16px -5px var(--purple);
 }
 // .card-top:hover > .movie-cover {
 //     filter: blur(1px) brightness(.25);
