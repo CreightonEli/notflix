@@ -1388,7 +1388,7 @@ ul.department-list {
 .person {
     display: flex;
     flex-direction: row;
-    max-width: 1160px;
+    max-width: 1440px;
     margin: 0 auto 25px;
     padding: 0 20px;
 }
@@ -1402,6 +1402,12 @@ ul.department-list {
     background-color: var(--header);
     border: 1px solid var(--header-border);
     border-radius: 8px;
+}
+
+.person > .overview > h1 {
+    font-size: 24pt;
+    margin: 24px 0;
+    display: none;
 }
   
 .person > .overview > .img-wrapper {
@@ -1488,11 +1494,64 @@ ul.department-list {
 .bio-btn:hover {
     color: var(--white);
 }
-  
-.filmography {
+
+.filmography-filter {
     display: flex;
     flex-direction: row;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.filmography-filter > select {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--header-border);
+    border-radius: 4px;
+    color: var(--off-white);
+    padding: 8px 12px;
+    font-size: 14pt;
+    font-weight: 400;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.filmography {
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    margin: 0 auto 14px;
+    margin: 4px auto 14px 16px;
     padding: 0;
+}
+
+.filmography > .year-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: -3px 0;
+    padding: 0;
+}
+.filmography > .year-header > svg {
+    position: absolute;
+    transform: translateX(-47%);
+    color: var(--purple);
+}
+.filmography > .year-header > h4 {
+    font-size: 16pt;
+    font-weight: 600;
+    margin: 0;
+    padding: 0 0 0 32px;
+    color: var(--off-white);
+    // border-left: 1px solid var(--purple);
+}
+
+.filmography .year-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0 0 20px 16px;
+    border-left: 2px solid var(--purple);
+    width: 100%;
+    max-width: 100%;
+}
+.filmography .year-group:last-child {
+    border-left: none;
 }

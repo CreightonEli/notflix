@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { User } from "@phosphor-icons/react";
+import nullPoster from "../assets/nullposter.png";
 
 export default function Cast(props) {
 
@@ -13,19 +13,15 @@ export default function Cast(props) {
                     <div className="cast-wrapper">
                         {props?.credits?.cast && (props?.credits?.cast?.map((person) => (
                             <div className="person-card" key={person.id}>
-                                {person.profile_path ? (
-                                    <div className="img-wrapper">
-                                        <Link to={`/person/${person.id}`}>
-                                            <img src={`https://image.tmdb.org/t/p/w200${person.profile_path}`} alt={`Picture of ${person.name}.`} />
-                                        </Link>
-                                    </div>
-                                ):
-                                    <div className="img-wrapper">
-                                        <Link to={`/person/${person.id}`}>
-                                            <User size={64} />
-                                        </Link>
-                                    </div>
-                                }
+                                <div className="img-wrapper">
+                                    <Link to={`/person/${person.id}`}>
+                                        {person.profile_path ? (
+                                        <img src={`https://image.tmdb.org/t/p/w200${person.profile_path}`} alt={`Picture of ${person.name}.`} />
+                                        ) : (
+                                            <img src={nullPoster} alt={"No profile image available for " + person?.name} />
+                                        )}
+                                    </Link>
+                                </div>
                                 <span className="person-name">
                                     <Link to={`/person/${person.id}`}>
                                         {person.name}
@@ -77,19 +73,15 @@ export default function Cast(props) {
                     <div className="cast-wrapper">
                         {props?.aggregate_credits?.cast && (props?.aggregate_credits?.cast?.map((person) => (
                             <div className="person-card" key={person.id}>
-                                {person.profile_path ? (
-                                    <div className="img-wrapper">
-                                        <Link to={`/person/${person.id}`}>
+                                <div className="img-wrapper">
+                                    <Link to={`/person/${person.id}`}>
+                                        {person.profile_path ? (
                                             <img src={`https://image.tmdb.org/t/p/w200${person.profile_path}`} alt={`Picture of ${person.name}.`} />
-                                        </Link>
-                                    </div>
-                                ):
-                                    <div className="img-wrapper">
-                                        <Link to={`/person/${person.id}`}>
-                                            <User size={64} />
-                                        </Link>
-                                    </div>
-                                }
+                                        ) : (
+                                            <img src={nullPoster} alt={"No profile image available for " + person?.name} />
+                                        )}
+                                    </Link>
+                                </div>
                                 <span className="person-name">
                                     <Link to={`/person/${person.id}`}>
                                         {person.name}

@@ -123,7 +123,12 @@ export default function Embed(props) {
                 <section className="embed-section">
                     <div className={`embed-wrapper ${isTheaterMode ? 'theater-mode' : ''}`}>
                         <div>
-                            <iframe src={selectedSource} frameBorder="0" allowFullScreen></iframe>
+                            <iframe
+                                key={selectedSource} // This forces React to remount the iframe on source change
+                                src={selectedSource}
+                                frameBorder="0"
+                                allowFullScreen
+                            ></iframe>
                         </div>
                     </div>
                 </section>

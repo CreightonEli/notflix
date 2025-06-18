@@ -1,6 +1,7 @@
 import { Clock, Star, StarHalf, PlayCircle, MagnifyingGlassPlus } from "@phosphor-icons/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import nullPosterBig from '../assets/nullPosterBig.png'; // Use relative path
 
 export default function Details(props) {
     const [activeMedia, setActiveMedia] = useState(
@@ -32,12 +33,14 @@ export default function Details(props) {
     const letterboxdSlug = generateSlug(props.title);
     const letterboxdUrl = `https://letterboxd.com/film/${letterboxdSlug}/`;
 
-    console.log(props)
-
     return (
         <>
             <div className="details-container">
-                <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={`Poster for the ${props.title ? 'movie' : 'show'} ${props.title || props.name}`} />
+                {props.poster_path ? (
+                    <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={`Poster for the ${props.title ? 'movie' : 'show'} ${props.title || props.name}`} />
+                ) : (
+                    <img src={nullPosterBig} alt={"No poster available for " + props.title || props.name} />
+                )}
                 <div className="text-container">
                     {props?.images?.logos[0]?.file_path ? 
                         <img src={`https://image.tmdb.org/t/p/w500${props?.images?.logos[0]?.file_path}`} alt={`Logo for ${props.title || props.name}`} />

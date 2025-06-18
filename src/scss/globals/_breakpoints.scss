@@ -351,6 +351,12 @@
       max-width: 100%;
       padding: 20px 20px 10px;
     }
+    .person > .overview > h1 {
+      font-size: 24pt;
+      margin: 24px 0;
+      display: block;
+    }
+
     .person > .overview > .img-wrapper {
       width: 100%;
       max-width: 300px;
@@ -359,7 +365,10 @@
       width: 100%;
     }
     .person > .biography {
-      padding: 0;
+      padding: 20px 0 0;
+    }
+    .person > .biography > h2 {
+      display: none;
     }
   
   

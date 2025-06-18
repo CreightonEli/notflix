@@ -216,7 +216,6 @@ export default function Results() {
             .catch(err => console.error(err));
     };
 
-    console.log(media)
     return (
         <>
             <main className='results-page'>
@@ -231,7 +230,7 @@ export default function Results() {
                         type === "similar_shows" ? "Similar Shows" :
                         "Results"
                     )}</h3>
-                    <p>Results: {filteredMedia.length}</p>  
+                    <p>Results: {totalResults}</p>  
                 </div>
                 <div className='results-filters'>
                     <div className='media-type-filters'>
