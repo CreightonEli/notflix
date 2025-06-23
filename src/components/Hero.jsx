@@ -68,7 +68,7 @@ export default function Hero(props) {
 
     const genreNames = getGenreNames(props.genre_ids); // Call the function with genre_ids
     
-    console.log(props)
+    // console.log(props)
     
     return (
         <div className="banner" style={{backgroundImage: "linear-gradient(360deg, rgb(26, 11, 63) 1%, transparent 100%), url(https://image.tmdb.org/t/p/original" + props.backdrop_path + ")"}}>

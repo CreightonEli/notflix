@@ -75,7 +75,7 @@ export default function Details(props) {
                     {props.release_date && (
                         <p className="date">
                             {new Date(props.release_date) > new Date() ? (
-                                <>Set to release in <span className="year">{new Date(props.release_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                                <>Set to release on <span className="year">{new Date(props.release_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
                             ) : (
                                 <>Released <span className="year">{props.release_date.split('-')[0]}</span></>
                             )}
@@ -84,7 +84,7 @@ export default function Details(props) {
                     {props.first_air_date && (
                         <p className="date">
                             {new Date(props.first_air_date) > new Date() ? (
-                                <>Set to air in <span className="year">{new Date(props.first_air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                                <>Set to air on <span className="year">{new Date(props.first_air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
                             ) : (
                                 <>First aired <span className="year">{props.first_air_date.split('-')[0]}</span></>
                             )}

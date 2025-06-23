@@ -7,6 +7,8 @@ import Person from "./pages/Person";
 import Results from "./pages/Results";
 import Modal from './components/Modal';
 import useApiKey from './hooks/useApiKey';
+import Lists from './pages/Lists';
+import Settings from './pages/Settings';
 
 function App() {
   const [apiKey, setApiKey] = useApiKey();
@@ -33,6 +35,8 @@ function App() {
           <Route path="/shows/:id" element={<Show />} />
           <Route path="/person/:id" element={<Person />} />
           <Route path="/results" element={<Results />} />
+          <Route path='/lists' element={<Lists />} />
+          <Route path='/settings' element={<Settings />} />
         </Routes>
       )}
     </>

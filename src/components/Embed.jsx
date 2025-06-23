@@ -1,6 +1,6 @@
 import Details from '../components/Details'
 import React, { useEffect, useState } from 'react';
-import { PlayCircle, CornersOut, CornersIn } from "@phosphor-icons/react";
+import { PlayCircle, CornersOut, CornersIn, ListPlus } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 import useApiKey from '../hooks/useApiKey';
 
@@ -12,6 +12,7 @@ export default function Embed(props) {
     const [selectedSource, setSelectedSource] = useState(''); // State to store selected source
     const [isTheaterMode, setIsTheaterMode] = useState(false); // State for theater mode
     const [apiKey, setApiKey] = useApiKey();
+    const [isWatchlisted, setIsWatchlisted] = useState(false);
 
     // provider URLs
     const vidLinkMovieURL = `https://vidlink.pro/movie/${props.id}&?autoplay=false`;
@@ -50,6 +51,11 @@ export default function Embed(props) {
         setSelectedSource(defaultURL);
         setSelectedSeason(1);
         setSelectedEpisode(1);
+    }, [props.id]);
+
+    useEffect(() => {
+        const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
+        setIsWatchlisted(watchlist.some(item => item.id === props.id));
     }, [props.id]);
 
     const constructSourceUrl = (baseUrl, season, episode) => {
@@ -110,6 +116,40 @@ export default function Embed(props) {
         setIsHeaderVisible(isTheaterMode); // Hide header when entering theater mode
     };
 
+    const handleAddToWatchlist = () => {
+        const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
+        const index = watchlist.findIndex(item => item.id === props.id);
+
+        if (index === -1) {
+            // Not in watchlist, add it
+            watchlist.push({
+                id: props.id,
+                title: props.title,
+                name: props.name,
+                media_type: props.title ? 'movie' : 'show',
+                poster_path: props.poster_path,
+                backdrop_path: props.backdrop_path,
+                images: props.images,
+                overview: props.overview,
+                vote_average: props.vote_average,
+                vote_count: props.vote_count,
+                release_date: props.release_date,
+                first_air_date: props.first_air_date,
+                runtime: props.runtime,
+                genres: props.genres,
+                credits: props.credits,
+                created_by: props.created_by,
+            });
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+            setIsWatchlisted(true);
+        } else {
+            // Already in watchlist, remove it
+            watchlist.splice(index, 1);
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+            setIsWatchlisted(false);
+        }
+    };
+
     return (
         <div>
             <div
@@ -124,7 +164,7 @@ export default function Embed(props) {
                     <div className={`embed-wrapper ${isTheaterMode ? 'theater-mode' : ''}`}>
                         <div>
                             <iframe
-                                key={selectedSource} // This forces React to remount the iframe on source change
+                                key={selectedSource}
                                 src={selectedSource}
                                 frameBorder="0"
                                 allowFullScreen
@@ -143,6 +183,15 @@ export default function Embed(props) {
                                 <option value={superEmbedMovieURL}>SuperEmbed</option>
                                 <option value={vidsrcMovie2URL}>VidSrc 2</option>
                             </select>
+                            <button
+                                className={`watchlist-btn${isWatchlisted ? ' active' : ''}`}
+                                onClick={handleAddToWatchlist}
+                            >
+                                <ListPlus size={21} />
+                                <span className={isWatchlisted ? 'active' : ''}>
+                                    {isWatchlisted ? 'Added to Watchlist' : 'Add to Watchlist'}
+                                </span>
+                            </button>
                             <button
                                 className={`theater-mode ${isTheaterMode ? 'active' : ''}`}
                                 onClick={toggleTheaterMode}
@@ -164,92 +213,101 @@ export default function Embed(props) {
                     </div>
                 )}
             </div>
-            {props.name && (
-                <div className="episode-selector">
-                    <div className="source-control">
-                        <select name="source" id="source" onChange={handleSourceChange}>
-                            <option value={vidLinkShowURL}>VidLink</option>
-                            <option value={vidsrcShowURL}>VidSrc</option>
-                            <option value={embedShowURL}>Embed.su</option>
-                            <option value={superEmbedShowURL}>SuperEmbed</option>
-                            <option value={vidsrcShow2URL}>VidSrc 2</option>
-                            <option value={vidsrcAnimeSubURL}>VS Anime (Sub)</option>
-                            <option value={vidsrcAnimeDubURL}>VS Anime (Dub)</option>
-                        </select>
-                        <button
-                            className={`theater-mode ${isTheaterMode ? 'active' : ''}`}
-                            onClick={toggleTheaterMode}
-                        >
-                            {isTheaterMode ? (
-                                <>
-                                    <span>Theater Mode</span>
-                                    <CornersIn size={21} />
-                                </>
-                            ) : (
-                                <>
-                                    <span>Theater Mode</span>
-                                    <CornersOut size={21} />
-                                </>
-                            )}
-                        </button>
-                    </div>
-                    <Details {...props} />
-                    <div className="heading">
-                        <h2>Episodes</h2>
-                        <select name="seasons" id="seasons" onChange={handleSeasonChange}>
-                            {props.seasons.map(
-                                (season, index) =>
-                                    season.season_number > 0 && (
-                                        <option value={season.season_number} key={season.id}>
-                                            {season.name}
-                                        </option>
-                                    )
-                            )}
-                        </select>
-                    </div>
-                    <div className="episode-list">
-                        {seasonData?.episodes ? (
-                            seasonData?.episodes?.map((episode, index) => (
-                                <div
-                                    className={`episode ${
-                                        selectedEpisode === index + 1 ? 'selected' : ''
-                                    }`}
-                                    key={episode?.id}
-                                    onClick={() => handleEpisodeClick(index + 1)}
-                                >
-                                    <span className="ep-num">{index + 1}</span>
-                                    <div className="ep-thumbnail-container">
-                                        <PlayCircle size={50} weight="fill" />
-                                        {episode?.still_path ? (
-                                            <img
-                                                src={`https://image.tmdb.org/t/p/w500${episode?.still_path}`}
-                                                alt={`Thumbnail`}
-                                            />
-                                        ) : (
-                                            <img
-                                                src={`https://image.tmdb.org/t/p/w500${props?.backdrop_path}`}
-                                                alt={`Thumbnail missing`}
-                                            />
-                                        )}
-                                    </div>
-                                    <div className="ep-text">
-                                        <div className="top-text">
-                                            <h3 className="ep-name">{episode?.name}</h3>
-                                            {episode?.runtime && (
-                                                <h3 className="ep-runtime">{episode?.runtime}m</h3>
+                {props.name && (
+                    <div className="episode-selector">
+                        <div className="source-control">
+                            <select name="source" id="source" onChange={handleSourceChange}>
+                                <option value={vidLinkShowURL}>VidLink</option>
+                                <option value={vidsrcShowURL}>VidSrc</option>
+                                <option value={embedShowURL}>Embed.su</option>
+                                <option value={superEmbedShowURL}>SuperEmbed</option>
+                                <option value={vidsrcShow2URL}>VidSrc 2</option>
+                                <option value={vidsrcAnimeSubURL}>VS Anime (Sub)</option>
+                                <option value={vidsrcAnimeDubURL}>VS Anime (Dub)</option>
+                            </select>
+                            <button
+                                className={`watchlist-btn${isWatchlisted ? ' active' : ''}`}
+                                onClick={handleAddToWatchlist}
+                            >
+                                <ListPlus size={21} />
+                                <span className={isWatchlisted ? 'active' : ''}>
+                                    {isWatchlisted ? 'Added to Watchlist' : 'Add to Watchlist'}
+                                </span>
+                            </button>
+                            <button
+                                className={`theater-mode ${isTheaterMode ? 'active' : ''}`}
+                                onClick={toggleTheaterMode}
+                            >
+                                {isTheaterMode ? (
+                                    <>
+                                        <span>Theater Mode</span>
+                                        <CornersIn size={21} />
+                                    </>
+                                ) : (
+                                    <>
+                                        <span>Theater Mode</span>
+                                        <CornersOut size={21} />
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                        <Details {...props} />
+                        <div className="heading">
+                            <h2>Episodes</h2>
+                            <select name="seasons" id="seasons" onChange={handleSeasonChange}>
+                                {props.seasons.map(
+                                    (season, index) =>
+                                        season.season_number > 0 && (
+                                            <option value={season.season_number} key={season.id}>
+                                                {season.name}
+                                            </option>
+                                        )
+                                )}
+                            </select>
+                        </div>
+                        <div className="episode-list">
+                            {seasonData?.episodes ? (
+                                seasonData?.episodes?.map((episode, index) => (
+                                    <div
+                                        className={`episode ${
+                                            selectedEpisode === index + 1 ? 'selected' : ''
+                                        }`}
+                                        key={episode?.id}
+                                        onClick={() => handleEpisodeClick(index + 1)}
+                                    >
+                                        <span className="ep-num">{index + 1}</span>
+                                        <div className="ep-thumbnail-container">
+                                            <PlayCircle size={50} weight="fill" />
+                                            {episode?.still_path ? (
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/w500${episode?.still_path}`}
+                                                    alt={`Thumbnail`}
+                                                />
+                                            ) : (
+                                                <img
+                                                    src={`https://image.tmdb.org/t/p/w500${props?.backdrop_path}`}
+                                                    alt={`Thumbnail missing`}
+                                                />
                                             )}
                                         </div>
-                                        <p className="ep-overview">{episode?.overview}</p>
+                                        <div className="ep-text">
+                                            <div className="top-text">
+                                                <h3 className="ep-name">{episode?.name}</h3>
+                                                {episode?.runtime && (
+                                                    <h3 className="ep-runtime">{episode?.runtime}m</h3>
+                                                )}
+                                            </div>
+                                            <p className="ep-overview">{episode?.overview}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p>Loading...</p>
-                        )}
-                        {seasonData?.episodes?.length === 0 && <p>No episodes available</p>}
+                                ))
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                            {seasonData?.episodes?.length === 0 && <p>No episodes available</p>}
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
     );
 }
