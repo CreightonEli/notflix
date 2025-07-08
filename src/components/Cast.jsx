@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import nullPoster from "../assets/nullposter.png";
+import nullPoster from "../assets/nullPoster.png";
 
 export default function Cast(props) {
 
