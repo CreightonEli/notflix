@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp, ArrowDown, Play, Trash, Clock, Star } from "@phosphor-icons/react";
 import nullPoster from '../assets/nullPoster.png'; // Use relative path
+import logoSmallShadow from '../assets/logo_small_shadow.png';
 
 export default function Lists() {
     const [watchlist, setWatchlist] = useState(
@@ -36,6 +37,16 @@ export default function Lists() {
 
     return (
         <main className="watchlist-page">
+
+            <title>Watchlist - Notflix</title>
+            <meta property="og:title" content="Watchlist" />
+            <meta property="og:site_name" content="Notflix" />
+            <meta name="description" content="Watchlist page of Notflix, showcasing user's watchlist." />
+            <meta property="og:description" content="Watchlist page of Notflix, showcasing user's watchlist." />
+            <meta property="og:image" content={`https://creightoneli.github.io${logoSmallShadow}`} />
+            <meta property="og:url" content="https://creightoneli.github.io/notflix/#/lists" />
+            <meta property="og:type" content="website" />
+
             <div>
                 {watchlist.length === 0 ? (
                     <div className="watchlist">

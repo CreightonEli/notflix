@@ -1,4 +1,4 @@
-import { useState } from "react";
+import logoSmallShadow from '../assets/logo_small_shadow.png';
 
 export default function Settings() {
     // Erase API key from localStorage
@@ -16,6 +16,16 @@ export default function Settings() {
 
     return (
         <main className="settings-page">
+            
+            <title>Settings - Notflix</title>
+            <meta property="og:title" content="Settings" />
+            <meta property="og:site_name" content="Notflix" />
+            <meta name="description" content="Settings page of Notflix, allowing users to manage their preferences." />
+            <meta property="og:description" content="Settings page of Notflix, allowing users to manage their preferences." />
+            <meta property="og:image" content={`https://creightoneli.github.io${logoSmallShadow}`} />
+            <meta property="og:url" content="https://creightoneli.github.io/notflix/#/settings" />
+            <meta property="og:type" content="website" />
+
             <h2>Settings</h2>
             <div>
                 <h3>Erasing TMDB API Key</h3>

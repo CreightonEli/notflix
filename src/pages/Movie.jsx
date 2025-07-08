@@ -31,6 +31,15 @@ export default function Movie() {
     
     return (
       <>
+        <title>{`${movieDetails?.title} ${ movieDetails?.release_date && '(' + movieDetails?.release_date.split('-')[0] + ')' } - Notflix`}</title>
+        <meta property="og:title" content={`${movieDetails?.title} ${ movieDetails?.release_date && '(' + movieDetails?.release_date.split('-')[0] + ')' }`} />
+        <meta property="og:site_name" content="Notflix" />
+        <meta name="description" content={movieDetails?.overview} />
+        <meta property="og:description" content={movieDetails?.overview} />
+        <meta property="og:image" content={`https://image.tmdb.org/t/p/w200${movieDetails?.poster_path}`} />
+        <meta property="og:url" content={`https://creightoneli.github.io/notflix/#/movie/${id}`} />
+        <meta property="og:type" content="website" />
+
         <Embed {...movieDetails} />
         <main>
             <Carousel headline='Related Movies' id={id} type='related_movies' mediaList={movieDetails?.recommendations?.results} />

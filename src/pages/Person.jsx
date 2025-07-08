@@ -24,7 +24,6 @@ export default function Person() {
         fetch(`https://api.themoviedb.org/3/person/${id}?append_to_response=combined_credits&language=en-US&include_image_language=en,null`, options)
             .then(response => response.json()) // Parse JSON response
             .then(data => {
-              document.title = `${data?.name} - Notflix`; // Set document title
               setPerson(data); // Save `results` to state
             })
             .catch(err => console.error(err));
@@ -97,6 +96,16 @@ export default function Person() {
     }, [uniqueRoles, roleCounts, selectedRole]);
     
     return (
+      <>
+      <title>{`${person?.name} - Notflix`}</title>
+      <meta property="og:title" content={`${person?.name} - Notflix`} />
+      <meta property="og:site_name" content="Notflix" />
+      <meta name="description" content={person?.biography} />
+      <meta property="og:description" content={person?.biography} />
+      <meta property="og:image" content={`https://image.tmdb.org/t/p/w200${person?.profile_path}`} />
+      <meta property="og:url" content={`https://creightoneli.github.io/notflix/#/person/${id}`} />
+      <meta property="og:type" content="website" />
+
       <main className='person'>
         <div className='overview'>
           {person?.profile_path ? (
@@ -288,5 +297,6 @@ export default function Person() {
           )}
         </div>
       </main>
+      </>
     );
 }

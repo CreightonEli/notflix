@@ -2,6 +2,7 @@ import Hero from '../components/Hero';
 import Carousel from '../components/Carousel';
 import React, { useEffect, useState } from 'react';
 import useApiKey from '../hooks/useApiKey';
+import logoSmallShadow from '../assets/logo_small_shadow.png';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -9,8 +10,6 @@ export default function Home() {
   const [movieLists, setMovieLists] = useState([]);
   const [showLists, setShowLists] = useState([]);
   const [apiKey, setApiKey] = useApiKey();
-
-  document.title = `Home - Notflix`;
 
   // Fetch options
   const options = {
@@ -54,6 +53,15 @@ export default function Home() {
 
   return (
     <>
+      <title>Home - Notflix</title>
+      <meta property="og:title" content="Home" />
+      <meta property="og:site_name" content="Notflix" />
+      <meta name="description" content="Home page of Notflix, showcasing trending movies and TV shows." />
+      <meta property="og:description" content="Home page of Notflix, showcasing trending movies and TV shows." />
+      <meta property="og:image" content={`https://creightoneli.github.io${logoSmallShadow}`} />
+      <meta property="og:url" content="https://creightoneli.github.io/notflix/" />
+      <meta property="og:type" content="website" />
+
       <Hero {...mergedObjects[getRandomInt(40)]} />
       <main>
         <Carousel headline="Trending Movies" type="trending" mediaList={movies} />

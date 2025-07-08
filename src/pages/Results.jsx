@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import genres from '../genres'; // Import genres array
 import useApiKey from '../hooks/useApiKey';
 import logoSmall from '../assets/logo_small.png'; // Use relative path
+import logoSmallShadow from '../assets/logo_small_shadow.png';
+
 
 export default function Results() {
     const [searchParams] = useSearchParams();
@@ -218,6 +220,14 @@ export default function Results() {
 
     return (
         <>
+            <meta property="og:title" content={`Search results for ${query}`} />
+            <meta property="og:site_name" content="Notflix" />
+            <meta name="description" content={`Results page of Notflix, showcasing search results for movies and TV shows related to "${query}".`} />
+            <meta property="og:description" content={`Results page of Notflix, showcasing search results for movies and TV shows related to "${query}".`} />
+            <meta property="og:image" content={`https://creightoneli.github.io${logoSmallShadow}`} />
+            <meta property="og:url" content={`https://creightoneli.github.io/notflix/#/results?search=${query}`} />
+            <meta property="og:type" content="website" />
+            
             <main className='results-page'>
                 <div className='results-top'>
                     <h3>{(
