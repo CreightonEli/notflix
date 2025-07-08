@@ -97,13 +97,13 @@ export default function Person() {
     
     return (
       <>
-      <title>{`${person?.name} - Notflix`}</title>
-      <meta property="og:title" content={`${person?.name} - Notflix`} />
-      <meta property="og:site_name" content="Notflix" />
+      <title>{`${person?.name} - Nullflix`}</title>
+      <meta property="og:title" content={`${person?.name} - Nullflix`} />
+      <meta property="og:site_name" content="Nullflix" />
       <meta name="description" content={person?.biography} />
       <meta property="og:description" content={person?.biography} />
       <meta property="og:image" content={`https://image.tmdb.org/t/p/w200${person?.profile_path}`} />
-      <meta property="og:url" content={`https://creightoneli.github.io/notflix/#/person/${id}`} />
+      <meta property="og:url" content={`https://nullflix.vercel.app/#/person/${id}`} />
       <meta property="og:type" content="website" />
 
       <main className='person'>

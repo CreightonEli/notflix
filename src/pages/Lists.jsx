@@ -38,13 +38,13 @@ export default function Lists() {
     return (
         <main className="watchlist-page">
 
-            <title>Watchlist - Notflix</title>
+            <title>Watchlist - Nullflix</title>
             <meta property="og:title" content="Watchlist" />
-            <meta property="og:site_name" content="Notflix" />
-            <meta name="description" content="Watchlist page of Notflix, showcasing user's watchlist." />
-            <meta property="og:description" content="Watchlist page of Notflix, showcasing user's watchlist." />
-            <meta property="og:image" content={`https://creightoneli.github.io${logoSmallShadow}`} />
-            <meta property="og:url" content="https://creightoneli.github.io/notflix/#/lists" />
+            <meta property="og:site_name" content="Nullflix" />
+            <meta name="description" content="Watchlist page of Nullflix, showcasing user's watchlist." />
+            <meta property="og:description" content="Watchlist page of Nullflix, showcasing user's watchlist." />
+            <meta property="og:image" content={`https://nullflix.vercel.app${logoSmallShadow}`} />
+            <meta property="og:url" content="https://nullflix.vercel.app/#/lists" />
             <meta property="og:type" content="website" />
 
             <div>

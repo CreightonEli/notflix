@@ -32,13 +32,13 @@ export default function Show() {
     // console.log(showDetails)
     return (
         <>
-            <title>{`${showDetails?.name} ${ showDetails?.first_air_date && '(' + showDetails?.first_air_date.split('-')[0] + ')' } - Notflix`}</title>
+            <title>{`${showDetails?.name} ${ showDetails?.first_air_date && '(' + showDetails?.first_air_date.split('-')[0] + ')' } - Nullflix`}</title>
             <meta property="og:title" content={`${showDetails?.name} ${ showDetails?.first_air_date && '(' + showDetails?.first_air_date.split('-')[0] + ')' }`} />
-            <meta property="og:site_name" content="Notflix" />
+            <meta property="og:site_name" content="Nullflix" />
             <meta name="description" content={showDetails?.overview} />
             <meta property="og:description" content={showDetails?.overview} />
             <meta property="og:image" content={`https://image.tmdb.org/t/p/w200${showDetails?.poster_path}`} />
-            <meta property="og:url" content={`https://creightoneli.github.io/notflix/#/shows/${id}`} />
+            <meta property="og:url" content={`https://nullflix.vercel.app/#/shows/${id}`} />
             <meta property="og:type" content="website" />
 
             <Embed {...showDetails} />

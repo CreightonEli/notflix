@@ -52,32 +52,32 @@ export default function Results() {
         let fetchShows = Promise.resolve({ results: [], total_pages: 0, total_results: 0 });
 
         if (query) {
-            document.title = `Results for "${query}" - Notflix`;
+            document.title = `Results for "${query}" - Nullflix`;
             fetchMovies = fetch(movieFilter, options).then(response => response.json());
             fetchShows = fetch(showFilter, options).then(response => response.json());
         } else {
             if (type === "trending") {
-                document.title = `Trending - Notflix`;
+                document.title = `Trending - Nullflix`;
                 fetchMovies = fetch(trendingMovieFilter, options).then(response => response.json());
                 fetchShows = fetch(trendingShowFilter, options).then(response => response.json());
             } else if (type === "top_rated") {
-                document.title = `Top Rated - Notflix`;
+                document.title = `Top Rated - Nullflix`;
                 fetchMovies = fetch(topRatedMovieFilter, options).then(response => response.json());
                 fetchShows = fetch(topRatedShowFilter, options).then(response => response.json());
             } else if (type === "related_movies") {
-                document.title = `Related Movies - Notflix`;
+                document.title = `Related Movies - Nullflix`;
                 fetchMovies = fetch(relatedMoviesFilter, options).then(response => response.json());
             } else if (type === "related_shows") {
-                document.title = `Related Shows - Notflix`;
+                document.title = `Related Shows - Nullflix`;
                 fetchShows = fetch(relatedShowsFilter, options).then(response => response.json());
             } else if (type === "similar_movies") {
-                document.title = `Similar Movies - Notflix`;
+                document.title = `Similar Movies - Nullflix`;
                 fetchMovies = fetch(similarMoviesFilter, options).then(response => response.json());
             } else if (type === "similar_shows") {
-                document.title = `Similar Shows - Notflix`;
+                document.title = `Similar Shows - Nullflix`;
                 fetchShows = fetch(similarShowsFilter, options).then(response => response.json());
             } else {
-                document.title = `Trending - Notflix`;
+                document.title = `Trending - Nullflix`;
                 fetchMovies = fetch(trendingMovieFilter, options).then(response => response.json());
                 fetchShows = fetch(trendingShowFilter, options).then(response => response.json());
             }
@@ -221,11 +221,11 @@ export default function Results() {
     return (
         <>
             <meta property="og:title" content={`Search results for ${query}`} />
-            <meta property="og:site_name" content="Notflix" />
-            <meta name="description" content={`Results page of Notflix, showcasing search results for movies and TV shows related to "${query}".`} />
-            <meta property="og:description" content={`Results page of Notflix, showcasing search results for movies and TV shows related to "${query}".`} />
-            <meta property="og:image" content={`https://creightoneli.github.io${logoSmallShadow}`} />
-            <meta property="og:url" content={`https://creightoneli.github.io/notflix/#/results?search=${query}`} />
+            <meta property="og:site_name" content="Nullflix" />
+            <meta name="description" content={`Results page of Nullflix, showcasing search results for movies and TV shows related to "${query}".`} />
+            <meta property="og:description" content={`Results page of Nullflix, showcasing search results for movies and TV shows related to "${query}".`} />
+            <meta property="og:image" content={`https://nullflix.vercel.app${logoSmallShadow}`} />
+            <meta property="og:url" content={`https://nullflix.vercel.app/#/results?search=${query}`} />
             <meta property="og:type" content="website" />
             
             <main className='results-page'>
@@ -281,8 +281,8 @@ export default function Results() {
                 </div>
                 {page < totalPages && (
                     <div className='load-more'>
-                        <img className="logo" src={logoSmall} alt="Notflix Logo" />
-                        <img className="logo-shadow" src={logoSmall} alt="Notflix Logo" />
+                        <img className="logo" src={logoSmall} alt="Nullflix Logo" />
+                        <img className="logo-shadow" src={logoSmall} alt="Nullflix Logo" />
                     </div>
                 )}
             </main>

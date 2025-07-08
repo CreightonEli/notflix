@@ -53,13 +53,13 @@ export default function Home() {
 
   return (
     <>
-      <title>Home - Notflix</title>
+      <title>Home - Nullflix</title>
       <meta property="og:title" content="Home" />
-      <meta property="og:site_name" content="Notflix" />
-      <meta name="description" content="Home page of Notflix, showcasing trending movies and TV shows." />
-      <meta property="og:description" content="Home page of Notflix, showcasing trending movies and TV shows." />
-      <meta property="og:image" content={`https://creightoneli.github.io${logoSmallShadow}`} />
-      <meta property="og:url" content="https://creightoneli.github.io/notflix/" />
+      <meta property="og:site_name" content="Nullflix" />
+      <meta name="description" content="Home page of Nullflix, showcasing trending movies and TV shows." />
+      <meta property="og:description" content="Home page of Nullflix, showcasing trending movies and TV shows." />
+      <meta property="og:image" content={`https://nullflix.vercel.app${logoSmallShadow}`} />
+      <meta property="og:url" content="https://nullflix.vercel.app/" />
       <meta property="og:type" content="website" />
 
       <Hero {...mergedObjects[getRandomInt(40)]} />

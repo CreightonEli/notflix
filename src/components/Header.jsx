@@ -37,7 +37,7 @@ export default function Header() {
                 <img 
                     className="logo" 
                     src={isSmallScreen ? logoSmall : logoFull} 
-                    alt="Notflix Logo" 
+                    alt="Nullflix Logo" 
                 />
             </Link>
             <div className="header-right">

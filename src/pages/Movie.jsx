@@ -23,7 +23,6 @@ export default function Movie() {
         fetch(`https://api.themoviedb.org/3/movie/${id}?append_to_response=recommendations,credits,images,videos,similar&language=en-US&include_image_language=en,null`, options)
             .then(response => response.json()) // Parse JSON response
             .then(data => {
-              document.title = `${data?.title} ${ data?.release_date && '(' + data?.release_date.split('-')[0] + ')' } - Notflix`; // Set document title
               setMovieDetails(data) // Save `results` to state
             })
             .catch(err => console.error(err));
@@ -31,13 +30,13 @@ export default function Movie() {
     
     return (
       <>
-        <title>{`${movieDetails?.title} ${ movieDetails?.release_date && '(' + movieDetails?.release_date.split('-')[0] + ')' } - Notflix`}</title>
+        <title>{`${movieDetails?.title} ${ movieDetails?.release_date && '(' + movieDetails?.release_date.split('-')[0] + ')' } - Nullflix`}</title>
         <meta property="og:title" content={`${movieDetails?.title} ${ movieDetails?.release_date && '(' + movieDetails?.release_date.split('-')[0] + ')' }`} />
-        <meta property="og:site_name" content="Notflix" />
+        <meta property="og:site_name" content="Nullflix" />
         <meta name="description" content={movieDetails?.overview} />
         <meta property="og:description" content={movieDetails?.overview} />
         <meta property="og:image" content={`https://image.tmdb.org/t/p/w200${movieDetails?.poster_path}`} />
-        <meta property="og:url" content={`https://creightoneli.github.io/notflix/#/movie/${id}`} />
+        <meta property="og:url" content={`https://nullflix.vercel.app/#/movie/${id}`} />
         <meta property="og:type" content="website" />
 
         <Embed {...movieDetails} />

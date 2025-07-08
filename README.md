@@ -1,6 +1,6 @@
 <img src="./src/assets/logo_small_shadow.png" alt="Logo" width="130"/>
 
-# Notflix
+# Nullflix
 
 ## Table of contents
 
@@ -17,15 +17,15 @@ Movie and TV show web app. See what is trending, who it is directed by and how w
 
 ### Getting Started:
 
-Before you can use Notflix there is a bit of setup you may need to do.
+Before you can use Nullflix there is a bit of setup you may need to do.
 
-1. In order to use Notflix you first need to register your API key with the Movie Database. [Here](https://developer.themoviedb.org/docs/getting-started)'s a link to get you started.
+1. In order to use Nullflix you first need to register your API key with the Movie Database. [Here](https://developer.themoviedb.org/docs/getting-started)'s a link to get you started.
 
 2. Once you have the key you can submit it on the website. Your API key is saved locally in your browser and used by it to make all the necessary API calls.
 
 3. Finally, I highly recommend you only access this site with a solid adblocking extension like [uBlock Origin](https://github.com/gorhill/uBlock). I don't put ads on the site myself but many of the video providers inject ads into their services which are used on the site. In order to avoid dealing with annoying pop-ups please install a decent adblocker.
 
-That's about all you need to do to enjoy Notflix.
+That's about all you need to do to enjoy Nullflix.
 
 ### Screenshots:
 
