@@ -1812,12 +1812,12 @@ ul.department-list {
     margin: 0 0 6px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 5;
     overflow: hidden;
 }
 
 .genre-container {
-    height: 30px;
+    min-height: 30px;
     // margin-bottom: 3px;
 }
 
