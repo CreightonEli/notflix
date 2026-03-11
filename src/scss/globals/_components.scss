@@ -288,6 +288,7 @@ footer {
 .modal-content > img.logo {
     width: 120px;
     height: auto;
+    min-height: 120px;
     border-radius: 6px;
     margin: 6px auto;
     animation: rotate 10s linear infinite;
