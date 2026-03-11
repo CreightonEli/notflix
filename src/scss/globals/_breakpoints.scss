@@ -457,6 +457,11 @@
     .watchlist .poster-wrapper {
       display: none;
     }
+
+    .list-item-info .title { // this works for both watchlist and history since they share the same list item structure
+      margin: auto auto 6px;
+    }
+
     .watchlist .logo {
       margin: 0 auto;
       max-width: 250px;

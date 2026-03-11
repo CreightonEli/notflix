@@ -1706,6 +1706,7 @@ ul.department-list {
 
 .watchlist > .list-item {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -1742,6 +1743,7 @@ ul.department-list {
     flex-direction: column;
     justify-content: space-between;
     gap: 4px;
+    width: 100%;
 }
 
 .list-item-info > div {
@@ -1995,6 +1997,24 @@ ul.department-list {
 .history-list {
     display: flex;
     flex-direction: column;
+}
+
+.history-list .overview {
+    font-size: 12pt;
+    font-weight: 200;
+    color: var(--white);
+    margin: 0 0 6px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.history-list .director {
+    font-size: 13pt;
+}
+.history-list .release-year {
+    font-size: 13pt;
 }
 
 .history-list .logo {
