@@ -1999,7 +1999,7 @@ ul.department-list {
     flex-direction: column;
 }
 
-.history-list .overview {
+.watchlist .overview,.history-list .overview { // these styles are shared between watchlist and history pages
     font-size: 12pt;
     font-weight: 200;
     color: var(--white);
