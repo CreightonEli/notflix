@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { MagnifyingGlass, List, ListHeart, Gear } from "@phosphor-icons/react";
+import { MagnifyingGlass, List, ListHeart, Gear, ClockCounterClockwiseIcon  } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 import { useState, useEffect } from "react";
 import logoFull from '../assets/logo_full.png'; // Use relative path
@@ -70,7 +70,16 @@ export default function Header() {
                             onClick={() => setDropdownOpen(false)}
                         >
                             <ListHeart size={24} />
-                            Lists
+                            Watchlist
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/history"
+                            onClick={() => setDropdownOpen(false)}
+                        >
+                            <ClockCounterClockwiseIcon size={24} />
+                            History
                         </Link>
                     </li>
                     <li>

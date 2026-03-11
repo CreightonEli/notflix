@@ -1,36 +1,66 @@
 import Details from '../components/Details'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { PlayCircle, CornersOut, CornersIn, ListPlus } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 import useApiKey from '../hooks/useApiKey';
+import providersData from '../providers.json';
+// import { style } from 'motion/react-client';
 
 export default function Embed(props) {
     const { isHeaderVisible, setIsHeaderVisible } = useHeaderVisibility();
     const [seasonData, setSeasonData] = useState([]); // State to store episode data
-    const [selectedSeason, setSelectedSeason] = useState(1); // State to store selected season
-    const [selectedEpisode, setSelectedEpisode] = useState(1); // State to store selected episode
+    const [selectedSeason, setSelectedSeason] = useState(1); // State to store currently viewed season
+    const [selectedEpisode, setSelectedEpisode] = useState(1); // State to store selected episode number
+    const [selectedEpisodeSeason, setSelectedEpisodeSeason] = useState(1); // season that contains the selected episode
     const [selectedSource, setSelectedSource] = useState(''); // State to store selected source
     const [isTheaterMode, setIsTheaterMode] = useState(false); // State for theater mode
     const [apiKey, setApiKey] = useApiKey();
     const [isWatchlisted, setIsWatchlisted] = useState(false);
+    const [defaultMovieProvider, setDefaultMovieProvider] = useState(0);
+    const [defaultShowProvider, setDefaultShowProvider] = useState(0);
+    const [watchedEpisodes, setWatchedEpisodes] = useState({}); // { season: [episodes] }
+    const playerRef = useRef(null);
 
-    // provider URLs
-    const vidLinkMovieURL = `https://vidlink.pro/movie/${props.id}&?autoplay=false`;
-    const vidLinkShowURL = `https://vidlink.pro/tv/${props.id}/${selectedSeason}/${selectedEpisode}&?autoplay=false`;
-    const embedMovieURL = `https://embed.su/embed/movie/${props.id}`;
-    const embedShowURL = `https://embed.su/embed/tv/${props.id}/${selectedSeason}/${selectedEpisode}`;
-    const vidsrcMovieURL = `https://vidsrc.cc/v3/embed/movie/${props.id}`;
-    const vidsrcShowURL = `https://vidsrc.cc/v3/embed/tv/${props.id}/${selectedSeason}/${selectedEpisode}`;
-    const vidsrcAnimeSubURL = `https://vidsrc.cc/v2/embed/anime/tmdb${props.id}/${selectedEpisode}/sub?autoPlay=false`;
-    const vidsrcAnimeDubURL = `https://vidsrc.cc/v2/embed/anime/tmdb${props.id}/${selectedEpisode}/dub?autoPlay=false`;
-    const vidsrcMovie2URL = `https://vidsrc.me/embed/movie?tmdb=${props.id}`;
-    const vidsrcShow2URL = `https://vidsrc.me/embed/tv?tmdb=${props.id}&season=${selectedSeason}&episode=${selectedEpisode}`;
-    const superEmbedMovieURL = `https://multiembed.mov/directstream.php?video_id=${props.id}&tmdb=1`;
-    const superEmbedShowURL = `https://multiembed.mov/directstream.php?video_id=${props.id}&tmdb=1&s=${selectedSeason}&e=${selectedEpisode}`;
+    const isMovie = !!props.title;
 
-    let defaultURL = 'https://embed.su/embed/movie/${props.id}';
-    props.title && (defaultURL = vidLinkMovieURL);
-    props.name && (defaultURL = vidLinkShowURL);
+    // Load default providers from localStorage
+    useEffect(() => {
+        const savedMovieProvider = localStorage.getItem('defaultMovieProvider');
+        const savedShowProvider = localStorage.getItem('defaultShowProvider');
+        setDefaultMovieProvider(savedMovieProvider !== null ? parseInt(savedMovieProvider, 10) : 1);
+        setDefaultShowProvider(savedShowProvider !== null ? parseInt(savedShowProvider, 10) : 1);
+    }, []);
+
+    // Function to replace placeholders in URL
+    const buildUrl = (template, id, season = null, episode = null) => {
+        let url = template.replace('{id}', id);
+        if (season !== null && season !== undefined) {
+            url = url.replace('{season}', season);
+        }
+        if (episode !== null && episode !== undefined) {
+            url = url.replace('{episode}', episode);
+        }
+        return url;
+    };
+
+    // Get providers based on type
+    const providers = isMovie ? providersData.movieProviders : providersData.showProviders;
+
+    // compute watched episodes set for current season (shows only)
+    // derive from state so component will rerender when watchedEpisodes changes
+    const watchedSet = React.useMemo(() => {
+        if (isMovie) return new Set();
+        return new Set(watchedEpisodes[selectedSeason] || []);
+    }, [isMovie, watchedEpisodes, selectedSeason]);
+
+    let defaultURL = 'https://vidsrc.cc/v3/embed/movie/1?autoPlay=false';
+    if (isMovie) {
+        defaultURL = buildUrl(providers[defaultMovieProvider]?.url || providers[0].url, props.id);
+    } else {
+        // when selectedEpisode could be null, fall back to 1 for building this placeholder value
+        const ep = selectedEpisode != null ? selectedEpisode : 1;
+        defaultURL = buildUrl(providers[defaultShowProvider]?.url || providers[0].url, props.id, selectedSeason, ep);
+    }
 
     useEffect(() => {
         const options = {
@@ -47,10 +77,132 @@ export default function Embed(props) {
             .catch((err) => console.error(err));
     }, [props.id, selectedSeason]);
 
+    // record movie/show info when page loads or id changes
+    const updateRecentlyWatchedMovie = () => {
+        // guard against invalid props
+        if (!props.id) return;
+        const list = JSON.parse(localStorage.getItem('recentlyWatched') || '[]');
+        const index = list.findIndex(item => item.id === props.id && item.media_type === 'movie');
+        const baseEntry = {
+            id: props.id,
+            title: props.title,
+            name: props.name,
+            media_type: 'movie',
+            poster_path: props.poster_path,
+            backdrop_path: props.backdrop_path,
+            overview: props.overview,
+            vote_average: props.vote_average,
+            vote_count: props.vote_count,
+            release_date: props.release_date,
+            runtime: props.runtime,
+            genres: props.genres,
+            credits: props.credits,
+            created_by: props.created_by,
+            images: props.images, // store logos etc.
+            lastUpdated: Date.now(),
+            lastViewed: Date.now(),
+        };
+        if (index !== -1) {
+            list[index] = { ...list[index], ...baseEntry, lastViewed: Date.now() };
+        } else {
+            list.push(baseEntry);
+        }
+        localStorage.setItem('recentlyWatched', JSON.stringify(list));
+        // notify listeners that history updated
+        const evt2 = document.createEvent('Event');
+        evt2.initEvent('historyUpdated', true, true);
+        window.dispatchEvent(evt2);
+    };
+
+    const updateRecentlyWatchedShow = (season, episodeNumber) => {
+        if (!props.id || season == null || episodeNumber == null) return;
+        const list = JSON.parse(localStorage.getItem('recentlyWatched') || '[]');
+        const index = list.findIndex(item => item.id === props.id && item.media_type === 'show');
+        const episodeEntry = {
+            id: props.id,
+            name: props.name,
+            media_type: 'show',
+            poster_path: props.poster_path,
+            backdrop_path: props.backdrop_path,
+            overview: props.overview,
+            vote_average: props.vote_average,
+            vote_count: props.vote_count,
+            first_air_date: props.first_air_date,
+            runtime: props.runtime,
+            genres: props.genres,
+            credits: props.credits,
+            created_by: props.created_by,
+            images: props.images,
+            watchedEpisodes: {},
+            selectedSeason: season,
+            selectedEpisode: episodeNumber,
+            lastUpdated: Date.now(),
+            lastViewed: Date.now(),
+        };
+        if (index === -1) {
+            episodeEntry.watchedEpisodes = { [season]: [episodeNumber] };
+            list.push(episodeEntry);
+        } else {
+            const entry = list[index];
+            const watched = entry.watchedEpisodes || {};
+            const seasonSet = new Set(watched[season] || []);
+            seasonSet.add(episodeNumber);
+            watched[season] = Array.from(seasonSet);
+            entry.watchedEpisodes = watched;
+            entry.selectedSeason = season;
+            entry.selectedEpisode = episodeNumber;
+            entry.lastUpdated = Date.now();
+            entry.lastViewed = Date.now();
+            list[index] = entry;
+        }
+        localStorage.setItem('recentlyWatched', JSON.stringify(list));
+        // Update local state
+        setWatchedEpisodes(prev => ({
+            ...prev,
+            [season]: Array.from(new Set([...(prev[season] || []), episodeNumber]))
+        }));
+        // notify listeners (e.g., history page) that storage changed
+        const evt = document.createEvent('Event');
+        evt.initEvent('historyUpdated', true, true);
+        window.dispatchEvent(evt);
+    };
+
     useEffect(() => {
-        setSelectedSource(defaultURL);
-        setSelectedSeason(1);
-        setSelectedEpisode(1);
+        // when the id changes we want to restore the last selected season/episode for shows
+        let season = 1;
+        let episode = 1;
+        let initialWatched = {};
+
+        if (!isMovie) {
+            const list = JSON.parse(localStorage.getItem('recentlyWatched') || '[]');
+            const entry = list.find(item => item.id === props.id && item.media_type === 'show');
+            if (entry) {
+                if (entry.selectedSeason && entry.selectedEpisode) {
+                    season = entry.selectedSeason;
+                    episode = entry.selectedEpisode;
+                }
+                // preload watchedEpisodes state
+                initialWatched = entry.watchedEpisodes || {};
+            }
+        }
+
+        setSelectedSeason(season);
+        setSelectedEpisode(episode);
+        setSelectedEpisodeSeason(season);
+        setWatchedEpisodes(initialWatched);
+
+        // build the initial source using whatever season/episode we chose above
+        const initial = isMovie
+            ? buildUrl(providers[defaultMovieProvider]?.url || providers[0].url, props.id)
+            : buildUrl(providers[defaultShowProvider]?.url || providers[0].url, props.id, season, episode);
+        setSelectedSource(initial);
+
+        if (isMovie) {
+            updateRecentlyWatchedMovie();
+        } else {
+            // record show episode (could be restored or default 1/1)
+            updateRecentlyWatchedShow(season, episode);
+        }
     }, [props.id]);
 
     useEffect(() => {
@@ -59,13 +211,15 @@ export default function Embed(props) {
     }, [props.id]);
 
     const constructSourceUrl = (baseUrl, season, episode) => {
+        // replace season/episode segments even when query params are present
         if (baseUrl.includes('embed.su')) {
-            return baseUrl.replace(/\/\d+\/\d+$/, `/${season}/${episode}`);
+            return baseUrl.replace(/\/\d+\/\d+(?=\?|$)/, `/${season}/${episode}`);
         } else if (baseUrl.includes('vidsrc.cc')) {
             if (baseUrl.includes('anime')) {
-                return baseUrl.replace(/\/\d+\/(sub|dub)\?/, `/${episode}/$1?`);
+                // anime urls have the episode number before sub/dub
+                return baseUrl.replace(/\/\d+\/(sub|dub)(?=\?)/, `/${episode}/$1`);
             } else {
-                return baseUrl.replace(/\/\d+\/\d+$/, `/${season}/${episode}`);
+                return baseUrl.replace(/\/\d+\/\d+(?=\?|$)/, `/${season}/${episode}`);
             }
         } else if (baseUrl.includes('vidsrc.me')) {
             const url = new URL(baseUrl);
@@ -73,17 +227,8 @@ export default function Embed(props) {
             url.searchParams.set('episode', episode);
             return url.toString();
         } else if (baseUrl.includes('vidlink.pro')) {
-            return baseUrl.replace(/\/\d+\/\d+&/, `/${season}/${episode}&`);
-        } else if (baseUrl.includes('multiembed.mov')) {
-            // Handle SuperEmbedShowURL
-            // Replace &s= and &e= if present, or append if missing
-            let url = baseUrl;
-            if (url.includes('&s=') && url.includes('&e=')) {
-                url = url.replace(/&s=\d+/, `&s=${season}`).replace(/&e=\d+/, `&e=${episode}`);
-            } else {
-                url += `&s=${season}&e=${episode}`;
-            }
-            return url;
+            // urls use ? or & before query string, handle both
+            return baseUrl.replace(/\/\d+\/\d+(?=\?|&|$)/, `/${season}/${episode}`);
         }
         return baseUrl;
     };
@@ -94,21 +239,63 @@ export default function Embed(props) {
     };
 
     const handleSourceChange = (event) => {
-        updateSource(event.target.value);
+        const selectedIndex = parseInt(event.target.value, 10);
+        const selectedProvider = providers[selectedIndex];
+        const newSource = buildUrl(selectedProvider.url, props.id, selectedSeason, selectedEpisode);
+        setSelectedSource(newSource);
+        
+        // Save as default
+        if (isMovie) {
+            setDefaultMovieProvider(selectedIndex);
+            localStorage.setItem('defaultMovieProvider', selectedIndex.toString());
+        } else {
+            setDefaultShowProvider(selectedIndex);
+            localStorage.setItem('defaultShowProvider', selectedIndex.toString());
+        }
     };
 
     const handleSeasonChange = (event) => {
         const newSeason = Number(event.target.value);
         setSelectedSeason(newSeason);
-        setSelectedEpisode(1); // Reset to the first episode when season changes
-        const newSource = constructSourceUrl(selectedSource, newSeason, 1);
-        setSelectedSource(newSource);
+        // do NOT touch selectedEpisode; we keep a single episode selection for the show.
+        // the render logic will only mark it as selected when the displayed season matches.
     };
 
     const handleEpisodeClick = (episodeNumber) => {
         setSelectedEpisode(episodeNumber);
-        const newSource = constructSourceUrl(selectedSource, selectedSeason, episodeNumber);
-        setSelectedSource(newSource);
+        setSelectedEpisodeSeason(selectedSeason);
+        setSelectedSource(prev => constructSourceUrl(prev, selectedSeason, episodeNumber));
+        // Scroll to player
+        playerRef.current?.scrollIntoView({ behavior: 'smooth' });
+        // record show episode
+        if (!isMovie) {
+            updateRecentlyWatchedShow(selectedSeason, episodeNumber);
+        }
+    };
+
+    // toggle watched flag for an episode via right-click
+    const toggleWatchedEpisode = (season, episodeNumber) => {
+        setWatchedEpisodes(prev => {
+            const seasonArr = prev[season] ? [...prev[season]] : [];
+            const index = seasonArr.indexOf(episodeNumber);
+            let newSeasonArr;
+            if (index === -1) {
+                newSeasonArr = [...seasonArr, episodeNumber];
+            } else {
+                newSeasonArr = seasonArr.filter(e => e !== episodeNumber);
+            }
+            const newState = { ...prev, [season]: newSeasonArr };
+            // persist change to localStorage as well
+            const list = JSON.parse(localStorage.getItem('recentlyWatched') || '[]');
+            const entry = list.find(item => item.id === props.id && item.media_type === 'show');
+            if (entry) {
+                const watched = entry.watchedEpisodes || {};
+                watched[season] = newSeasonArr;
+                entry.watchedEpisodes = watched;
+                localStorage.setItem('recentlyWatched', JSON.stringify(list));
+            }
+            return newState;
+        });
     };
 
     const toggleTheaterMode = () => {
@@ -153,6 +340,7 @@ export default function Embed(props) {
     return (
         <div>
             <div
+                ref={playerRef}
                 className="banner"
                 style={{
                     backgroundImage: `linear-gradient(0deg, rgb(26, 11, 63) 1%, ${
@@ -176,12 +364,10 @@ export default function Embed(props) {
                 {props.title && (
                     <div className="source-container">
                         <div className="source-control">
-                            <select name="source" id="source" onChange={handleSourceChange}>
-                                <option value={vidLinkMovieURL}>VidLink</option>
-                                <option value={vidsrcMovieURL}>VidSrc</option>
-                                <option value={embedMovieURL}>Embed.su</option>
-                                <option value={superEmbedMovieURL}>SuperEmbed</option>
-                                <option value={vidsrcMovie2URL}>VidSrc 2</option>
+                            <select name="source" id="source" onChange={handleSourceChange} value={isMovie ? defaultMovieProvider : defaultShowProvider}>
+                                {providers.map((provider, index) => (
+                                    <option key={index} value={index}>{provider.name}</option>
+                                ))}
                             </select>
                             <button
                                 className={`watchlist-btn${isWatchlisted ? ' active' : ''}`}
@@ -216,14 +402,10 @@ export default function Embed(props) {
                 {props.name && (
                     <div className="episode-selector">
                         <div className="source-control">
-                            <select name="source" id="source" onChange={handleSourceChange}>
-                                <option value={vidLinkShowURL}>VidLink</option>
-                                <option value={vidsrcShowURL}>VidSrc</option>
-                                <option value={embedShowURL}>Embed.su</option>
-                                <option value={superEmbedShowURL}>SuperEmbed</option>
-                                <option value={vidsrcShow2URL}>VidSrc 2</option>
-                                <option value={vidsrcAnimeSubURL}>VS Anime (Sub)</option>
-                                <option value={vidsrcAnimeDubURL}>VS Anime (Dub)</option>
+                            <select name="source" id="source" onChange={handleSourceChange} value={isMovie ? defaultMovieProvider : defaultShowProvider}>
+                                {providers.map((provider, index) => (
+                                    <option key={index} value={index}>{provider.name}</option>
+                                ))}
                             </select>
                             <button
                                 className={`watchlist-btn${isWatchlisted ? ' active' : ''}`}
@@ -254,7 +436,7 @@ export default function Embed(props) {
                         <Details {...props} />
                         <div className="heading">
                             <h2>Episodes</h2>
-                            <select name="seasons" id="seasons" onChange={handleSeasonChange}>
+                            <select name="seasons" id="seasons" value={selectedSeason} onChange={handleSeasonChange}>
                                 {props.seasons.map(
                                     (season, index) =>
                                         season.season_number > 0 && (
@@ -270,10 +452,11 @@ export default function Embed(props) {
                                 seasonData?.episodes?.map((episode, index) => (
                                     <div
                                         className={`episode ${
-                                            selectedEpisode === index + 1 ? 'selected' : ''
-                                        }`}
+                                            selectedEpisodeSeason === selectedSeason && selectedEpisode === index + 1 ? 'selected' : ''
+                                        } ${watchedSet.has(index + 1) ? 'watched' : ''}`}
                                         key={episode?.id}
                                         onClick={() => handleEpisodeClick(index + 1)}
+                                onContextMenu={(e) => { e.preventDefault(); toggleWatchedEpisode(selectedSeason, index + 1); }}
                                     >
                                         <span className="ep-num">{index + 1}</span>
                                         <div className="ep-thumbnail-container">

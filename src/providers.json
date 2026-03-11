@@ -1,0 +1,38 @@
+{
+  "movieProviders": [
+    {
+      "name": "VidSrc V3",
+      "url": "https://vidsrc.cc/v3/embed/movie/{id}?autoPlay=false&color=646cff&poster=false"
+    },
+    {
+      "name": "VidSrc V2",
+      "url": "https://vidsrc.cc/v2/embed/movie/{id}?autoPlay=false&poster=true"
+    },
+    {
+      "name": "VidLink",
+      "url": "https://vidlink.pro/movie/{id}?primaryColor=646cff&secondaryColor=a2a2a2&iconColor=f7f7ff&icons=default&player=jw&title=true&poster=true&autoplay=false&nextbutton=true"
+    }
+  ],
+  "showProviders": [
+    {
+      "name": "VidSrc V3",
+      "url": "https://vidsrc.cc/v3/embed/tv/{id}/{season}/{episode}?autoPlay=false&color=646cff&poster=false"
+    },
+    {
+      "name": "VidSrc V2",
+      "url": "https://vidsrc.cc/v2/embed/tv/{id}/{season}/{episode}?autoPlay=false&poster=true"
+    },
+    {
+      "name": "VidLink",
+      "url": "https://vidlink.pro/tv/{id}/{season}/{episode}?primaryColor=646cff&secondaryColor=a2a2a2&iconColor=f7f7ff&icons=default&player=jw&title=true&poster=true&autoplay=false&nextbutton=true"
+    },
+    {
+      "name": "VS Anime (Sub)",
+      "url": "https://vidsrc.cc/v2/embed/anime/tmdb{id}/{episode}/sub?autoPlay=false"
+    },
+    {
+      "name": "VS Anime (Dub)",
+      "url": "https://vidsrc.cc/v2/embed/anime/tmdb{id}/{episode}/dub?autoPlay=false"
+    }
+  ]
+}

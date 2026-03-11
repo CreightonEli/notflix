@@ -1077,15 +1077,16 @@ h3 > a > span {
     flex-direction: column;
     justify-content: center;
     margin-top: 6px;
-    background-color: var(--dark-gray);
+    background-color: #1c1c21;
     border-radius: 3px;
+    overflow: hidden;
 }
 
 .episode-selector > .episode-list > .episode {
     display: flex;
     flex-direction: row;
     padding: 10px 20px;
-    border-radius: 4px;
+    // border-radius: 4px;
     border-bottom: 1px solid var(--gray);
     transition: 355ms;
     cursor: pointer;
@@ -1097,8 +1098,11 @@ h3 > a > span {
     margin: auto 0;
     color: var(--off-white);
 }
+.episode.watched {
+    background-color: #24243a;
+}
 .episode.selected {
-    background-color: #272b2d; /* Adjust the color as needed */
+    background-color: #333454;
 }
 
 .episode > .ep-thumbnail-container {
@@ -1662,14 +1666,15 @@ ul.department-list {
 .watchlist {
     display: flex;
     flex-direction: column;
-    max-width: 1080px;
-    margin: 0 auto 25px;
-    padding: 20px 40px;
-    // background: var(--dark-gray);
-    // border: 1px solid var(--gray);
-    border-radius: 8px;
+    max-width: 950px;
+    margin: auto;
     text-align: left;
     box-sizing: border-box;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    border: 1px solid var(--header-border);
 }
 
 .watchlist > h2 {
@@ -1698,14 +1703,14 @@ ul.department-list {
     will-change: transform;
     overflow: hidden;
 }
-.watchlist > .list-item > .list-item-bg {
+.list-item > .list-item-bg {
     width: 100%;
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
-.watchlist > .list-item > .list-item-bg > div {
+.list-item > .list-item-bg > div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -1733,7 +1738,7 @@ ul.department-list {
     border-radius: 8px;
 }
 
-.watchlist .poster-wrapper {
+.poster-wrapper {
     display: flex;
     justify-content: center;
     touch-action: auto;
@@ -1745,48 +1750,48 @@ ul.department-list {
     margin-right: 10px;
 }
 
-.watchlist .poster-wrapper .poster {
+.poster-wrapper .poster {
     width: 100%;
 }
-.watchlist .logo {
+.logo {
     margin: auto auto auto 10px;
     max-height: 75px;
     pointer-events: none;
 }
 
-.watchlist .title {
+.title {
     font-size: 32pt;
     font-weight: 600;
     margin: auto 0 0 6px;
     text-shadow: 0 0 4px black;
 }
 
-.watchlist .director {
+.director {
     font-size: 14pt;
     font-weight: 200;
     color: var(--off-white);
     margin: 0;
 }
-.watchlist .director > .name {
+.director > .name {
     color: #f2f3ff;
     border-bottom: 1px solid #f0f8ff30;
 }
-.watchlist .director > .name:hover {
+.director > .name:hover {
     border-bottom: 1px solid var(--purple);
 }
 
-.watchlist .release-year {
+.release-year {
     font-size: 14pt;
     font-weight: 200;
     color: var(--off-white);
     margin: 0;
 }
-.watchlist .release-year > span {
+.release-year > span {
     color: #f2f3ff;
     border-bottom: 1px solid #f0f8ff30;
 }
 
-.watchlist .overview {
+.overview {
     font-size: 12pt;
     font-weight: 200;
     color: var(-white);
@@ -1797,12 +1802,12 @@ ul.department-list {
     overflow: hidden;
 }
 
-.watchlist .genre-container {
+.genre-container {
     height: 30px;
     // margin-bottom: 3px;
 }
 
-.watchlist .stats {
+.stats {
     display: flex;
     flex-direction: row;
     margin: 4px 0;
@@ -1811,7 +1816,7 @@ ul.department-list {
     overflow-x: hidden;
 }
 
-.watchlist .stats .runtime {
+.stats .runtime {
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
@@ -1820,11 +1825,11 @@ ul.department-list {
     margin: auto 0;
     align-items: center;
 }
-.watchlist .stats .runtime > svg {
+.stats .runtime > svg {
     margin: 0 4px 0 0;
 }
 
-.watchlist .stats .rating {
+.stats .rating {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1833,11 +1838,11 @@ ul.department-list {
     font-weight: 600;
     color: goldenrod;
 }
-.watchlist .stats .rating > svg {
+.stats .rating > svg {
     margin: 0 4px 0 0;
 }
 
-.watchlist .stats .votes {
+.stats .votes {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1848,17 +1853,17 @@ ul.department-list {
     gap: 6px;
     white-space: nowrap;
 }
-.watchlist .stats .votes .vote-count {
+.stats .votes .vote-count {
     margin: 0;
 }
 
-.watchlist .list-item-buttons {
+.list-item-buttons {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.watchlist .list-item-buttons button {
+.list-item-buttons button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1871,7 +1876,7 @@ ul.department-list {
     font-weight: 600;
     cursor: pointer;
 }
-.watchlist .list-item-buttons button.play-btn {
+.list-item-buttons button.play-btn {
     background-color: var(--purple);
     color: var(--white);
     border: none;
@@ -1880,7 +1885,7 @@ ul.department-list {
     font-weight: 600;
     transition: 355ms;
 }
-.watchlist .list-item-buttons button.remove-btn {
+.list-item-buttons button.remove-btn {
     background-color: var(--red);
     color: var(--white);
     border: none;
@@ -1889,17 +1894,17 @@ ul.department-list {
     font-weight: 600;
     transition: 355ms;
 }
-.watchlist .list-item-buttons button:hover {
+.list-item-buttons button:hover {
     filter: brightness(0.8);
     border-color: var(--off-white);
 }
 
-.watchlist .list-item-buttons button > svg {
+.list-item-buttons button > svg {
     margin-right: 3px;
     // color: black;
 }
 
-.watchlist .list-item-controls {
+.list-item-controls {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1947,6 +1952,108 @@ ul.department-list {
     color: var(--off-white);
     margin: 0;
 }
+
+// History Page //
+.history-page {
+    display: flex;
+    flex-direction: column;
+    max-width: 950px;
+    margin: auto;
+    text-align: left;
+    box-sizing: border-box;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+    background-color: var(--dark-gray);
+    border-radius: 8px;
+    border: 1px solid var(--header-border);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-page h2 {
+    font-size: 32pt;
+    font-weight: 600;
+    color: var(--white);
+    margin: 0 0;
+}
+
+.history-page .history-list > p {
+    font-size: 14pt;
+    font-weight: 200;
+    color: var(--off-white);
+    border-bottom: 1px solid var(--header-border);
+    margin: 0 0 20px;
+    padding: 0 0 16px 0;
+}
+
+.history-list > .list-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 16px;
+}
+
+.list-top > button {
+    display: flex;
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 600;
+    transition: 355ms;
+    cursor: pointer;
+}
+.list-top > button:hover {
+    filter: brightness(1.1);
+}
+.list-top > button:active {
+    filter: brightness(0.9);
+    transform: scale(0.9);
+}
+
+.list-top > button > svg {
+    font-size: 16pt;
+    margin: auto 0 auto 5px;
+}
+
+
+.history-list > .list > .list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto 20px;
+    padding: 0;
+    background-color: var(--dark-gray);
+    border: 1px solid var(--header-border);
+    border-radius: 8px;
+    will-change: transform;
+    overflow: hidden;
+}
+
+.history-list .list-item-bg > div {
+    justify-content: start;
+}
+
+p.last-watched {
+    font-size: 12pt;
+    font-weight: 300;
+    color: var(--white);
+    margin: auto 0 0 0;
+    border-bottom: 1px solid rgba(240, 248, 255, 0.1882352941);
+}
+.watch-time {
+    font-size: 12pt;
+    font-weight: 200;
+    color: var(--off-white);
+    margin: auto 8px 0 0;
+}
+
 
 // Settings Page //
 .settings-page {
@@ -2023,4 +2130,10 @@ ul.department-list {
 }
 .settings-page a button:hover {
     filter: brightness(0.8);
+}
+
+.settings-page > div:nth-child(2) > div:nth-child(9), .settings-page > div:nth-child(2) > div:nth-child(6) {
+    font-size: 12pt;
+    font-weight: 200;
+    color: var(--off-white);
 }
