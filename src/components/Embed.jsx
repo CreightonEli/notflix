@@ -1,6 +1,6 @@
 import Details from '../components/Details'
 import React, { useEffect, useState, useRef } from 'react';
-import { PlayCircle, CornersOut, CornersIn, ListPlus } from "@phosphor-icons/react";
+import { PlayCircle, CornersOut, CornersIn, HeartIcon, HeartBreakIcon } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 import useApiKey from '../hooks/useApiKey';
 import providersData from '../providers.json';
@@ -373,9 +373,13 @@ export default function Embed(props) {
                                 className={`watchlist-btn${isWatchlisted ? ' active' : ''}`}
                                 onClick={handleAddToWatchlist}
                             >
-                                <ListPlus size={21} />
+                                {isWatchlisted ? (
+                                    <HeartIcon size={21} weight="fill" />
+                                ) : (
+                                    <HeartBreakIcon size={21} weight="fill" />
+                                )}
                                 <span className={isWatchlisted ? 'active' : ''}>
-                                    {isWatchlisted ? 'Added to Watchlist' : 'Add to Watchlist'}
+                                    {isWatchlisted ? 'Added to My List' : 'Add to My List'}
                                 </span>
                             </button>
                             <button
@@ -411,9 +415,13 @@ export default function Embed(props) {
                                 className={`watchlist-btn${isWatchlisted ? ' active' : ''}`}
                                 onClick={handleAddToWatchlist}
                             >
-                                <ListPlus size={21} />
+                                {isWatchlisted ? (
+                                    <HeartIcon size={21} weight="fill" />
+                                ) : (
+                                    <HeartBreakIcon size={21} weight="fill" />
+                                )}
                                 <span className={isWatchlisted ? 'active' : ''}>
-                                    {isWatchlisted ? 'Added to Watchlist' : 'Add to Watchlist'}
+                                    {isWatchlisted ? 'Added to My List' : 'Add to My List'}
                                 </span>
                             </button>
                             <button

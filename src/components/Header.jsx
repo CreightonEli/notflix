@@ -70,7 +70,7 @@ export default function Header() {
                             onClick={() => setDropdownOpen(false)}
                         >
                             <ListHeart size={24} />
-                            Watchlist
+                            My List
                         </Link>
                     </li>
                     <li>

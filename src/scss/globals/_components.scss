@@ -996,8 +996,8 @@ h3 > a > span {
     border-color: var(--off-white);
 }
 .source-control > .watchlist-btn.active {
-    background-color: var(--gray);
-    border-color: var(--purple);
+    background-color: #381f1f;
+    border-color: var(--red);
     color: var(--white);
 }
 
@@ -1005,6 +1005,9 @@ h3 > a > span {
     margin-right: 3px;
     color: var(--off-white);
     transition: 200ms;
+}
+.source-control > .watchlist-btn.active > svg {
+    color: var(--red);
 }
 
 .source-control > .theater-mode {
@@ -1500,11 +1503,12 @@ ul.department-list {
 }
   
 .person > .overview {
-    margin: 20px 0 0;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto auto;
     padding: 20px 20px 10px;
     text-align: left;
-    max-width: 500px;
-    height: fit-content;
+    min-width: fit-content;
     background-color: var(--header);
     border: 1px solid var(--header-border);
     border-radius: 8px;
@@ -1663,7 +1667,8 @@ ul.department-list {
 }
 
 // Watchlist Page //
-.watchlist {
+
+.watchlist-page {
     display: flex;
     flex-direction: column;
     max-width: 950px;
@@ -1675,6 +1680,12 @@ ul.department-list {
     background-color: var(--dark-gray);
     border-radius: 8px;
     border: 1px solid var(--header-border);
+    min-height: 488px;
+}
+
+.watchlist {
+    display: flex;
+    flex-direction: column;
 }
 
 .watchlist > h2 {
@@ -1688,6 +1699,8 @@ ul.department-list {
     font-weight: 200;
     color: var(--off-white);
     margin: 0 0 20px;
+    padding: 0 0 16px 0;
+    border-bottom: 1px solid var(--header-border);
 }
 
 .watchlist > .list-item {
@@ -1893,10 +1906,19 @@ ul.department-list {
     padding: 6px 12px;
     font-weight: 600;
     transition: 355ms;
+    max-height: 36px;
 }
 .list-item-buttons button:hover {
     filter: brightness(0.8);
     border-color: var(--off-white);
+}
+
+.list-item-buttons a {
+    margin: auto 0 0 0;
+}
+
+.list-item-buttons button {
+    margin: auto auto 0 0;
 }
 
 .list-item-buttons button > svg {
@@ -1966,11 +1988,16 @@ ul.department-list {
     background-color: var(--dark-gray);
     border-radius: 8px;
     border: 1px solid var(--header-border);
+    min-height: 537px;
 }
 
 .history-list {
     display: flex;
     flex-direction: column;
+}
+
+.history-list .logo {
+    max-height: 42px;
 }
 
 .history-page h2 {
@@ -2044,7 +2071,7 @@ p.last-watched {
     font-size: 12pt;
     font-weight: 300;
     color: var(--white);
-    margin: auto 0 0 0;
+    margin: auto 0 10px 0;
     border-bottom: 1px solid rgba(240, 248, 255, 0.1882352941);
 }
 .watch-time {

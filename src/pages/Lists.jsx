@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp, ArrowDown, Play, Trash, Clock, Star } from "@phosphor-icons/react";
+import { ArrowUp, ArrowDown, Play, HeartBreakIcon, Clock, Star } from "@phosphor-icons/react";
 import nullPoster from '../assets/nullPoster.png'; // Use relative path
 import logoSmallShadow from '../assets/logo_small_shadow.png';
 
@@ -38,11 +38,11 @@ export default function Lists() {
     return (
         <main className="watchlist-page">
 
-            <title>Watchlist - Nullflix</title>
-            <meta property="og:title" content="Watchlist" />
+            <title>My List - Nullflix</title>
+            <meta property="og:title" content="My List" />
             <meta property="og:site_name" content="Nullflix" />
-            <meta name="description" content="Watchlist page of Nullflix, showcasing user's watchlist." />
-            <meta property="og:description" content="Watchlist page of Nullflix, showcasing user's watchlist." />
+            <meta name="description" content="My List page of Nullflix, showcasing user's favorite shows and movies." />
+            <meta property="og:description" content="My List page of Nullflix, showcasing user's favorite shows and movies." />
             <meta property="og:image" content={`https://nullflix.vercel.app${logoSmallShadow}`} />
             <meta property="og:url" content="https://nullflix.vercel.app/#/lists" />
             <meta property="og:type" content="website" />
@@ -50,12 +50,12 @@ export default function Lists() {
             <div>
                 {watchlist.length === 0 ? (
                     <div className="watchlist">
-                        <h2 className="list-title">Watchlist</h2>
-                        <p>Your watchlist is empty.</p>
+                        <h2 className="list-title">My List</h2>
+                        <p>Your list is empty.</p>
                     </div>
                 ) : (
                     <div className="watchlist">
-                        <h2 className="list-title">Watchlist</h2>
+                        <h2 className="list-title">My List</h2>
                         <p>What will you watch next?</p>
                         <AnimatePresence>
                             {watchlist.map((item, index) => (
@@ -203,7 +203,7 @@ export default function Lists() {
                                                             className="remove-btn"
                                                             onClick={() => handleRemove(item.id)}
                                                         >
-                                                            <Trash size={24} weight="regular" />
+                                                            <HeartBreakIcon size={24} weight="regular" />
                                                             Remove
                                                         </button>
                                                     </div>

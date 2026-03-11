@@ -62,6 +62,10 @@
     max-width: 950px;
   }
 
+  .source-control > .watchlist-btn > svg {
+    margin: 0;
+  }
+
   .episode-selector {
     max-width: 950px;
   }
@@ -428,11 +432,14 @@
 
     .watchlist-page {
       margin: 0;
-      padding: 0 8px;
+      padding: 0;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
     }
     .watchlist {
       margin: 0;
-      padding: 0;
+      padding: 0 8px;
     }
 
     .watchlist .list-title {
@@ -440,7 +447,7 @@
     }
 
     .watchlist p {
-      margin: 0 0 20px 8px;
+      margin: 0 8px 20px 8px;
     }
 
     .watchlist .list-item {
@@ -463,6 +470,42 @@
     .watchlist .release-year {
       font-size: 13pt;
       margin-bottom: 10px;
+    }
+
+    .history-page {
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      padding: 0 8px;
+    }
+    
+    .history-list > .list-title {
+      margin: 0 0 0 8px;
+    }
+    .history-page .history-list > p {
+      margin: 0 8px 20px 8px;
+    }
+
+    .history-list .poster-wrapper {
+      display: none;
+    }
+
+    .history-list .logo {
+      margin: 0 auto;
+      max-width: 250px;
+      max-height: 75px;
+    }
+
+    .history-list .director {
+      font-size: 13pt;
+    }
+    .history-list .release-year {
+      font-size: 13pt;
+      margin-bottom: 10px;
+    }
+
+    .history-list .genre-container {
+      display: none;
     }
 
     .settings-page {

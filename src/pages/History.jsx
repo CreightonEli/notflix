@@ -97,7 +97,7 @@ export default function History() {
                                             scale: { type: "spring", stiffness: 700, damping: 30 }
                                         }}
                                     >
-                                        {console.log(item)}
+                                        {/* {console.log(item)} */}
                                         <div className="list-item-bg" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.backdrop_path})` }}>
                                             <div>
                                                 <div className="poster-wrapper">
@@ -187,6 +187,13 @@ export default function History() {
                                                             </p>                                                        
                                                         </div>
 
+                                                        <p className="last-watched">
+                                                            {`Last Watched: `}
+                                                            <span className="watch-time">
+                                                                {item.media_type == 'show' && `S${item.selectedSeason}E${item.selectedEpisode} - `}
+                                                                {item.lastUpdated ? new Date(item.lastUpdated).toLocaleString() : 'Unknown'}
+                                                            </span>
+                                                        </p>
                                                         <div className="list-item-buttons">
                                                             <Link to={`/${item.media_type == 'movie' ? 'movies' : 'shows'}/${item.id}`}>
                                                                 <button className="play-btn">
@@ -198,13 +205,6 @@ export default function History() {
                                                                 <TrashIcon size={24} weight="regular" />
                                                                 Remove
                                                             </button>                                               
-                                                            <p className="last-watched">
-                                                                Last watched:
-                                                            </p>
-                                                            <span className="watch-time">
-                                                                {item.media_type == 'show' && `S${item.selectedSeason}E${item.selectedEpisode} - `}
-                                                                {item.lastUpdated ? new Date(item.lastUpdated).toLocaleString() : 'Unknown'}
-                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
