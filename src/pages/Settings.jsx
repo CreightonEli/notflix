@@ -21,6 +21,7 @@ export default function Settings() {
         localStorage.removeItem("watchlist");
         // alert("Watchlist erased.");
         setWatchlistCount(0);
+        window.dispatchEvent(new Event('watchlistUpdated')); // notify listeners
     };
 
     // Erase history data

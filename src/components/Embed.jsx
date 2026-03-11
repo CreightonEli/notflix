@@ -335,6 +335,10 @@ export default function Embed(props) {
             localStorage.setItem('watchlist', JSON.stringify(watchlist));
             setIsWatchlisted(false);
         }
+        // notify listeners that watchlist changed
+        const evt = document.createEvent('Event');
+        evt.initEvent('watchlistUpdated', true, true);
+        window.dispatchEvent(evt);
     };
 
     return (

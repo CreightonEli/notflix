@@ -15,6 +15,10 @@ export default function Lists() {
         const updated = watchlist.filter(item => item.id !== id);
         setWatchlist(updated);
         localStorage.setItem('watchlist', JSON.stringify(updated));
+        // notify other components
+        const evt = document.createEvent('Event');
+        evt.initEvent('watchlistUpdated', true, true);
+        window.dispatchEvent(evt);
     };
 
     // Move item up in the array
@@ -24,6 +28,9 @@ export default function Lists() {
         [updated[index - 1], updated[index]] = [updated[index], updated[index - 1]];
         setWatchlist(updated);
         localStorage.setItem('watchlist', JSON.stringify(updated));
+        const evt = document.createEvent('Event');
+        evt.initEvent('watchlistUpdated', true, true);
+        window.dispatchEvent(evt);
     };
 
     // Move item down in the array
@@ -33,6 +40,9 @@ export default function Lists() {
         [updated[index], updated[index + 1]] = [updated[index + 1], updated[index]];
         setWatchlist(updated);
         localStorage.setItem('watchlist', JSON.stringify(updated));
+        const evt = document.createEvent('Event');
+        evt.initEvent('watchlistUpdated', true, true);
+        window.dispatchEvent(evt);
     };
 
     return (

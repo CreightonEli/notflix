@@ -1,11 +1,23 @@
 import { Link } from "react-router-dom";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Cards from "./Cards"; // Import your Cards component
 
-export default function Carousel({ headline, id, type, mediaList = [] }) {
+export default function Carousel({ headline, id, type, mediaList = [], seeAllPath }) {
     // console.log("Media List:", mediaList);
     const galleryRef = useRef(null);
+    const [showScroll, setShowScroll] = useState(false);
+
+    // determine whether gallery overflows its container
+    useEffect(() => {
+        const update = () => {
+            if (!galleryRef.current) return;
+            setShowScroll(galleryRef.current.scrollWidth > galleryRef.current.clientWidth);
+        };
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+    }, [mediaList]);
 
     // Scroll the gallery by a specific amount (e.g., width of 6 cards)
     const scrollGallery = (direction) => {
@@ -22,7 +34,7 @@ export default function Carousel({ headline, id, type, mediaList = [] }) {
         return (
             <div className="gallery-wrapper">
                 <h3>
-                    <Link to={`/results?id=${id}&type=${type}`}>
+                    <Link to={seeAllPath || `/results?id=${id}&type=${type}` }>
                         {headline && (headline)}<span>See all<CaretRight /></span>
                     </Link>
                 </h3>
@@ -33,8 +45,12 @@ export default function Carousel({ headline, id, type, mediaList = [] }) {
                         )))}
                     </div>
                 </div>
-                <button className="scroll-button left" onClick={() => scrollGallery('left')}><CaretLeft /></button>
-                <button className="scroll-button right" onClick={() => scrollGallery('right')}><CaretRight /></button>
+                {showScroll && (
+                    <>
+                        <button className="scroll-button left" onClick={() => scrollGallery('left')}><CaretLeft /></button>
+                        <button className="scroll-button right" onClick={() => scrollGallery('right')}><CaretRight /></button>
+                    </>
+                )}
             </div>
         );
     }

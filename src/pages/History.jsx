@@ -21,6 +21,9 @@ export default function History() {
         const updated = historyList.filter(item => item && item.id !== id);
         setHistoryList(updated);
         localStorage.setItem('recentlyWatched', JSON.stringify(updated));
+        const evt = document.createEvent('Event');
+        evt.initEvent('historyUpdated', true, true);
+        window.dispatchEvent(evt);
     };
 
     useEffect(() => {

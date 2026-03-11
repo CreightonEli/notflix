@@ -465,6 +465,7 @@ footer {
 .text-container > p.clamped {
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 0 0 8px;
@@ -749,6 +750,7 @@ h3 > a > span {
     display: -webkit-box;
     line-clamp: 2;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -1168,6 +1170,7 @@ h3 > a > span {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     overflow: hidden;
     color: var(--off-white);
 }
@@ -1815,6 +1818,7 @@ ul.department-list {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 5;
+    line-clamp: 5;
     overflow: hidden;
 }
 
@@ -2007,6 +2011,7 @@ ul.department-list {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
 }
 
