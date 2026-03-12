@@ -264,7 +264,19 @@ export default function Embed(props) {
     const handleEpisodeClick = (episodeNumber) => {
         setSelectedEpisode(episodeNumber);
         setSelectedEpisodeSeason(selectedSeason);
-        setSelectedSource(prev => constructSourceUrl(prev, selectedSeason, episodeNumber));
+        
+        const providerIndex = isMovie ? defaultMovieProvider : defaultShowProvider;
+        const provider = providers[providerIndex];
+
+        const newSource = buildUrl(
+            provider.url,
+            props.id,
+            selectedSeason,
+            episodeNumber
+        );
+
+        setSelectedSource(newSource);
+
         // Scroll to player
         playerRef.current?.scrollIntoView({ behavior: 'smooth' });
         // record show episode

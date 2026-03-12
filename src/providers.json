@@ -1,30 +1,46 @@
 {
   "movieProviders": [
     {
-      "name": "VidSrc V3",
-      "url": "https://vidsrc.cc/v3/embed/movie/{id}?autoPlay=false&color=646cff&poster=false"
-    },
-    {
-      "name": "VidSrc V2",
-      "url": "https://vidsrc.cc/v2/embed/movie/{id}?autoPlay=false&poster=true"
+      "name": "VidEasy",
+      "url": "https://player.videasy.net/movie/{id}?color=646cff&overlay=true"
     },
     {
       "name": "VidLink",
-      "url": "https://vidlink.pro/movie/{id}?primaryColor=646cff&secondaryColor=a2a2a2&iconColor=f7f7ff&icons=default&player=jw&title=true&poster=true&autoplay=false&nextbutton=true"
+      "url": "https://vidlink.pro/movie/{id}?primaryColor=646cff&secondaryColor=a2a2a2&iconColor=f7f7ff&icons=default&player=jw&title=true&poster=true&autoplay=false&nextbutton=false"
+    },
+    {
+      "name": "111Movies",
+      "url": "https://111movies.net/movie/{id}"
+    },
+    {
+      "name": "VidRock",
+      "url": "https://vidrock.net/movie/{id}?autoplay=false"
+    },
+    {
+      "name": "VidSrc",
+      "url": "https://www.vidsrc.wtf/api/1/movie/?id={id}"
     }
   ],
   "showProviders": [
     {
-      "name": "VidSrc V3",
-      "url": "https://vidsrc.cc/v3/embed/tv/{id}/{season}/{episode}?autoPlay=false&color=646cff&poster=false"
-    },
-    {
-      "name": "VidSrc V2",
-      "url": "https://vidsrc.cc/v2/embed/tv/{id}/{season}/{episode}?autoPlay=false&poster=true"
+      "name": "VidEasy",
+      "url": "https://player.videasy.net/tv/{id}/{season}/{episode}?color=646cff&overlay=true"
     },
     {
       "name": "VidLink",
-      "url": "https://vidlink.pro/tv/{id}/{season}/{episode}?primaryColor=646cff&secondaryColor=a2a2a2&iconColor=f7f7ff&icons=default&player=jw&title=true&poster=true&autoplay=false&nextbutton=true"
+      "url": "https://vidlink.pro/tv/{id}/{season}/{episode}?primaryColor=646cff&secondaryColor=a2a2a2&iconColor=f7f7ff&icons=default&player=jw&title=true&poster=true&autoplay=false&nextbutton=false"
+    },
+    {
+      "name": "111Movies",
+      "url": "https://111movies.net/tv/{id}/{season}/{episode}"
+    },
+    {
+      "name": "VidRock",
+      "url": "https://vidrock.net/tv/{id}/{season}/{episode}?autoplay=false"
+    },
+    {
+      "name": "VidSrc",
+      "url": "https://www.vidsrc.wtf/api/1/tv/?id={id}&s={season}&e={episode}"
     },
     {
       "name": "VS Anime (Sub)",
