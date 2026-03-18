@@ -83,6 +83,7 @@
 @media (max-width: 950px) {
     header {
       margin: 18px;
+      width: auto;
     }
     // header > ul {
     //   display: none;
@@ -518,4 +519,10 @@
       border-left: none;
       border-right: none;
     }
+
+    // footer
+    footer {
+      border-radius: 0;
+    }
+
   }
