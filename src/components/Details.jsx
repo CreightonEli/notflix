@@ -1,12 +1,8 @@
-import { Clock, Star, StarHalf, PlayCircle, MagnifyingGlassPlus } from "@phosphor-icons/react";
-import React, { useState } from "react";
+import { Clock, Star, StarHalf, } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import nullPosterBig from '../assets/nullPosterBig.png'; // Use relative path
 
 export default function Details(props) {
-    const [activeMedia, setActiveMedia] = useState(
-        props.videos?.results?.length > 0 ? "videos" : "images"
-    ); // Default to "videos" if available, otherwise "images"
 
     const starArray = [
         <><Star size={32} /><Star size={32} /><Star size={32} /><Star size={32} /><Star size={32} /></>, 
@@ -21,17 +17,6 @@ export default function Details(props) {
         <><Star size={32} weight="fill" /><Star size={32} weight="fill" /><Star size={32} weight="fill" /><Star size={32} weight="fill" /><StarHalf size={32} weight="fill" /></>,
         <><Star size={32} weight="fill" /><Star size={32} weight="fill" /><Star size={32} weight="fill" /><Star size={32} weight="fill" /><Star size={32} weight="fill" /></>
     ];
-
-    const generateSlug = (title) => {
-        if (!title) return "";
-        return title
-            .toLowerCase()
-            .replace(/[^a-z0-9\s]/g, "") // Remove special characters
-            .replace(/\s+/g, "-"); // Replace spaces with hyphens
-    };
-
-    const letterboxdSlug = generateSlug(props.title);
-    const letterboxdUrl = `https://letterboxd.com/film/${letterboxdSlug}/`;
 
     return (
         <>
@@ -138,48 +123,6 @@ export default function Details(props) {
                     </div>
                 </div>
             </div>
-            {(props.videos?.results?.length > 0 || props.images?.backdrops?.length > 0) && (
-                <div className="media-container">
-                    <div className="media-header">
-                        <h2>Media</h2>
-                        {props.videos?.results?.length > 0 && (
-                            <h3 
-                                className={activeMedia === "videos" ? "active" : ""} 
-                                onClick={() => setActiveMedia("videos")}
-                            >
-                                Videos <span>{props.videos.results.length}</span>
-                            </h3>
-                        )}
-                        {props.images?.backdrops?.length > 0 && (
-                            <h3 
-                                className={activeMedia === "images" ? "active" : ""} 
-                                onClick={() => setActiveMedia("images")}
-                            >
-                                Images <span>{props.images.backdrops.length}</span>
-                            </h3>
-                        )}
-                    </div>                        
-                    <div className="media-gallery">
-                        {activeMedia === "videos" && props.videos?.results?.map((video, index) => (
-                            <a href={`https://www.youtube.com/watch?v=${video.key}`} target="_blank" key={index}>
-                                <PlayCircle size={50} weight="fill" />
-                                <img src={`https://img.youtube.com/vi/${video.key}/0.jpg`} alt={`Trailer ${index + 1}`} />
-                            </a>
-                        ))}
-                        {activeMedia === "images" && props.images?.backdrops?.map((image, index) => (
-                            <a href={`https://image.tmdb.org/t/p/original${image.file_path}`} target="_blank" key={index}>
-                                <MagnifyingGlassPlus size={50} />
-                                <img key={index} src={`https://image.tmdb.org/t/p/w500${image.file_path}`} alt={`Backdrop ${index + 1}`} />
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            )}
-            {props.title && (
-                <a className="letterboxd-btn" href={letterboxdUrl} target="_blank">
-                    <img src="https://a.ltrbxd.com/logos/letterboxd-logo-h-neg-rgb.svg" />
-                </a>
-            )}
         </>
     );
 }

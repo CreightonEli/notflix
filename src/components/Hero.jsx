@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Info, Star, StarHalf } from "@phosphor-icons/react"
 import genres from "../genres"
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useApiKey from '../hooks/useApiKey';
+import nullPosterBig from '../assets/nullPosterBig.png'; // Use relative path
 
 export default function Hero(props) {
     const [images, setImages] = useState(null); // Store only the relevant logo path
@@ -73,7 +74,11 @@ export default function Hero(props) {
     return (
         <div className="banner" style={{backgroundImage: "linear-gradient(360deg, rgb(26, 11, 63) 1%, transparent 100%), url(https://image.tmdb.org/t/p/original" + props.backdrop_path + ")"}}>
             <div className="hero-container">
-                <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={"Movie poster for " + props.title} />
+                {props.poster_path ? (
+                    <img src={"https://image.tmdb.org/t/p/w500" + props.poster_path} alt={`Poster for the ${props.title ? 'movie' : 'show'} ${props.title || props.name}`} />
+                ) : (
+                    <img src={nullPosterBig} alt={"No poster available for " + props.title || props.name} />
+                )}
                 <div className="text-container">
                     {images?.id === props.id && images?.logos?.[0]?.file_path ? 
                         // <div className="logo-container">

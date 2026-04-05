@@ -1,10 +1,11 @@
 import Details from '../components/Details'
+import Media from "./Media";
 import React, { useEffect, useState, useRef } from 'react';
 import { PlayCircle, CornersOut, CornersIn, HeartIcon, HeartBreakIcon } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 import useApiKey from '../hooks/useApiKey';
 import providersData from '../providers.json';
-// import { style } from 'motion/react-client';
+import nullThumbail from '../assets/nullThumbnail.png'; // Use relative path
 
 export default function Embed(props) {
     const { isHeaderVisible, setIsHeaderVisible } = useHeaderVisibility();
@@ -353,6 +354,19 @@ export default function Embed(props) {
         window.dispatchEvent(evt);
     };
 
+    // generate letterboxd slug and url
+    const generateSlug = (title) => {
+    if (!title) return "";
+    return title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, "") // Remove special characters
+        .replace(/\s+/g, "-"); // Replace spaces with hyphens
+    };
+
+    const letterboxdSlug = generateSlug(props.title);
+    const letterboxdUrl = `https://letterboxd.com/film/${letterboxdSlug}/`;
+
+
     return (
         <div>
             <div
@@ -416,6 +430,14 @@ export default function Embed(props) {
                             </button>
                         </div>
                         <Details {...props} />
+                        {(props.videos?.results?.length > 0 || props.images?.backdrops?.length > 0 || props.images?.posters?.length > 0 || props.images?.logos?.length > 0) && (
+                            <Media {...props} />
+                        )}
+                        {props.title && (
+                            <a className="letterboxd-btn" href={letterboxdUrl} target="_blank">
+                                <img src="https://a.ltrbxd.com/logos/letterboxd-logo-h-neg-rgb.svg" />
+                            </a>
+                        )}
                     </div>
                 )}
             </div>
@@ -491,10 +513,17 @@ export default function Embed(props) {
                                                     alt={`Thumbnail`}
                                                 />
                                             ) : (
-                                                <img
-                                                    src={`https://image.tmdb.org/t/p/w500${props?.backdrop_path}`}
-                                                    alt={`Thumbnail missing`}
-                                                />
+                                                props.backdrop_path ? (
+                                                    <img
+                                                        src={`https://image.tmdb.org/t/p/w500${props?.backdrop_path}`}
+                                                        alt={`Thumbnail missing`}
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        src={nullThumbail}
+                                                        alt={`Thumbnail missing`}
+                                                    />
+                                                )
                                             )}
                                         </div>
                                         <div className="ep-text">
@@ -513,6 +542,9 @@ export default function Embed(props) {
                             )}
                             {seasonData?.episodes?.length === 0 && <p>No episodes available</p>}
                         </div>
+                        {(props.videos?.results?.length > 0 || props.images?.backdrops?.length > 0 || props.images?.posters?.length > 0 || props.images?.logos?.length > 0) && (
+                            <Media {...props} />
+                        )}
                     </div>
                 )}
             </div>

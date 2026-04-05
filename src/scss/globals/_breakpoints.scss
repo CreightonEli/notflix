@@ -69,10 +69,6 @@
   .episode-selector {
     max-width: 950px;
   }
-
-  .media-header > h3 {
-    margin-left: 38px;
-  }
 }
 
 // =============================
@@ -276,8 +272,9 @@
       margin: 10px auto 0 0;
     }
   
-    .media-header > h3 {
-      margin-left: 16px;
+
+    .media-container > .media-header h3 > span {
+      display: none;
     }
     
     .cast-container {

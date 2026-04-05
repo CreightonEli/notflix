@@ -936,34 +936,45 @@ h3 > a > span {
     margin: auto;
 }
 
+// media gallery component
+
 .media-container {
     justify-content: center;
     max-width: 1080px;
     max-height: 500px;
+    // min-height: 260px;
+    margin: 14px 0 0;
     overflow: hidden;
 }
 .media-container > .media-header {
     display: flex;
-    flex-direction: row;
-    align-items: end;
+    flex-direction: column;
+    // align-items: end;
 }
 
-.media-container > .media-header > h2 {
+.media-container > .media-header h2 {
     font-weight: 700;
-    margin: 0;
+    margin: 0 auto 0 0;
 }
-.media-container > .media-header > h3 {
+
+.media-container > .media-header > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.media-container > .media-header h3 {
     font-size: 16pt;
     font-weight: 400;
     color: var(--white);
     cursor: pointer;
     border-bottom: 1px solid transparent;
+    margin: 0 20px 0 0;
 }
-.media-container > .media-header > h3.active {
+.media-container > .media-header h3.active {
     border-bottom: 1px solid var(--header-border);
 }
 
-.media-container > .media-header > h3 > span {
+.media-container > .media-header h3 > span {
     font-size: 14pt;
     font-weight: 200;
     color: var(--off-white);
@@ -974,22 +985,32 @@ h3 > a > span {
     flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
-    margin: 16px 0;
+    margin: 16px 0 0;
+    padding: 0 0 14px 0;
+    min-height: 130px;
     gap: 16px;
     overflow-x: scroll;
-    min-height: 115px;
+    box-sizing: border-box;
 }
 .media-gallery > a {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative; /* Ensure the SVG can be positioned relative to the <a> tag */
+    margin: 0 0 auto;
     border-radius: 6px;
     border: 1px solid var(--dark-gray);
     transition: 255ms;
     min-width: 200px;
     overflow: hidden;
     aspect-ratio: 16/9;
+    box-sizing: border-box;
+}
+
+.media-gallery > a.posters {
+    aspect-ratio: 2/3;
+    min-width: 95px;
+    max-height: 145px;
 }
 
 .media-gallery > a > svg {
@@ -1007,10 +1028,13 @@ h3 > a > span {
 }
 
 .media-gallery > a > img {
-    max-height: 150px;
     max-width: 200px;
     transition: 255ms;
     pointer-events: none;
+}
+
+.media-gallery > a.posters > img {
+    max-height: 145px;
 }
   
 /* source control */
@@ -1125,7 +1149,7 @@ h3 > a > span {
     justify-content: center;
     max-width: 1050px;
     margin: auto auto 40px;
-    padding: 0 20px 18px;
+    padding: 0 20px 4px;
     box-sizing: border-box;
     background-color: var(--header);
     border-radius: 0 0 8px 8px;
@@ -1144,6 +1168,7 @@ h3 > a > span {
 
 .episode-selector > .heading > select {
     margin: 0 0 0 auto;
+    max-width: 250px;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 14pt;
     background-color: var(--dark-gray);
@@ -1183,6 +1208,7 @@ h3 > a > span {
     font-size: 18pt;
     font-weight: 600;
     margin: auto 0;
+    min-width: 20px;
     color: var(--off-white);
 }
 .episode.watched {
@@ -1340,7 +1366,7 @@ h3 > a > span {
 
 .letterboxd-btn {
     height: 40px;
-    margin: 0 auto 0 0;
+    margin: 6px auto 0 0;
     background-color: #202830;
     border-radius: 10px;
     transition: 355ms;
@@ -1669,6 +1695,7 @@ ul.department-list {
     margin: 0;
     padding: 20px 20px 10px;
     text-align: left;
+    width: 100%;
 }
 .person > .biography > h2 {
     font-size: 30pt;
