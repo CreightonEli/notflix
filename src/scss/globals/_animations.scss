@@ -18,6 +18,46 @@ to {
 }
 }
 
+@keyframes modal-overlay-in {
+from {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+}
+
+@keyframes modal-overlay-out {
+from {
+    opacity: 1;
+}
+to {
+    opacity: 0;
+}
+}
+
+@keyframes modal-content-in {
+from {
+    opacity: 0;
+    transform: scale(0.95);
+}
+to {
+    opacity: 1;
+    transform: scale(1);
+}
+}
+
+@keyframes modal-content-out {
+from {
+    opacity: 1;
+    transform: scale(1);
+}
+to {
+    opacity: 0;
+    transform: scale(0.95);
+}
+}
+
 @keyframes fade-right {
 from {
     opacity: 0;

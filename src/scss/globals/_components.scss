@@ -987,16 +987,17 @@ h3 > a > span {
     width: 100%;
     margin: 16px 0 0;
     padding: 0 0 14px 0;
-    min-height: 130px;
+    min-height: 157px;
     gap: 16px;
     overflow-x: scroll;
     box-sizing: border-box;
 }
-.media-gallery > a {
+.media-gallery > a,
+.media-gallery-item {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Ensure the SVG can be positioned relative to the <a> tag */
+    position: relative; /* Ensure the SVG can be positioned relative to the element */
     margin: 0 0 auto;
     border-radius: 6px;
     border: 1px solid var(--dark-gray);
@@ -1005,16 +1006,20 @@ h3 > a > span {
     overflow: hidden;
     aspect-ratio: 16/9;
     box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
 }
 
-.media-gallery > a.posters {
+.media-gallery > a.posters,
+.media-gallery-item.posters {
     aspect-ratio: 2/3;
     min-width: 95px;
     max-height: 145px;
 }
 
-.media-gallery > a > svg {
-    position: absolute; /* Position the SVG relative to the <a> tag */
+.media-gallery > a > svg,
+.media-gallery-item > svg {
+    position: absolute; /* Position the SVG relative to the element */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Center the SVG */
@@ -1023,18 +1028,159 @@ h3 > a > span {
     opacity: 0; /* Hide the SVG by default */
     transition: opacity 200ms ease-in-out;
 }
-.media-gallery > a:hover > svg {
+.media-gallery > a:hover > svg,
+.media-gallery-item:hover > svg {
     opacity: 1; /* Make the SVG visible on hover */
 }
 
-.media-gallery > a > img {
+.media-gallery > a > img,
+.media-gallery-item > img {
     max-width: 200px;
     transition: 255ms;
     pointer-events: none;
 }
 
-.media-gallery > a.posters > img {
+.media-gallery > a.posters > img,
+.media-gallery-item.posters > img {
     max-height: 145px;
+}
+
+/* Media Modal */
+.media-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 11, 63, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.media-modal-overlay.opening {
+    animation: modal-overlay-in 300ms ease-out forwards;
+}
+
+.media-modal-overlay.closing {
+    animation: modal-overlay-out 300ms ease-out forwards;
+}
+
+.media-modal-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.664);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.media-modal-content.opening {
+    animation: modal-content-in 300ms ease-out forwards;
+}
+
+.media-modal-content.closing {
+    animation: modal-content-out 300ms ease-out forwards;
+}
+
+.media-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2001;
+    background-color: var(--dark-gray);
+    border: 1px solid var(--header-border);
+    color: var(--white);
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 255ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.media-modal-close:hover {
+    background-color: var(--gray);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.media-modal-display {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.media-modal-display > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.media-modal-display > iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.media-modal-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(26, 11, 63, 0.7);
+    border: 1px solid var(--header-border);
+    color: var(--purple);
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 255ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 500;
+}
+
+.media-modal-nav-btn:hover {
+    background-color: var(--header);
+    border-color: var(--purple);
+    // color: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
+.media-modal-nav-btn:active {
+    border-color: var(--purple);
+    transform: translateY(-50%) scale(0.95);
+}
+
+.media-modal-nav-btn.left {
+    left: 12px;
+}
+
+.media-modal-nav-btn.right {
+    right: 12px;
+}
+
+.media-modal-counter {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background-color: rgba(26, 11, 63, 0.7);
+    color: var(--off-white);
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--header-border);
+    font-size: 12pt;
+    z-index: 500;
 }
   
 /* source control */
