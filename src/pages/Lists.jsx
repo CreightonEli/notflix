@@ -45,6 +45,21 @@ export default function Lists() {
         window.dispatchEvent(evt);
     };
 
+    // compact mode toggle
+    const [compactMode, setCompactMode] = useState(false);
+
+    function toggleCompactMode() {
+        setCompactMode(!compactMode);
+        const listElement = document.getElementById('list');
+        if (listElement) {
+            if (!compactMode) {
+                listElement.classList.add('compact');
+            } else {
+                listElement.classList.remove('compact');
+            }
+        }
+    }
+
     return (
         <main className="watchlist-page">
 
@@ -64,9 +79,14 @@ export default function Lists() {
                         <p>Your list is empty.</p>
                     </div>
                 ) : (
-                    <div className="watchlist">
+                    <div id="list" className="watchlist">
                         <h2 className="list-title">My List</h2>
                         <p>What will you watch next?</p>
+                        <div className="list-top">
+                            <button className="compact-btn" onClick={toggleCompactMode}>
+                                Compact Mode
+                            </button>
+                        </div>
                         <AnimatePresence>
                             {watchlist.map((item, index) => (
                                 <motion.div
@@ -204,7 +224,9 @@ export default function Lists() {
                                                         <Link to={`/${item.media_type == 'movie' ? 'movies' : 'shows'}/${item.id}`}>
                                                             <button className="play-btn">
                                                                 <Play size={24} weight="regular" />
-                                                                Watch
+                                                                <span>
+                                                                    Watch
+                                                                </span>
                                                             </button>
                                                         </Link>
 
@@ -214,7 +236,9 @@ export default function Lists() {
                                                             onClick={() => handleRemove(item.id)}
                                                         >
                                                             <HeartBreakIcon size={24} weight="regular" />
-                                                            Remove
+                                                            <span>
+                                                                Remove
+                                                            </span>
                                                         </button>
                                                     </div>
                                                 </div>

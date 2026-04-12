@@ -444,7 +444,7 @@
       margin: 0 0 0 8px;
     }
 
-    .watchlist p {
+    .watchlist > p {
       margin: 0 8px 20px 8px;
     }
 
@@ -458,6 +458,10 @@
 
     .list-item-info .title { // this works for both watchlist and history since they share the same list item structure
       margin: auto auto 6px;
+      text-align: center;
+    }
+    .compact .list-item-info .title {
+      text-align: left;
     }
 
     .watchlist .logo {
@@ -511,6 +515,26 @@
       display: none;
     }
 
+    // list compact view
+    .compact .list-item .poster-wrapper {
+      display: flex;
+    }
+
+    .compact .list-item .logo {
+      min-width: 56px;
+      max-width: 42%;
+      margin: 0 auto 0 0;
+    }
+
+    .watchlist.compact .list-item .title, .history-list.compact .list-item .title {
+      font-size: 10pt;
+    }
+
+    .compact p.last-watched {
+      display: none;
+    }
+
+    // settings page
     .settings-page {
       border-radius: 0;
       border-left: none;

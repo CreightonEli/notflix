@@ -45,6 +45,21 @@ export default function History() {
 
     const toggleOrder = () => setMostRecentFirst(prev => !prev);
 
+    // compact mode toggle
+    const [compactMode, setCompactMode] = useState(false);
+
+    function toggleCompactMode() {
+        setCompactMode(!compactMode);
+        const listElement = document.getElementById('list');
+        if (listElement) {
+            if (!compactMode) {
+                listElement.classList.add('compact');
+            } else {
+                listElement.classList.remove('compact');
+            }
+        }
+    }
+
     return (
         <main className="history-page">
             <title>History - Nullflix</title>
@@ -64,7 +79,7 @@ export default function History() {
                         <p>Nothing watched yet.</p>
                     </div>
                 ) : (
-                    <div className="history-list">
+                    <div id="list" className="history-list">
                         <h2 className="list-title">History</h2>
                         <p>You've seen some... interesting stuff.</p>
 
@@ -80,6 +95,9 @@ export default function History() {
                                         Least Recent <CaretDownIcon size={16} weight="fill" />
                                     </>
                                 )}
+                            </button>
+                            <button className="compact-btn" onClick={toggleCompactMode}>
+                                Compact Mode
                             </button>
                         </div>
                         <div className="list">
@@ -201,12 +219,16 @@ export default function History() {
                                                             <Link to={`/${item.media_type == 'movie' ? 'movies' : 'shows'}/${item.id}`}>
                                                                 <button className="play-btn">
                                                                     <PlayIcon size={24} weight="regular" />
-                                                                    Watch
+                                                                    <span>
+                                                                        Watch
+                                                                    </span>
                                                                 </button>
                                                             </Link>                                                    
                                                             <button className="remove-btn" onClick={() => removeFromHistory(item.id)}>
                                                                 <TrashIcon size={24} weight="regular" />
-                                                                Remove
+                                                                <span>
+                                                                    Remove
+                                                                </span>
                                                             </button>                                               
                                                         </div>
                                                     </div>

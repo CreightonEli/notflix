@@ -1959,6 +1959,83 @@ ul.department-list {
     display: flex;
     flex-direction: column;
 }
+.watchlist.compact .compact-btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--purple);
+    border: 1px solid var(--purple);
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.watchlist.compact .list-item {
+    flex-direction: row;
+}
+.watchlist.compact .list-item .poster-wrapper {
+    max-height: 46px;
+    max-width: 46px;
+    min-width: 46px;
+    border-radius: 2rem;
+    overflow: hidden;
+    align-content: center;
+}
+.watchlist.compact .list-item .poster-wrapper .poster {
+    width: auto;
+    height: 155%;
+    margin: -12px auto auto;
+    object-fit: contain;
+}
+
+.watchlist.compact .list-item-info {
+    flex-direction: row;
+}
+.watchlist.compact .list-item-info > div {
+    padding: 4px;
+}
+.watchlist.compact .list-item .logo {
+    max-height: 46px;
+    object-fit: contain;
+}
+.watchlist.compact .list-item .title {
+    font-size: 21pt;
+    font-weight: 600;
+    margin: auto auto auto 0;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    max-height: 46px;
+}
+.watchlist.compact .list-item-info .director {
+    display: none;
+}
+.watchlist.compact .list-item-info .release-year {
+    display: none;
+}
+.watchlist.compact .list-item-info .overview {
+    display: none;
+}
+.watchlist.compact .list-item-info .genre-container {
+    display: none;
+}
+.watchlist.compact .list-item-info .stats {
+    display: none;
+}
+.watchlist.compact .list-item-info button > span {
+    display: none;
+}
+
+.watchlist.compact .list-item .list-item-controls {
+    flex-direction: row;
+    min-width: 130px;
+    margin: 0 auto auto 10px;
+}
+.watchlist.compact .list-item .list-item-controls > .up-btn {
+    margin: -1px auto -1px -1px;
+}
+.watchlist.compact .list-item .list-item-controls > .down-btn {
+    margin: -1px -1px -1px auto;
+}
 
 .watchlist > h2 {
     font-size: 32pt;
@@ -1973,6 +2050,20 @@ ul.department-list {
     margin: 0 0 20px;
     padding: 0 0 16px 0;
     border-bottom: 1px solid var(--header-border);
+}
+
+
+.watchlist > .list-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 16px;
+}
+
+.watchlist > .list-top button {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--gray);
 }
 
 .watchlist > .list-item {
@@ -2039,11 +2130,13 @@ ul.department-list {
 
 .poster-wrapper .poster {
     width: 100%;
+    object-fit: contain;
 }
 .logo {
     margin: auto auto auto 10px;
     max-height: 75px;
     pointer-events: none;
+    object-fit: contain;
 }
 
 .title {
@@ -2211,6 +2304,7 @@ ul.department-list {
     border-radius: 1em;
     border: 1px solid var(--gray);
     width: 49px;
+    box-sizing: border-box;
 }
 
 .list-item-controls > button {
@@ -2244,10 +2338,19 @@ ul.department-list {
 }
 
 .list-item-controls > .item-number {
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 16pt;
     font-weight: 200;
     color: var(--off-white);
-    margin: 0;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: textfield;
+    -moz-appearance:    textfield;
+    appearance:         textfield;
 }
 
 // History Page //
@@ -2282,6 +2385,105 @@ ul.department-list {
     overflow: hidden;
 }
 
+// compact list styles
+.history-list.compact .compact-btn {
+    display: flex;
+    align-items: center;
+    background-color: var(--purple);
+    border: 1px solid var(--purple);
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.history-list.compact .list-item {
+    flex-direction: row;
+}
+.history-list.compact .list-item .poster-wrapper {
+    max-height: 46px;
+    max-width: 46px;
+    min-width: 46px;
+    border-radius: 2rem;
+    overflow: hidden;
+    align-content: center;
+}
+.history-list.compact .list-item .poster-wrapper .poster {
+    width: auto;
+    height: 155%;
+    margin: -12px auto auto;
+    object-fit: contain;
+}
+
+.history-list.compact .list-item-info {
+    flex-direction: row;
+}
+.history-list.compact .list-item-info > div {
+    padding: 4px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.history-list.compact .list-item .logo {
+    max-height: 46px;
+    object-fit: contain;
+}
+.history-list.compact .list-item .title {
+    font-size: 21pt;
+    font-weight: 600;
+    margin: auto auto auto 0;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    max-height: 46px;
+}
+.history-list.compact .list-item-info .director {
+    display: none;
+}
+.history-list.compact .list-item-info .release-year {
+    display: none;
+}
+.history-list.compact .list-item-info .overview {
+    display: none;
+}
+.history-list.compact .list-item-info .genre-container {
+    display: none;
+}
+.history-list.compact .list-item-info .stats {
+    display: none;
+}
+.history-list.compact .list-item-info button > span {
+    display: none;
+}
+.history-list.compact p.last-watched {
+    margin: auto 0 auto 10px;
+}
+
+.history-list.compact .list-item .list-item-controls {
+    flex-direction: row;
+    min-width: 130px;
+    margin: 0 auto auto 10px;
+}
+.history-list.compact .list-item .list-item-controls > .up-btn {
+    margin: -1px auto -1px -1px;
+}
+.history-list.compact .list-item .list-item-controls > .down-btn {
+    margin: -1px -1px -1px auto;
+}
+.history-list > .list-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 0 16px;
+}
+
+.history-list > .list-top .compact-btn {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--gray);
+}
+.history-list.compact > .list-top .compact-btn {
+    background-color: var(--purple);
+    border: 1px solid var(--purple);
+}
+
 .history-list .director {
     font-size: 13pt;
 }
@@ -2312,9 +2514,9 @@ ul.department-list {
 .history-list > .list-top {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     margin: 0 0 16px;
+    gap: 10px;
 }
 
 .list-top > button {
