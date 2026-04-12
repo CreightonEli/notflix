@@ -516,6 +516,10 @@
     }
 
     // list compact view
+    .watchlist.compact .list-item .poster-wrapper {
+      display: none;
+    }
+
     .compact .list-item .poster-wrapper {
       display: flex;
     }
