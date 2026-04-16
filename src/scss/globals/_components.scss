@@ -426,6 +426,7 @@ footer .footer-content a:hover {
     box-sizing: border-box;
     background-color: #141718;
     transition: 355ms;
+    font-size: 16px;
 }
 .modal-content input:hover {
     border-color: var(--purple);
@@ -1139,6 +1140,7 @@ h3 > a > span {
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(26, 11, 63, 0.7);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--header-border);
     color: var(--purple);
     padding: 12px;
@@ -1179,6 +1181,7 @@ h3 > a > span {
     padding: 6px 12px;
     border-radius: 4px;
     border: 1px solid var(--header-border);
+    backdrop-filter: blur(10px);
     font-size: 12pt;
     z-index: 500;
 }
@@ -1219,7 +1222,6 @@ h3 > a > span {
 
 .source-control > select {
     margin: auto 10px auto 0;
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 14pt;
     background-color: var(--dark-gray);
     color: var(--off-white);
@@ -1315,7 +1317,6 @@ h3 > a > span {
 .episode-selector > .heading > select {
     margin: 0 0 0 auto;
     max-width: 250px;
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 14pt;
     background-color: var(--dark-gray);
     color: var(--off-white);
@@ -1343,7 +1344,7 @@ h3 > a > span {
 .episode-selector > .episode-list > .episode {
     display: flex;
     flex-direction: row;
-    padding: 10px 20px;
+    padding: 10px 20px 10px 0;
     // border-radius: 4px;
     border-bottom: 1px solid var(--gray);
     transition: 355ms;
@@ -1354,7 +1355,7 @@ h3 > a > span {
     font-size: 18pt;
     font-weight: 600;
     margin: auto 0;
-    min-width: 20px;
+    min-width: 65px;
     color: var(--off-white);
 }
 .episode.watched {
@@ -1365,7 +1366,7 @@ h3 > a > span {
 }
 
 .episode > .ep-thumbnail-container {
-    margin: 0 20px 0;
+    margin: 0 20px 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1375,6 +1376,7 @@ h3 > a > span {
     overflow: hidden;
     border-radius: 4px;
 }
+
 .episode > .ep-thumbnail-container > img {
     height: auto;
     max-height: 150px;
@@ -1530,6 +1532,7 @@ h3 > a > span {
 .cast-container {
     background-color: var(--dark-gray);
     max-width: 1300px;
+    width: 100%;
     border: 1px solid var(--gray);
     border-radius: 8px;
     margin: 0 auto;
@@ -1780,7 +1783,7 @@ ul.department-list {
     margin: 20px auto auto;
     padding: 20px 20px 10px;
     text-align: left;
-    min-width: fit-content;
+    min-width: min-content;
     background-color: var(--header);
     border: 1px solid var(--header-border);
     border-radius: 8px;
@@ -1948,7 +1951,7 @@ ul.department-list {
     text-align: left;
     box-sizing: border-box;
     margin: 0 auto 20px;
-    padding: 0 20px;
+    padding: 12px 20px 0;
     background-color: var(--dark-gray);
     border-radius: 8px;
     border: 1px solid var(--header-border);
@@ -2062,8 +2065,8 @@ ul.department-list {
 }
 
 .watchlist > .list-top button {
-    background-color: var(--dark-gray);
-    border: 1px solid var(--gray);
+    background-color: var(--header-border);
+    border: 1px solid var(--header-border);
 }
 
 .watchlist > .list-item {
@@ -2148,7 +2151,7 @@ ul.department-list {
 
 .director {
     font-size: 14pt;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--off-white);
     margin: 0;
 }
@@ -2162,7 +2165,7 @@ ul.department-list {
 
 .release-year {
     font-size: 14pt;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--off-white);
     margin: 0;
 }
@@ -2229,7 +2232,7 @@ ul.department-list {
     align-items: center;
     margin: auto 0 1px;
     font-size: 12pt;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--off-white);
     gap: 6px;
     white-space: nowrap;
@@ -2361,7 +2364,7 @@ ul.department-list {
     text-align: left;
     box-sizing: border-box;
     margin: 0 auto 20px;
-    padding: 0 20px;
+    padding: 12px 20px 0;
     background-color: var(--dark-gray);
     border-radius: 8px;
     border: 1px solid var(--header-border);
@@ -2375,7 +2378,7 @@ ul.department-list {
 
 .watchlist .overview,.history-list .overview { // these styles are shared between watchlist and history pages
     font-size: 12pt;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--white);
     margin: 0 0 6px;
     display: -webkit-box;
@@ -2476,8 +2479,8 @@ ul.department-list {
 }
 
 .history-list > .list-top .compact-btn {
-    background-color: var(--dark-gray);
-    border: 1px solid var(--gray);
+    background-color: var(--header-border);
+    border: 1px solid var(--header-border);
 }
 .history-list.compact > .list-top .compact-btn {
     background-color: var(--purple);
@@ -2523,7 +2526,7 @@ ul.department-list {
     display: flex;
     background-color: var(--purple);
     color: var(--white);
-    border: none;
+    border: 1px solid var(--purple);
     border-radius: 8px;
     padding: 6px 12px;
     font-weight: 600;
@@ -2571,7 +2574,7 @@ p.last-watched {
 }
 .watch-time {
     font-size: 12pt;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--off-white);
     margin: auto 8px 0 0;
 }
@@ -2586,7 +2589,7 @@ p.last-watched {
     text-align: left;
     box-sizing: border-box;
     margin: 0 auto 20px;
-    padding: 0 20px;
+    padding: 12px 20px 0;
     background-color: var(--dark-gray);
     border-radius: 8px;
     border: 1px solid var(--header-border);

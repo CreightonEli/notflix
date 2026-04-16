@@ -134,12 +134,12 @@ export default function Hero(props) {
                                 <span className="vote-count-text">
                                     {props.vote_average > 0 ? (
                                         <>
-                                            {props.vote_count.toLocaleString('en', {useGrouping:true})} ratings
+                                            {props.vote_count.toLocaleString('en', {useGrouping:true})} <span className="vote-text">ratings</span>
                                         </>
                                     ) : (
-                                        <>
+                                        <span className="vote-text">
                                             No ratings
-                                        </>
+                                        </span>
                                     )}
                                 </span>
                             </span>

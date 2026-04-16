@@ -1,14 +1,26 @@
+:root {
+    font-family: "Roboto", sans-serif;
+}
+
+input, select, textarea {
+    font-family: "Roboto", sans-serif;
+}
+
+button {
+    font-family: "Roboto Mono", monospace;
+}
+
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
 }
-  
+
 h3 {
     font-size: 24pt;
     margin: 0 0 0 38px;
     text-align: left;
 }
-  
+
 h3 > a {
     color: inherit;
     font-weight: inherit;
@@ -17,9 +29,109 @@ h3 > a {
 h3 > a:hover {
     color: inherit;
 }
-  
+
 h3 > a > span > svg {
     transform: translateY(3px);
     color: inherit;
 }
-  
+
+// hero typography
+.hero-container > .text-container > h2 {
+    font-family: "Roboto Serif", serif;
+}
+
+.info-item > .rating-num {
+    font-family: "Roboto Mono", monospace;
+}
+
+.info-item > .vote-count-text {
+    font-family: "Roboto Mono", monospace;
+}
+
+// card typography
+.card-bottom > .quick-info > span.year {
+    font-family: "Roboto Mono", monospace;
+}
+.card-bottom > .quick-info > span.rating {
+    font-family: "Roboto Mono", monospace;
+}
+
+// search typography
+.results-top > h3 {
+    font-family: "Roboto Serif", serif;
+}
+
+// details typography
+.details-container > .text-container > h2 {
+    font-family: "Roboto Serif", serif;
+}
+
+.details-container > .text-container > .tagline {
+    font-family: "Roboto serif", serif;
+}
+
+.info-item.runtime {
+    font-family: "Roboto Mono", monospace;
+}
+
+// media gallery typography
+.media-modal-counter {
+    font-family: "Roboto Mono", monospace;
+}
+
+// Header typography
+.search-box {
+    font-family: "Roboto", sans-serif;
+}
+
+// Person details typography
+.person > .biography > h2 {
+    font-family: "Roboto Serif", serif;
+}
+.person > .overview > h1 {
+    font-family: "Roboto Serif", serif;
+}
+
+// Episode details typography
+.episode > .ep-num {
+    font-family: "Roboto Mono", monospace;
+}
+
+.ep-text > .top-text > .ep-runtime {
+    font-family: "Roboto Mono", monospace;
+}
+
+// My List typography
+.watchlist > h2 {
+    font-family: "Roboto Serif", serif;
+}
+
+.list-item-controls > .item-number {
+    font-family: "Roboto Mono", monospace;
+}
+
+.stats .runtime {
+    font-family: "Roboto Mono", monospace;
+}
+
+.stats .rating {
+    font-family: "Roboto Mono", monospace;
+}
+
+.stats .votes {
+    font-family: "Roboto Mono", monospace;
+}
+
+.watchlist-page .title {
+    font-family: "Roboto Serif", serif;
+}
+
+// History typography
+.history-page h2 {
+    font-family: "Roboto Serif", serif;
+}
+
+// Settings typography
+.settings-page h2 {
+    font-family: "Roboto Serif", serif;
+}

@@ -5,6 +5,10 @@
       "url": "https://player.videasy.net/movie/{id}?color=646cff&overlay=true"
     },
     {
+      "name": "VidKing",
+      "url": "https://www.vidking.net/embed/movie/{id}?color=646cff&autoplay=false"
+    },
+    {
       "name": "VidLink",
       "url": "https://vidlink.pro/movie/{id}?primaryColor=646cff&secondaryColor=a2a2a2&iconColor=f7f7ff&icons=default&player=jw&title=true&poster=true&autoplay=false&nextbutton=false"
     },
@@ -21,10 +25,15 @@
       "url": "https://www.vidsrc.wtf/api/1/movie/?id={id}"
     }
   ],
+
   "showProviders": [
     {
       "name": "VidEasy",
       "url": "https://player.videasy.net/tv/{id}/{season}/{episode}?color=646cff&overlay=true"
+    },
+    {
+      "name": "VidKing",
+      "url": "https://www.vidking.net/embed/tv/{id}/{season}/{episode}?color=646cff&autoplay=false"
     },
     {
       "name": "VidLink",
