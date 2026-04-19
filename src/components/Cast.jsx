@@ -35,7 +35,7 @@ export default function Cast(props) {
                             </div>
                         )))}
                     </div>
-                    {props?.aggregate_credits?.crew && (
+                    {props?.credits?.crew && (
                     <>
                         <p><span className="heading">Crew</span></p>
                         <div className="crew-wrapper">
@@ -99,7 +99,7 @@ export default function Cast(props) {
                             </div>
                         )))}
                     </div>
-                    {/* {props?.length > 0 && ( */}
+                    {props?.aggregate_credits?.crew.length > 0 && ( // only show crew section if there is at least 1 crew member
                         <>
                             <p><span className="heading">Crew</span></p>
                             <div className="crew-wrapper">
@@ -133,7 +133,7 @@ export default function Cast(props) {
                                 })()}
                             </div>
                         </>
-                    {/* )} */}
+                    )}
                 </div>
 
             )}

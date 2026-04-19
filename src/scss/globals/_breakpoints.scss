@@ -249,6 +249,10 @@
     .source-control > .theater-mode {
       display: none;
     }
+    
+    .details-container {
+      margin: 14px auto 0 0;
+    }
   
     .details-container > .text-container > .bottom {
       display: flex;
@@ -336,6 +340,7 @@
   
     .episode-selector > .details-container {
       padding: 0;
+      margin: 0;
     }
   
     .episode > .ep-num {
@@ -551,4 +556,14 @@
       border-radius: 0;
     }
 
+  }
+
+  // extra small mobile breakpoints
+  @media (max-width: 440px) {
+    // providers modal
+    .provider-modal-content {
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
   }

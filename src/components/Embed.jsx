@@ -1,5 +1,6 @@
 import Details from '../components/Details'
 import Media from "./Media";
+import Providers from './Providers';
 import React, { useEffect, useState, useRef } from 'react';
 import { PlayCircle, CornersOut, CornersIn, HeartIcon, HeartBreakIcon } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
@@ -63,7 +64,7 @@ export default function Embed(props) {
         defaultURL = buildUrl(providers[defaultShowProvider]?.url || providers[0].url, props.id, selectedSeason, ep);
     }
 
-    useEffect(() => {
+    useEffect(() => { // fetch season data when selectedSeason changes
         const options = {
             method: 'GET',
             headers: {
@@ -430,9 +431,17 @@ export default function Embed(props) {
                             </button>
                         </div>
                         <Details {...props} />
+
+                        {/* Legit Stream provider list */}
+                        <Providers {...props}/>
+
+                        {/* media gallery */}
                         {(props.videos?.results?.length > 0 || props.images?.backdrops?.length > 0 || props.images?.posters?.length > 0 || props.images?.logos?.length > 0) && (
                             <Media {...props} />
                         )}
+
+
+                        {/* Letterboxd button */}
                         {props.title && (
                             <a className="letterboxd-btn" href={letterboxdUrl} target="_blank">
                                 <img src="https://a.ltrbxd.com/logos/letterboxd-logo-h-neg-rgb.svg" />
@@ -480,6 +489,10 @@ export default function Embed(props) {
                             </button>
                         </div>
                         <Details {...props} />
+
+                        {/* Legit Stream provider list */}
+                        <Providers {...props}/>
+                        
                         <div className="heading">
                             <h2>Episodes</h2>
                             <select name="seasons" id="seasons" value={selectedSeason} onChange={handleSeasonChange}>

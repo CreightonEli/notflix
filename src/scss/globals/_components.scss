@@ -1108,7 +1108,7 @@ h3 > a > span {
 }
 
 .media-modal-close:hover {
-    background-color: var(--gray);
+    background-color: rgba(63, 11, 11, 0.9);
     border-color: var(--red);
     color: var(--red);
 }
@@ -1511,7 +1511,179 @@ h3 > a > span {
     margin: 0;
 }
 
+// Provider Component
+.providers {
+    display: flex;
+    flex-direction: row;
+    // flex-wrap: wrap;
+    margin: 0;
+    gap: 8px;
+    width: fit-content;
+    cursor: pointer;
+}
 
+.provider-modal-content > select {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--header-border);
+    border-radius: 4px;
+    color: var(--off-white);
+    padding: 8px 12px;
+    font-size: 12pt;
+    font-weight: 400;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.providers > p {
+    opacity: 0;
+    margin: auto 0;
+    border-bottom: 1px solid transparent;
+    font-size: 12pt;
+    color: var(--off-white);
+    transition: 355ms;
+}
+.providers:hover > p {
+    animation: fade-right 355ms ease-in forwards;
+    opacity: 1;
+}
+.providers > p:hover {
+    color: var(--white);
+    border-bottom: 1px solid var(--white);
+}
+
+.providers > .provider-list > .provider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 355ms;
+    height: 60px;
+}
+.provider img {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--header-border);
+    border-radius: 8px;
+    width: 60px;
+    height: auto;
+    overflow: hidden;
+}
+.provider-list p {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    font-size: 10pt;
+    color: var(--off-white);
+    // opacity: 0;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    width: 67px;
+    background-color: rgba(26, 11, 63, 0.7);
+    border: 1px solid var(--header-border);
+    border-radius: 0 8px 8px 8px;
+}
+
+.provider-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 11, 63, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.provider-modal-backdrop.opening {
+    animation: modal-overlay-in 0.3s ease-out forwards;
+}
+
+.provider-modal-backdrop.closing {
+    animation: modal-overlay-out 0.3s ease-in forwards;
+}
+
+.provider-modal-content {
+    background-color: var(--header);
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 442px;
+    width: 100%;
+    color: var(--off-white);
+    max-height: 80vh;
+    overflow-y: scroll;
+    max-height: 100vh;
+    box-sizing: border-box;
+}
+
+.provider-modal-content.opening {
+    animation: modal-content-in 0.3s ease-out forwards;
+}
+
+.provider-modal-content.closing {
+    animation: modal-content-out 0.3s ease-in forwards;
+}
+
+.provider-modal-close {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 0 auto;
+    // background-color: rgba(26, 11, 63, 0.7);
+    color: var(--off-white);
+    border: 1px solid var(--header-border);
+    border-radius: 4px;
+    padding: 6px;
+    cursor: pointer;
+    z-index: 500;
+}
+.provider-modal-close:hover {
+    background-color: rgba(63, 11, 11, 0.9);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.provider-modal-close svg {
+    margin: auto;
+}
+
+.provider-modal-content .provider img {
+    width: 65px;
+}
+
+.provider-modal-content > h2 {
+    margin: 0 auto 0 0;
+    text-align: left;
+    display: flex;
+}
+
+.provider-modal-content > h3 {
+    margin: 8px auto 8px 0;
+    font-size: 16pt;
+    font-weight: 400;
+}
+
+.provider-modal-content > .provider-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 16px;
+}
+
+// hide borders on apple-tv
+.provider#free-2 img, 
+.provider#ads-2 img, 
+.provider#stream-2 img, 
+.provider#rent-2 img, 
+.provider#buy-2 img,
+.provider#other-2 img {
+    border: none;
+}
+
+// other shiz lol
 .letterboxd-btn {
     height: 40px;
     margin: 6px auto 0 0;

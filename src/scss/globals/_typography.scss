@@ -6,6 +6,10 @@ input, select, textarea {
     font-family: "Roboto", sans-serif;
 }
 
+.modal-content h2 {
+    font-family: "Roboto Serif", serif;
+}
+
 button {
     font-family: "Roboto Mono", monospace;
 }
@@ -101,6 +105,14 @@ h3 > a > span > svg {
     font-family: "Roboto Mono", monospace;
 }
 
+.episode-selector > .heading > h2 {
+    font-family: "Roboto Serif", serif;
+}
+
+.media-container > .media-header h2 {
+    font-family: "Roboto Serif", serif;
+}
+
 // My List typography
 .watchlist > h2 {
     font-family: "Roboto Serif", serif;
@@ -134,4 +146,11 @@ h3 > a > span > svg {
 // Settings typography
 .settings-page h2 {
     font-family: "Roboto Serif", serif;
+}
+
+// Providers typography
+.provider-modal-content > h2 {
+    font-family: "Roboto Serif", serif;
+    font-size: 23pt;
+    color: var(--white);
 }
