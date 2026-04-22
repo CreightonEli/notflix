@@ -1,4 +1,5 @@
 import Details from '../components/Details'
+import Collection from './Collection';
 import Media from "./Media";
 import Providers from './Providers';
 import React, { useEffect, useState, useRef } from 'react';
@@ -109,6 +110,10 @@ export default function Embed(props) {
         } else {
             list.push(baseEntry);
         }
+        // Limit to 50 entries, keeping the most recent
+        if (list.length > 50) {
+            list.splice(0, list.length - 50);
+        }
         localStorage.setItem('recentlyWatched', JSON.stringify(list));
         // notify listeners that history updated
         const evt2 = document.createEvent('Event');
@@ -156,6 +161,10 @@ export default function Embed(props) {
             entry.lastUpdated = Date.now();
             entry.lastViewed = Date.now();
             list[index] = entry;
+        }
+        // Limit to 50 entries, keeping the most recent
+        if (list.length > 50) {
+            list.splice(0, list.length - 50);
         }
         localStorage.setItem('recentlyWatched', JSON.stringify(list));
         // Update local state
@@ -440,6 +449,10 @@ export default function Embed(props) {
                             <Media {...props} />
                         )}
 
+                        {/* Collection Component */}
+                        {props.belongs_to_collection && ( // display collection when it exists.
+                            <Collection {...props} />
+                        )}
 
                         {/* Letterboxd button */}
                         {props.title && (
@@ -555,9 +568,11 @@ export default function Embed(props) {
                             )}
                             {seasonData?.episodes?.length === 0 && <p>No episodes available</p>}
                         </div>
+                        {/* Media Component */}
                         {(props.videos?.results?.length > 0 || props.images?.backdrops?.length > 0 || props.images?.posters?.length > 0 || props.images?.logos?.length > 0) && (
                             <Media {...props} />
                         )}
+
                     </div>
                 )}
             </div>

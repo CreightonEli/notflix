@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Show from "./pages/Show";
 import Person from "./pages/Person";
+import Collection from "./pages/Collection";
 import Results from "./pages/Results";
 import Modal from './components/Modal';
 import useApiKey from './hooks/useApiKey';
@@ -35,6 +36,7 @@ function App() {
           <Route path="/movies/:id" element={<Movie />} />
           <Route path="/shows/:id" element={<Show />} />
           <Route path="/person/:id" element={<Person />} />
+          <Route path="/collection/:id" element={<Collection />} />
           <Route path="/results" element={<Results />} />
           <Route path='/lists' element={<Lists />} />
           <Route path='/history' element={<History />} />

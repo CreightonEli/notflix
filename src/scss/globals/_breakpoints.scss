@@ -560,6 +560,57 @@
       border-radius: 0;
     }
 
+    // Collection Component
+    .collection .collection-backdrop div {
+      padding: 10px;
+    }
+    .collection h2 {
+      font-size: 16pt;
+      margin: 0 0 10px;
+    }
+
+    // Collection Page
+    .collection-top {
+      flex-direction: column;
+      gap: 0;
+      min-height: auto;
+    }
+    .collection-top .collection-hero{
+      margin: auto auto 0 20px;
+      width: 250px;
+    }
+
+    .collection-page .collection-info {
+      margin: 0 auto auto 0;
+    }
+    
+    .collection-info > h1 {
+      font-size: 24pt;
+      margin: 20px 0 0;
+    }
+    .collection-info .collection-stats {
+      gap: 10px;
+    }
+    .collection-stats .info-item {
+      padding: 0 10px 0 0;
+    }
+    .collection-stats .info-item h2 {
+      font-size: 13pt;
+    }
+    .collection-info .info-item .stat-num {
+      font-size: 11pt;
+    }
+
+    .collection-parts {
+      margin: 0 20px;
+    }
+    .part .title-section {
+      flex-direction: column;
+    }
+    .title-section .part-info {
+      margin: 16px 0 0;
+    }
+
   }
 
   // extra small mobile breakpoints

@@ -14,6 +14,10 @@ button {
     font-family: "Roboto Mono", monospace;
 }
 
+.tag {
+    font-family: "Roboto Mono", monospace;
+}
+
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
@@ -147,10 +151,39 @@ h3 > a > span > svg {
 .settings-page h2 {
     font-family: "Roboto Serif", serif;
 }
+// .settings-page h3 {
+//     font-family: "Roboto Serif", serif;
+// }
+.list-erase span {
+    font-family: "Roboto Mono", monospace;
+}
 
 // Providers typography
 .provider-modal-content > h2 {
     font-family: "Roboto Serif", serif;
     font-size: 23pt;
     color: var(--white);
+}
+
+// Collection Component typography
+.collection h2 {
+    font-family: "Roboto Serif", serif;
+}
+
+// Collection page typography
+.collection-info > h1 {
+    font-family: "Roboto Serif", serif;
+}
+.collection-info .info-item h2 {
+    font-family: "Roboto Serif", serif;
+}
+.collection-info .info-item .stat-num {
+    font-family: "Roboto Mono", monospace;
+}
+
+.collection-parts-list .year-header {
+    font-family: "Roboto Mono", monospace;
+}
+.part-info h3 {
+    font-family: "Roboto Serif", serif;
 }

@@ -56,15 +56,21 @@ export default function Settings() {
                 </div>
                 <h3>Erasing Watchlist Data</h3>
                 <p>In case you want to start from scratch.</p>
-                <div>
+                <div className="list-erase">
                     <button onClick={handleEraseWatchlist}>Delete Watchlist Data</button>
-                    You have {watchlistCount} items in your watchlist.
+                    <span>
+                        You have <strong>{watchlistCount}</strong> items in your watchlist.
+                        {watchlistCount > 0 ? " Time for a fresh start?" : " Your watchlist is empty!"}
+                    </span>
                 </div>
                 <h3>Erasing History Data</h3>
                 <p>Leave the past behind you.</p>
-                <div>
+                <div className="list-erase">
                     <button onClick={handleEraseHistory}>Delete History Data</button>
-                    You have {historyCount} items in your history.
+                    <span>
+                        You have <strong>{historyCount}</strong> items in your history.
+                        {historyCount > 0 ? " Leave the past behind you?" : " The slate wiped clean!"}
+                    </span>
                 </div>
             </div>
         </main>
