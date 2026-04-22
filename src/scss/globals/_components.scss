@@ -1745,6 +1745,7 @@ h3 > a > span {
 .collection-info button {
     margin: 0 auto;
     border-color: var(--gray);
+    color: var(--white);
 }
 .collection-info button:hover {
     border-color: var(--purple);
@@ -3165,6 +3166,7 @@ select#sort-parts {
 }
 .link-section button {
     border-color: var(--gray);
+    color: var(--white);
     display: flex;
 }
 .link-section button:hover {
