@@ -1702,6 +1702,7 @@ h3 > a > span {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-color: var(--purple);
 }
 .collection .collection-backdrop div {
     backdrop-filter: blur(10px) brightness(0.8);
@@ -2919,6 +2920,7 @@ p.last-watched {
     background-position: center center;
     background-size: cover;
     margin-bottom: 30px;
+    background-color: var(--purple);
 }
 
 .collection-top {

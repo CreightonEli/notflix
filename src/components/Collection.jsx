@@ -5,7 +5,7 @@ export default function Details(props) {
 
     return (
         <div className="collection">
-            <div className="collection-backdrop" style={props.belongs_to_collection.backdrop_path ? { backgroundImage: `url(https://image.tmdb.org/t/p/original${props.belongs_to_collection.backdrop_path})` } : { backgroundColor: 'var(--dark)' }}>
+            <div className="collection-backdrop" style={props.belongs_to_collection.backdrop_path ? { backgroundImage: `url(https://image.tmdb.org/t/p/original${props.belongs_to_collection.backdrop_path})` } : { backgroundColor: 'var(--purple)' }}>
                 <div>
                     <img className="collection-poster" src={`https://image.tmdb.org/t/p/w500${props.belongs_to_collection.poster_path}`} alt={props.belongs_to_collection.name} />
                     <div className="collection-info">

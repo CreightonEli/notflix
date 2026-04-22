@@ -86,7 +86,7 @@ export default function Collection() {
 
     return (
         <div className="collection-page">
-            <div className="collection-backdrop" style={collectionDetails.backdrop_path ? { backgroundImage: `url(https://image.tmdb.org/t/p/original${collectionDetails.backdrop_path})` } : { backgroundColor: 'var(--dark)' }}>
+            <div className="collection-backdrop" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${collectionDetails.backdrop_path})` }}>
                 <div className="collection-top">
 
                     <img className="collection-hero" src={`https://image.tmdb.org/t/p/w500${collectionDetails.poster_path}`} alt={collectionDetails.name} />
@@ -171,7 +171,7 @@ export default function Collection() {
                                 <div className="year-group">
                                     {groupedByYear[year].map(part => (
                                         <div key={part.id} className="part">
-                                            <div className='part-banner' style={collectionDetails.backdrop_path ? { backgroundImage: `url(https://image.tmdb.org/t/p/w780${part.backdrop_path})` } : { backgroundColor: 'var(--dark)' }} ></div>
+                                            <div className='part-banner' style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w780${part.backdrop_path})` }} ></div>
                                             <div className="part-section title-section">
                                                 <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${part.poster_path}`} alt={part.title} />
                                                 <div className='part-info'>
@@ -225,7 +225,7 @@ export default function Collection() {
                                 <div className="year-group">
                                     {groupedByYear['unknown'].map(part => (
                                         <div key={part.id} className="part">
-                                            <div className='part-banner' style={collectionDetails.backdrop_path ? { backgroundImage: `url(https://image.tmdb.org/t/p/w780${part.backdrop_path})` } : { backgroundColor: 'var(--dark)' }} ></div>
+                                            <div className='part-banner' style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w780${part.backdrop_path})` }} ></div>
                                             <div className="part-section title-section">
                                                 <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${part.poster_path}`} alt={part.title} />
                                                 <div className='part-info'>
