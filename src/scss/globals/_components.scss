@@ -1349,6 +1349,7 @@ h3 > a > span {
     border-bottom: 1px solid var(--gray);
     transition: 355ms;
     cursor: pointer;
+    animation: fade-right 355ms forwards;
 }
 
 .episode > .ep-num {

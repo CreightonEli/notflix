@@ -528,7 +528,7 @@ export default function Embed(props) {
                                         } ${watchedSet.has(index + 1) ? 'watched' : ''}`}
                                         key={episode?.id}
                                         onClick={() => handleEpisodeClick(index + 1)}
-                                onContextMenu={(e) => { e.preventDefault(); toggleWatchedEpisode(selectedSeason, index + 1); }}
+                                        onContextMenu={(e) => { e.preventDefault(); toggleWatchedEpisode(selectedSeason, index + 1); }}
                                     >
                                         <span className="ep-num">{index + 1}</span>
                                         <div className="ep-thumbnail-container">
