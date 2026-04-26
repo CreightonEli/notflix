@@ -84,6 +84,8 @@ export default function Collection() {
         years.sort((a, b) => a - b);
     }
 
+    console.log(collectionDetails)
+
     return (
         <div className="collection-page">
             <div className="collection-backdrop" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${collectionDetails.backdrop_path})` }}>
@@ -119,9 +121,28 @@ export default function Collection() {
                                 </h2>
                                 <span className="stat-num">
                                     <ClockIcon weight="fill"/>
-                                    {collectionDetails.parts && collectionDetails.parts.length > 0 ? (
-                                        `${new Date(collectionDetails.parts[0].release_date).getFullYear()} - ${new Date(collectionDetails.parts[collectionDetails.parts.length - 1].release_date).getFullYear()}`
-                                    ) : 'N/A'}
+                                    {collectionDetails.parts && collectionDetails.parts.length > 0 ? (() => {
+                                    const parts = collectionDetails.parts;
+                                    const firstDate = parts[0]?.release_date || "";
+                                    const lastIndex = parts.length - 1;
+
+                                    // choose last part; if its release_date is empty, fall back to previous item(s)
+                                    let lastDate = parts[lastIndex]?.release_date || "";
+                                    if (!lastDate && lastIndex > 0) {
+                                        // scan backwards until you find a non-empty release_date or reach index 0
+                                        for (let i = lastIndex - 1; i >= 0; i--) {
+                                        if (parts[i]?.release_date) { lastDate = parts[i].release_date; break; }
+                                        }
+                                    }
+
+                                    const safeYear = d => {
+                                        if (!d) return "unknown";
+                                        const parsed = new Date(d);
+                                        return isNaN(parsed) ? "unknown" : parsed.getFullYear();
+                                    };
+
+                                    return `${safeYear(firstDate)} / ${safeYear(lastDate)}`;
+                                    })() : 'N/A'}
                                 </span>
                             </div>
                             <div className="info-item">
@@ -173,7 +194,11 @@ export default function Collection() {
                                         <div key={part.id} className="part">
                                             <div className='part-banner' style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w780${part.backdrop_path})` }} ></div>
                                             <div className="part-section title-section">
-                                                <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${part.poster_path}`} alt={part.title} />
+                                                { part.poster_path !== null ? (
+                                                    <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${part.poster_path}`} alt={part.title} />
+                                                ) : (
+                                                    <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${collectionDetails.poster_path}`} alt='No poster found' />
+                                                )}
                                                 <div className='part-info'>
                                                     <h3>{part.title}</h3>
                                                     <p className="date">
@@ -219,7 +244,7 @@ export default function Collection() {
                         {groupedByYear['unknown'] && groupedByYear['unknown'].length > 0 && (
                             <React.Fragment key="unknown">
                                 <div className='year-header'>
-                                    <FilmStripIcon size={32} weight="fill" />
+                                    <CircleIcon size={32} />
                                     <h4>Date Unknown</h4>
                                 </div>
                                 <div className="year-group">
@@ -227,7 +252,11 @@ export default function Collection() {
                                         <div key={part.id} className="part">
                                             <div className='part-banner' style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w780${part.backdrop_path})` }} ></div>
                                             <div className="part-section title-section">
-                                                <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${part.poster_path}`} alt={part.title} />
+                                                { part.poster_path !== null ? (
+                                                    <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${part.poster_path}`} alt={part.title} />
+                                                ) : (
+                                                    <img className='part-poster' src={`https://image.tmdb.org/t/p/w500${collectionDetails.poster_path}`} alt='No poster found' />
+                                                )}
                                                 <div className='part-info'>
                                                     <h3>{part.title}</h3>
                                                     <p className="date">
@@ -241,12 +270,16 @@ export default function Collection() {
                                                             <>Release date unknown</>
                                                         )}
                                                     </p>
-                                                    <span className="info-item rating-avg">
-                                                        <StarIcon weight="fill"/>
-                                                        <span className="rating-num">
-                                                            {Math.round(part.vote_average * 10) / 10}
-                                                        </span>
-                                                    </span>
+                                                    
+                                                    { part.vote_average < 0 &&
+                                                        <span className="info-item rating-avg">
+                                                            <StarIcon weight="fill"/>
+                                                            <span className="rating-num">
+                                                                {Math.round(part.vote_average * 10) / 10}
+                                                            </span>
+                                                        </span> 
+                                                    }
+
                                                     <p className="genre-container">
                                                         {getGenreNames(part.genre_ids).map((genre, index) => (
                                                             <span key={index} className="tag">
