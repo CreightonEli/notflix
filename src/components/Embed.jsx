@@ -30,8 +30,8 @@ export default function Embed(props) {
     useEffect(() => {
         const savedMovieProvider = localStorage.getItem('defaultMovieProvider');
         const savedShowProvider = localStorage.getItem('defaultShowProvider');
-        setDefaultMovieProvider(savedMovieProvider !== null ? parseInt(savedMovieProvider, 10) : 1);
-        setDefaultShowProvider(savedShowProvider !== null ? parseInt(savedShowProvider, 10) : 1);
+        setDefaultMovieProvider(savedMovieProvider !== null ? parseInt(savedMovieProvider, 10) : 0);
+        setDefaultShowProvider(savedShowProvider !== null ? parseInt(savedShowProvider, 10) : 0);
     }, []);
 
     // Function to replace placeholders in URL
