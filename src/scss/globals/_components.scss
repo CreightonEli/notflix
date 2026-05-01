@@ -1347,6 +1347,9 @@ h3 > a > span {
     border-radius: 8px;
     margin: 0 0 auto;
     animation: fade-right 355ms;
+    border: 1px solid var(--header-border);
+    box-sizing: border-box;
+    min-height: 220px;
 }
 
 .season-info {
@@ -1638,6 +1641,7 @@ h3 > a > span {
     border-radius: 8px;
     width: 60px;
     height: auto;
+    box-sizing: border-box;
     overflow: hidden;
 }
 .provider-list p {
