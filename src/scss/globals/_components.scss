@@ -1309,12 +1309,16 @@ h3 > a > span {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 20px;
 }
-.episode-selector > .heading > h2 {
+.episode-selector > .heading h2 {
     margin: 0 auto 0 0;
+    overflow-x: hidden;
+    text-wrap: nowrap;
+    // margin-right: 5px;
 }
 
-.episode-selector > .heading > select {
+.episode-selector > .heading select {
     margin: 0 0 0 auto;
     max-width: 250px;
     font-size: 14pt;
@@ -1325,10 +1329,78 @@ h3 > a > span {
     padding: 4px 8px;
     cursor: pointer;
 }
-.episode-selector > .heading > select > option {
+.episode-selector > .heading select option {
     background-color: var(--dark-gray);
     color: var(--off-white);
     cursor: pointer;
+}
+
+.episode-selector > .season-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 8px 0;
+    gap: 20px;
+}
+
+.season-wrapper .season-poster {
+    width: 150px;
+    border-radius: 8px;
+    margin: 0 0 auto;
+    animation: fade-right 355ms;
+}
+
+.season-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    animation: fade-right 1s;
+}
+
+.season-info .season-name {
+    margin: auto 0 0;
+    overflow: hidden;
+    font-size: 16pt;
+    // line-height: 1;
+    max-height: 64px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
+}
+
+.season-info .date {
+    text-align: left;
+    margin: 0;
+    font-size: 14pt;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.6862745098);
+}
+.season-info .date span {
+    font-size: 14pt;
+    margin: 0 6px 0 0;
+    border-bottom: 1px solid rgba(240, 248, 255, 0.1882352941);
+    font-weight: 200;
+    color: #e2e4ff;
+}
+
+.season-info .info-item.rating-avg {
+    margin: 0 0 auto;
+}
+
+.season-info .season-overview {
+    margin: auto 0 0 -5px;
+    background-color: #1c1c21;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: left;
+    font-weight: 200;
+    overflow: scroll;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
 }
 
 .episode-selector > .episode-list {
@@ -1337,7 +1409,7 @@ h3 > a > span {
     justify-content: center;
     margin-top: 6px;
     background-color: #1c1c21;
-    border-radius: 3px;
+    border-radius: 6px;
     overflow: hidden;
 }
 

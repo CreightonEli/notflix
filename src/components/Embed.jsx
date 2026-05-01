@@ -3,7 +3,7 @@ import Collection from './Collection';
 import Media from "./Media";
 import Providers from './Providers';
 import React, { useEffect, useState, useRef } from 'react';
-import { PlayCircle, CornersOut, CornersIn, HeartIcon, HeartBreakIcon } from "@phosphor-icons/react";
+import { PlayCircle, CornersOut, CornersIn, HeartIcon, HeartBreakIcon, StarIcon } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 import useApiKey from '../hooks/useApiKey';
 import providersData from '../providers.json';
@@ -376,6 +376,7 @@ export default function Embed(props) {
     const letterboxdSlug = generateSlug(props.title);
     const letterboxdUrl = `https://letterboxd.com/film/${letterboxdSlug}/`;
 
+    // console.log(seasonData)
 
     return (
         <div>
@@ -507,7 +508,7 @@ export default function Embed(props) {
                         <Providers {...props}/>
                         
                         <div className="heading">
-                            <h2>Episodes</h2>
+                            <h2>Seasons</h2>
                             <select name="seasons" id="seasons" value={selectedSeason} onChange={handleSeasonChange}>
                                 {props.seasons.map(
                                     (season, index) =>
@@ -518,6 +519,51 @@ export default function Embed(props) {
                                         )
                                 )}
                             </select>
+                        </div>
+
+                        {seasonData.episodes?.length == 0 && (
+                            <p>No season data available</p>
+                        )}
+                        {seasonData.episodes?.length > 0 && (
+                            <div className='season-wrapper'>
+                                {seasonData.poster_path && (
+                                    <img className='season-poster' src={`https://image.tmdb.org/t/p/w300${seasonData.poster_path}`} />
+                                )}
+
+                                <div className='season-info'>
+                                    {seasonData.name && (
+                                        <h3 className='season-name'>{seasonData.name}</h3>
+                                    )}
+                                
+                                    {seasonData.air_date && (
+                                        <p className="date">
+                                            {new Date(seasonData.air_date) > new Date() ? (
+                                                <>Set to air on <span className="year">{new Date(seasonData.air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                                            ) : (
+                                                <>Air date <span className="year">{new Date(seasonData.air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                                            )}
+                                        </p>
+                                    )}
+                                
+                                    {seasonData.vote_average > 0 && (
+                                        <span className="info-item rating-avg">
+                                            <StarIcon weight="fill"/>
+                                            <span className="rating-num">
+                                                {Math.round(seasonData.vote_average * 10) / 10}
+                                            </span>
+                                        </span>
+                                    )}
+
+                                    {seasonData.overview && (
+                                        <p className='season-overview'>{seasonData.overview}</p>
+                                    )}
+                                
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="heading">
+                            <h2>Episodes</h2>
                         </div>
                         <div className="episode-list">
                             {seasonData?.episodes ? (

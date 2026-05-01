@@ -621,4 +621,19 @@
       border-left: none;
       border-right: none;
     }
+    
+    .media-container > .media-header h3 {
+      margin: 0 auto 0 0;
+    }
+
+    .season-wrapper .season-poster {
+      width: 135px;
+    }
+
+    .season-info .date {
+      font-size: 13pt;
+    }
+    .season-info .date span {
+      font-size: 13pt;
+    }
   }
