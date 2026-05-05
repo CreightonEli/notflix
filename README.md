@@ -51,6 +51,7 @@ That's about all you need to do to enjoy Nullflix.
 - CSS custom properties and SCSS
 - An immense amount of JavaScript
 - Phosphor Icons
+- Google Fonts
 - Various online video providers
 
 ## Author

@@ -1360,8 +1360,12 @@ h3 > a > span {
     animation: fade-right 1s;
 }
 
+.season-info > div {
+    margin: auto 0;
+}
+
 .season-info .season-name {
-    margin: auto 0 0;
+    margin: 0;
     overflow: hidden;
     font-size: 16pt;
     // line-height: 1;
@@ -1389,7 +1393,7 @@ h3 > a > span {
 }
 
 .season-info .info-item.rating-avg {
-    margin: 0 0 auto;
+    margin: 0;
 }
 
 .season-info .season-overview {

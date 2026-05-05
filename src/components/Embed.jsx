@@ -531,28 +531,31 @@ export default function Embed(props) {
                                 )}
 
                                 <div className='season-info'>
-                                    {seasonData.name && (
-                                        <h3 className='season-name'>{seasonData.name}</h3>
-                                    )}
-                                
-                                    {seasonData.air_date && (
-                                        <p className="date">
-                                            {new Date(seasonData.air_date) > new Date() ? (
-                                                <>Set to air on <span className="year">{new Date(seasonData.air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
-                                            ) : (
-                                                <>Air date <span className="year">{new Date(seasonData.air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
-                                            )}
-                                        </p>
-                                    )}
-                                
-                                    {seasonData.vote_average > 0 && (
-                                        <span className="info-item rating-avg">
-                                            <StarIcon weight="fill"/>
-                                            <span className="rating-num">
-                                                {Math.round(seasonData.vote_average * 10) / 10}
+                                    
+                                    <div>
+                                        {seasonData.name && (
+                                            <h3 className='season-name'>{seasonData.name}</h3>
+                                        )}
+                                    
+                                        {seasonData.air_date && (
+                                            <p className="date">
+                                                {new Date(seasonData.air_date) > new Date() ? (
+                                                    <>Set to air on <span className="year">{new Date(seasonData.air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                                                ) : (
+                                                    <>Air date <span className="year">{new Date(seasonData.air_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span></>
+                                                )}
+                                            </p>
+                                        )}
+                                    
+                                        {seasonData.vote_average > 0 && (
+                                            <span className="info-item rating-avg">
+                                                <StarIcon weight="fill"/>
+                                                <span className="rating-num">
+                                                    {Math.round(seasonData.vote_average * 10) / 10}
+                                                </span>
                                             </span>
-                                        </span>
-                                    )}
+                                        )}
+                                    </div>
 
                                     {seasonData.overview && (
                                         <p className='season-overview'>{seasonData.overview}</p>
