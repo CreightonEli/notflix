@@ -149,8 +149,23 @@ header > .header-right {
     align-items: center;
 }
 
+header > .header-right > .random-btn {
+    height: 40px;
+    width: 40px;
+    border-radius: 2rem;
+    margin-right: 4px;
+    padding: 4px 0 0 0;
+    border: 1px solid var(--header-border);
+    background-color: var(--dark-gray);
+    cursor: pointer;
+    transition: 355ms;
+}
+header > .header-right > .random-btn:hover {
+    border-color: var(--purple);
+}
+
 header > .header-right > form {
-    min-width: 320px;
+    // min-width: 320px;
     display: flex;
     justify-content: flex-end;
 }

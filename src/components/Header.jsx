@@ -1,15 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
-import { MagnifyingGlass, List, ListHeart, Gear, ClockCounterClockwiseIcon  } from "@phosphor-icons/react";
+import { DiceSixIcon, MagnifyingGlass, List, ListHeart, Gear, ClockCounterClockwiseIcon  } from "@phosphor-icons/react";
 import { useHeaderVisibility } from '../context/HeaderVisibilityContext';
 import { useState, useEffect } from "react";
+import useApiKey from '../hooks/useApiKey';
 import logoFull from '../assets/logo_full.png'; // Use relative path
 import logoSmall from '../assets/logo_small.png'; // Use relative path
 
 export default function Header() {
     const { isHeaderVisible } = useHeaderVisibility();
     const navigate = useNavigate();
+    const [apiKey] = useApiKey();
     const [isSmallScreen, setIsSmallScreen] = useState(window.matchMedia("(max-width: 950px)").matches);
     const [dropdownOpen, setDropdownOpen] = useState(false); // Add state
+    const [isChoosingRandomTitle, setIsChoosingRandomTitle] = useState(false);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 950px)");
@@ -29,6 +32,56 @@ export default function Header() {
         }
     };
 
+    const handleRandomTitle = async () => {
+        if (isChoosingRandomTitle) return;
+
+        setIsChoosingRandomTitle(true);
+        const mediaType = Math.random() < 0.5 ? 'movie' : 'tv';
+        const certificationLimit = mediaType === 'movie' ? 'R' : 'TV-14';
+        const endpoint = `https://api.themoviedb.org/3/discover/${mediaType}?include_adult=false&certification_country=US&certification.lte=${certificationLimit}&language=en-US&sort_by=popularity.desc`;
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${apiKey}`,
+            },
+        };
+
+        try {
+            const firstResponse = await fetch(`${endpoint}&page=1`, options);
+            if (!firstResponse.ok) {
+                throw new Error(`TMDB request failed (${firstResponse.status}).`);
+            }
+
+            const firstPage = await firstResponse.json();
+            const totalPages = Math.min(firstPage.total_pages || 1, 500);
+            const page = Math.floor(Math.random() * totalPages) + 1;
+            let results = firstPage.results || [];
+
+            if (page !== 1) {
+                const randomPageResponse = await fetch(`${endpoint}&page=${page}`, options);
+                if (!randomPageResponse.ok) {
+                    throw new Error(`TMDB request failed (${randomPageResponse.status}).`);
+                }
+                const randomPage = await randomPageResponse.json();
+                results = randomPage.results || [];
+            }
+
+            const eligibleResults = results.filter((item) => item.adult !== true);
+            if (eligibleResults.length === 0) {
+                throw new Error('TMDB did not return any eligible titles.');
+            }
+
+            const selectedTitle = eligibleResults[Math.floor(Math.random() * eligibleResults.length)];
+            navigate(`/${mediaType === 'movie' ? 'movies' : 'shows'}/${selectedTitle.id}`);
+        } catch (error) {
+            console.error('Unable to choose a random title:', error);
+            window.alert('Could not find a random title. Please try again.');
+        } finally {
+            setIsChoosingRandomTitle(false);
+        }
+    };
+
     if (!isHeaderVisible) return null; // Hide the header if not visible
 
     return (
@@ -41,6 +94,16 @@ export default function Header() {
                 />
             </Link>
             <div className="header-right">
+                <button
+                    className="random-btn"
+                    type="button"
+                    onClick={handleRandomTitle}
+                    disabled={isChoosingRandomTitle}
+                    aria-label="Go to a random movie or TV show"
+                    title="Random movie or TV show"
+                >
+                    <DiceSixIcon size={18} />
+                </button>
                 <form onSubmit={handleSubmit}>
                     <input 
                         className="search-box"
